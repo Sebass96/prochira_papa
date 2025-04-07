@@ -37,44 +37,32 @@ session_info()
 Data was imported from the field book evaluated during the 2022-2023 growing season. The evaluations focused on mango fruits of the ‘Kent’ variety at two stages: physiological maturity and commercial maturity.
 
 ```{r}
-url <- "https://docs.google.com/spreadsheets/d/1cjWrS-EVcII85c-l_NuEfTpjhVMI156e8REM9GDVP_w/edit?gid=95386135#gid=95386135"
+url <- "https://docs.google.com/spreadsheets/d/1UzF2W_rfOLLybl-wiD2sJSVPHlfzfKXXgShnqhfX5ps/edit?gid=912027622#gid=912027622"
 
 gs <- url %>% 
   as_sheets_id()
 
-tratamiento <- gs %>% 
-  range_read("tratamientos") %>% 
-  rename_with(~ tolower(.))
+data <- gs %>% 
+  range_read("fb") %>% 
+  select(-c(barcode:plots)) %>% 
+  select(-c(sort,rows,cols)) %>% 
+  pivot_longer(
+    cols = -c(ntreat, Tipo.de.control, block),
+    names_to = c("grupo", "id_variable", "repeticion"),
+    names_sep = "_",
+    values_to = "valor"
+  ) %>%
+  mutate(
+    grupo = factor(grupo),
+    id_variable = as.numeric(id_variable),
+    repeticion = as.integer(repeticion),
+    ntreat = as.factor(ntreat),
+    block = as.factor(block),
+    Tipo.de.control = as.factor(Tipo.de.control)
+  )
 
-rendimiento <- gs %>% 
-  range_read("rendimiento") %>% 
-  rename_with(~ tolower(.)) 
-
-fisio <- gs %>% 
-  range_read("fisio") %>% 
-  rename_with(~ tolower(.)) %>% 
-  merge(., tratamiento) %>% 
-  dplyr::select(tratamiento,compost, biol,everything()) %>% 
-  merge(., rendimiento) %>% 
-  mutate(across(tratamiento:nfrutos, ~ as.factor(.))) %>% 
-  rename(treat = tratamiento
-         , repetition = repeticion
-         , composts = compost)
-
-str(fisio)
-
-consumo <- gs %>% 
-  range_read("consumo") %>% 
-  rename_with(~ tolower(.)) %>%
-  merge(., tratamiento) %>% 
-  dplyr::select(tratamiento,compost, biol,everything()) %>% 
-  mutate(across(tratamiento:nfrutos, ~ as.factor(.))) %>% 
-    rename(treat = tratamiento
-         , repetition = repeticion
-         , composts = compost
-         , n_fruits = nfrutos)
-
-glimpse(consumo)
+str(data)
+  
 ```
 
 ```{r}
