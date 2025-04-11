@@ -136,7 +136,7 @@ The objective of this study is to demonstrate the effect of organic fertilizers,
 
 Demonstrate the effect of organic fertilizers, specifically compost and biol, applied at the soil and foliar levels on the quality of mango fruit at physiological maturity.
 
-### Fruit firmness at physiological maturity (FFPM)
+### Numero de huevos
 
 ```{r}
 trait <- "ffmf"
