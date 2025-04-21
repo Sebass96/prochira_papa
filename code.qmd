@@ -105,7 +105,7 @@ Climatic conditions of the study area located in the Tambogrande district, Piura
 met <- range_read(ss = gs, sheet = "clima") %>% 
   mutate(date = as_date(Fecha))
 
-scale <- 2
+scale <- 3
 
 plot <- met %>% 
   ggplot(aes(x = date)) +
@@ -313,7 +313,8 @@ p1c <- mc %>%
            , glab = "Tratamiento"
            , ylimits = c(0, 4, 2)
            , 
-           )
+           ) %>% 
+  facet_wrap()
 
 p1c
 ```
@@ -370,5 +371,57 @@ knitr::include_graphics("submission/Figure_3.jpg")
 
 ```{r}
 datos_ppp <- data %>% filter(!is.na(ppp))
+
+trait <- "height"
+
+lmm <- paste({{trait}}, "~ 1 + (1|block) + stock*edge") %>% as.formula()
+
+lmd <- paste({{trait}}, "~ block + stock*edge") %>% as.formula()
+
+rmout <- rdt %>% 
+  remove_outliers(formula = lmm
+                  , drop_na = T, plot_diag = T)
+
+rmout$diagplot
+
+rmout$outliers
+
+model <- rmout$data$clean %>% 
+  aov(formula = lmd, .)
+
+anova(model)
+
+mc1 <- emmeans(model, ~ edge|stock) %>%
+  cld(Letters = letters, reversed = T) %>% 
+  mutate(across(".group", ~ trimws(.))) %>% 
+  rename(sig1 = ".group")
+
+mc2 <- emmeans(model, ~ stock|edge) %>%
+  cld(Letters = letters, reversed = T) %>% 
+  mutate(across(".group", ~ trimws(.))) %>% 
+  mutate(across(".group", ~ toupper(.))) %>% 
+  rename(sig2 = ".group")
+
+mc <- merge(mc2, mc1) %>% 
+  unite(col = "group", c("sig2", "sig1"), sep = "")
+
+mc %>% kable()
+
+p1a <- mc %>% 
+  plot_smr(x = "stock"
+           , y = "emmean"
+           , group = "edge"
+           , sig = "group"
+           , error = "SE"
+           , color = T
+           , xlab = "Rootstock"
+           , ylab = "Plant height (m)"
+           , glab = "Interstock"
+           , ylimits = c(0, 6, 2)
+           , 
+           )
+
+p1a
+
 ```
 
