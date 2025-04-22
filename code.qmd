@@ -66,7 +66,16 @@ data <- gs %>%
   pivot_wider(
     names_from = grupo,     
     values_from = valor     
-  )
+  ) %>% 
+  mutate(Tipo.de.control = recode(Tipo.de.control,
+    "Testigo" = "Control",
+    "Control.químico" = "Chemical control",
+    "Beauveria.bassiana" = "Beauveria bassiana",
+    "Metarhizium.anisopliae" = "Metarhizium anisopliae",
+    "Paecilomyces.lilacinus" = "Paecilomyces lilacinus"
+  ))
+
+names(data)
 
 str(data)
 ```
@@ -126,14 +135,14 @@ plot <- met %>%
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
 plot %>% 
-  ggsave2(plot = ., "submission/Figure_2.jpg", units = "cm"
+  ggsave2(plot = ., "submission/Figure_1.jpg", units = "cm"
          , width = 25, height = 15)
 
 plot %>% 
-  ggsave2(plot = ., "submission/Figure_2.eps", units = "cm"
+  ggsave2(plot = ., "submission/Figure_1.eps", units = "cm"
          , width = 25, height = 15)
 
-knitr::include_graphics("submission/Figure_2.jpg")
+knitr::include_graphics("submission/Figure_1.jpg")
 ```
 
 # Objetives
@@ -169,12 +178,12 @@ Anova(modelo_ndh_quasi, type = 3)
 
 anova(modelo_ndh_quasi, test = "Chisq")
 
-mc1 <- emmeans(modelo_ndh_quasi, ~ Tipo.de.control | id_variable) %>%
+mc1 <- emmeans(modelo_ndh_quasi, ~ Tipo.de.control | id_variable, type = "response") %>%
   cld(Letters = letters, reversed = T) %>% 
   mutate(across(".group", ~ trimws(.))) %>% 
   rename(sig1 = ".group")
 
-mc2 <- emmeans(modelo_ndh_quasi, ~ id_variable | Tipo.de.control) %>%
+mc2 <- emmeans(modelo_ndh_quasi, ~ id_variable | Tipo.de.control, type = "response") %>%
   cld(Letters = letters, reversed = T) %>% 
   mutate(across(".group", ~ trimws(.))) %>% 
   mutate(across(".group", ~ toupper(.))) %>% 
@@ -187,17 +196,18 @@ mc %>% kable()
 
 p1a <- mc %>% 
   plot_smr(x = "id_variable"
-           , y = "emmean"
+           , y = "rate"
            , group = "Tipo.de.control"
            , sig = "group"
            # , error = "SE"
            , color = T
-           , xlab = "Días"
-           , ylab = "Numero de huevos (u)"
-           , glab = "Tratamiento"
-           , ylimits = c(0, 4, 2)
+           , xlab = "Evaluation days"
+           , ylab = "Eggs (u)"
+           , glab = "Control Type"
+           , ylimits = c(0, 35, 5)
            , 
-           )
+           ) +
+  guides(fill = guide_legend(label.theme = element_text(face = "italic")))
 
 p1a
 ```
@@ -227,12 +237,12 @@ Anova(modelo_ndn_quasi, type = 3)
 
 anova(modelo_ndn_quasi, test = "Chisq")
 
-mc1 <- emmeans(modelo_ndn_quasi, ~ Tipo.de.control | id_variable) %>%
+mc1 <- emmeans(modelo_ndn_quasi, ~ Tipo.de.control | id_variable, type = "response") %>%
   cld(Letters = letters, reversed = T) %>% 
   mutate(across(".group", ~ trimws(.))) %>% 
   rename(sig1 = ".group")
 
-mc2 <- emmeans(modelo_ndn_quasi, ~ id_variable | Tipo.de.control) %>%
+mc2 <- emmeans(modelo_ndn_quasi, ~ id_variable | Tipo.de.control, type = "response") %>%
   cld(Letters = letters, reversed = T) %>% 
   mutate(across(".group", ~ trimws(.))) %>% 
   mutate(across(".group", ~ toupper(.))) %>% 
@@ -245,17 +255,18 @@ mc %>% kable()
 
 p1b <- mc %>% 
   plot_smr(x = "id_variable"
-           , y = "emmean"
+           , y = "rate"
            , group = "Tipo.de.control"
            , sig = "group"
            # , error = "SE"
            , color = T
-           , xlab = "Días"
-           , ylab = "Numero de ninfas (u)"
-           , glab = "Tratamiento"
-           , ylimits = c(0, 4, 2)
+           , xlab = "Evaluation days"
+           , ylab = " Nymphs (u)"
+           , glab = "Control Type"
+           , ylimits = c(0, 35, 5)
            , 
-           )
+           )+
+  guides(fill = guide_legend(label.theme = element_text(face = "italic")))
 
 p1b
 ```
@@ -285,12 +296,12 @@ deviance(modelo_nda) / df.residual(modelo_nda)
 # 
 # anova(modelo_nda_quasi, test = "Chisq")
 
-mc1 <- emmeans(modelo_nda, ~ Tipo.de.control | id_variable) %>%
+mc1 <- emmeans(modelo_nda, ~ Tipo.de.control | id_variable, type = "response") %>%
   cld(Letters = letters, reversed = T) %>% 
   mutate(across(".group", ~ trimws(.))) %>% 
   rename(sig1 = ".group")
 
-mc2 <- emmeans(modelo_nda, ~ id_variable | Tipo.de.control) %>%
+mc2 <- emmeans(modelo_nda, ~ id_variable | Tipo.de.control, type = "response") %>%
   cld(Letters = letters, reversed = T) %>% 
   mutate(across(".group", ~ trimws(.))) %>% 
   mutate(across(".group", ~ toupper(.))) %>% 
@@ -303,23 +314,23 @@ mc %>% kable()
 
 p1c <- mc %>% 
   plot_smr(x = "id_variable"
-           , y = "emmean"
+           , y = "rate"
            , group = "Tipo.de.control"
            , sig = "group"
            # , error = "SE"
            , color = T
-           , xlab = "Días"
-           , ylab = "Numero de adultos (u)"
-           , glab = "Tratamiento"
-           , ylimits = c(0, 4, 2)
+           , xlab = "Evaluation days"
+           , ylab = "Adults (u)"
+           , glab = "Control Type"
+           , ylimits = c(0, 0.8, 0.2)
            , 
-           ) %>% 
-  facet_wrap()
+           )+
+  guides(fill = guide_legend(label.theme = element_text(face = "italic")))
 
 p1c
 ```
 
-### Figure 1
+### Figure 2
 
 Univariate analysis of the variables for determining the physiological maturity of the fruit at harvest time and for preventing handling damage during commercialization or industrial processes.
 
@@ -351,20 +362,20 @@ p1 <- list(p1a + labs(x = NULL) + theme(legend.position="none"
 fig <- plot_grid(legend, p1, ncol = 1, align = 'v', rel_heights = c(0.05, 1))
   
 fig %>% 
-  ggsave2(plot = ., "submission/Figure_3.jpg"
+  ggsave2(plot = ., "submission/Figure_2.jpg"
          , units = "cm"
-         , width = 26
-         , height = 26
+         , width = 35
+         , height = 30
          )
 
 fig %>% 
-  ggsave2(plot = ., "submission/Figure_3.eps"
+  ggsave2(plot = ., "submission/Figure_2.eps"
          , units = "cm"
-         , width = 26
-         , height = 26
+         , width = 35
+         , height = 30
          )
 
-knitr::include_graphics("submission/Figure_3.jpg")
+knitr::include_graphics("submission/Figure_2.jpg")
 ```
 
 ### Peso de planta
@@ -372,13 +383,13 @@ knitr::include_graphics("submission/Figure_3.jpg")
 ```{r}
 datos_ppp <- data %>% filter(!is.na(ppp))
 
-trait <- "height"
+trait <- "ppp"
 
-lmm <- paste({{trait}}, "~ 1 + (1|block) + stock*edge") %>% as.formula()
+lmm <- paste({{trait}}, "~ 1 + (1|block) + Tipo.de.control") %>% as.formula()
 
-lmd <- paste({{trait}}, "~ block + stock*edge") %>% as.formula()
+lmd <- paste({{trait}}, "~ block + Tipo.de.control") %>% as.formula()
 
-rmout <- rdt %>% 
+rmout <- datos_ppp %>% 
   remove_outliers(formula = lmm
                   , drop_na = T, plot_diag = T)
 
@@ -391,37 +402,180 @@ model <- rmout$data$clean %>%
 
 anova(model)
 
-mc1 <- emmeans(model, ~ edge|stock) %>%
+mc <- emmeans(model, ~ Tipo.de.control) %>%
   cld(Letters = letters, reversed = T) %>% 
   mutate(across(".group", ~ trimws(.))) %>% 
   rename(sig1 = ".group")
 
-mc2 <- emmeans(model, ~ stock|edge) %>%
+mc %>% kable()
+
+p2a <- mc %>% 
+  plot_smr(x = "Tipo.de.control"
+           , y = "emmean"
+           # , group = "edge"
+           , sig = "sig1"
+           # , error = "SE"
+           , color = T
+           , xlab = "NULL"
+           , ylab = "Plant weight (g)"
+           , glab = "Control Type"
+           , ylimits = c(0, 220, 40)
+           , 
+           ) +
+  guides(fill = guide_legend(label.theme = element_text(face = "italic"))) +
+  theme(axis.text.x = element_blank(),
+        axis.ticks.x = element_blank())
+
+p2a
+```
+
+### Numero de tuberculos
+
+```{r}
+datos_ntp <- data %>% filter(!is.na(ntp))
+
+modelo_ntp <- glm(ntp ~ Tipo.de.control + block,
+                  family = poisson(link = "log"),
+                  data = datos_ntp)
+
+anova(modelo_ndn, test = "Chisq")
+
+Anova(modelo_ndn, type = 3)
+
+# Calcular dispersión: si >>1, hay sobredispersión
+
+# deviance(modelo_ntp) / df.residual(modelo_ntp)
+# 
+# modelo_ntp_quasi <- glm(ntp ~ Tipo.de.control + block,
+#                         family = quasipoisson(link = "log"),
+#                         data = datos_ntp)
+# 
+# Anova(modelo_ntp_quasi, type = 3)
+# 
+# anova(modelo_ndn_quasi, test = "Chisq")
+
+mc <- emmeans(modelo_ntp, ~ Tipo.de.control, type = "response") %>%
   cld(Letters = letters, reversed = T) %>% 
   mutate(across(".group", ~ trimws(.))) %>% 
-  mutate(across(".group", ~ toupper(.))) %>% 
-  rename(sig2 = ".group")
-
-mc <- merge(mc2, mc1) %>% 
-  unite(col = "group", c("sig2", "sig1"), sep = "")
+  rename(sig1 = ".group")
 
 mc %>% kable()
 
-p1a <- mc %>% 
-  plot_smr(x = "stock"
-           , y = "emmean"
-           , group = "edge"
-           , sig = "group"
-           , error = "SE"
+p2b <- mc %>% 
+  plot_smr(x = "Tipo.de.control"
+           , y = "rate"
+           # , group = "Tipo.de.control"
+           , sig = "sig1"
+           # , error = "SE"
            , color = T
-           , xlab = "Rootstock"
-           , ylab = "Plant height (m)"
-           , glab = "Interstock"
-           , ylimits = c(0, 6, 2)
+           , xlab = "NULL"
+           , ylab = " Tubers (u)"
+           , glab = "Control Type"
+           , ylimits = c(0, 8, 2)
            , 
-           )
+           )+
+  guides(fill = guide_legend(label.theme = element_text(face = "italic")))
 
-p1a
-
+p2b
 ```
+
+### Figure 3
+
+Univariate analysis of the variables for determining the physiological maturity of the fruit at harvest time and for preventing handling damage during commercialization or industrial processes.
+
+```{r}
+legend <- cowplot::get_plot_component(p2a, 'guide-box-top', return_all = TRUE)
+
+p2 <- list(p2a + labs(x = NULL) + theme(legend.position="none"
+                                        , axis.title.x=element_blank()
+                                        , axis.text.x=element_blank()
+                                        , axis.ticks.x=element_blank())
+           # , p1b + labs(x = NULL) + theme(legend.position="none"
+           #                              , axis.title.x=element_blank()
+           #                              , axis.text.x=element_blank()
+           #                              , axis.ticks.x=element_blank())
+           # , p1c + labs(x = NULL) + theme(legend.position="none"
+           #                              , axis.title.x=element_blank()
+           #                              , axis.text.x=element_blank()
+           #                              , axis.ticks.x=element_blank())
+           # , p1b + labs(x = NULL) + theme(legend.position="none"
+           #                              , axis.title.x=element_blank()
+           #                              , axis.text.x=element_blank()
+           #                              , axis.ticks.x=element_blank())
+           , p2b + theme(legend.position="none")
+           ) %>% 
+  plot_grid(plotlist = ., ncol = 1
+            , labels = "auto"
+            ) 
+
+fig <- plot_grid(p2, ncol = 1, align = 'v', rel_heights = c(0.05, 1))
+  
+fig %>% 
+  ggsave2(plot = ., "submission/Figure_3.jpg"
+         , units = "cm"
+         , width = 24
+         , height = 12
+         )
+
+fig %>% 
+  ggsave2(plot = ., "submission/Figure_3.eps"
+         , units = "cm"
+         , width = 20
+         , height = 10
+         )
+
+knitr::include_graphics("submission/Figure_3.jpg")
+```
+
+### Punta morada
+
+```{r}
+datos_npm <- data %>% filter(!is.na(npm))
+
+modelo_ntp <- glm(ntp ~ Tipo.de.control + block,
+                  family = poisson(link = "log"),
+                  data = datos_ntp)
+
+anova(modelo_ndn, test = "Chisq")
+
+Anova(modelo_ndn, type = 3)
+
+# Calcular dispersión: si >>1, hay sobredispersión
+
+# deviance(modelo_ntp) / df.residual(modelo_ntp)
+# 
+# modelo_ntp_quasi <- glm(ntp ~ Tipo.de.control + block,
+#                         family = quasipoisson(link = "log"),
+#                         data = datos_ntp)
+# 
+# Anova(modelo_ntp_quasi, type = 3)
+# 
+# anova(modelo_ndn_quasi, test = "Chisq")
+
+mc <- emmeans(modelo_ntp, ~ Tipo.de.control, type = "response") %>%
+  cld(Letters = letters, reversed = T) %>% 
+  mutate(across(".group", ~ trimws(.))) %>% 
+  rename(sig1 = ".group")
+
+mc %>% kable()
+
+p2b <- mc %>% 
+  plot_smr(x = "Tipo.de.control"
+           , y = "rate"
+           # , group = "Tipo.de.control"
+           , sig = "sig1"
+           # , error = "SE"
+           , color = T
+           , xlab = "NULL"
+           , ylab = " Tubers (u)"
+           , glab = "Control Type"
+           , ylimits = c(0, 8, 2)
+           , 
+           )+
+  guides(fill = guide_legend(label.theme = element_text(face = "italic")))
+
+p2b
+```
+
+
 
