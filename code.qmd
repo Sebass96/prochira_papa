@@ -532,49 +532,37 @@ knitr::include_graphics("submission/Figure_3.jpg")
 ```{r}
 datos_npm <- data %>% filter(!is.na(npm))
 
-modelo_ntp <- glm(ntp ~ Tipo.de.control + block,
-                  family = poisson(link = "log"),
-                  data = datos_ntp)
+modelo_npm <- glm(npm ~ Tipo.de.control + block,
+                  family = binomial(link = "logit"),
+                  data = datos_npm)
 
-anova(modelo_ndn, test = "Chisq")
+summary(modelo_npm)
 
-Anova(modelo_ndn, type = 3)
+anova(modelo_npm, test = "Chisq")
 
-# Calcular dispersión: si >>1, hay sobredispersión
 
-# deviance(modelo_ntp) / df.residual(modelo_ntp)
-# 
-# modelo_ntp_quasi <- glm(ntp ~ Tipo.de.control + block,
-#                         family = quasipoisson(link = "log"),
-#                         data = datos_ntp)
-# 
-# Anova(modelo_ntp_quasi, type = 3)
-# 
-# anova(modelo_ndn_quasi, test = "Chisq")
-
-mc <- emmeans(modelo_ntp, ~ Tipo.de.control, type = "response") %>%
+mc <- emmeans(modelo_npm, ~ Tipo.de.control, type = "response") %>%
   cld(Letters = letters, reversed = T) %>% 
   mutate(across(".group", ~ trimws(.))) %>% 
   rename(sig1 = ".group")
 
 mc %>% kable()
 
-p2b <- mc %>% 
+p3 <- mc %>% 
   plot_smr(x = "Tipo.de.control"
-           , y = "rate"
+           , y = "prob"
            # , group = "Tipo.de.control"
            , sig = "sig1"
            # , error = "SE"
            , color = T
-           , xlab = "NULL"
-           , ylab = " Tubers (u)"
-           , glab = "Control Type"
-           , ylimits = c(0, 8, 2)
+           , xlab = "Control Type"
+           , ylab = " Probability of presence of purple tip"
+           , glab = "NULL"
+           , ylimits = c(0, 1, 0.2)
            , 
-           )+
-  guides(fill = guide_legend(label.theme = element_text(face = "italic")))
+           ) 
 
-p2b
+p3
 ```
 
 
