@@ -417,7 +417,7 @@ p2a <- mc %>%
            # , error = "SE"
            , color = T
            , xlab = "NULL"
-           , ylab = "Plant weight (g)"
+           , ylab = "Tubers weight (g)"
            , glab = "Control Type"
            , ylimits = c(0, 220, 40)
            , 
@@ -438,9 +438,9 @@ modelo_ntp <- glm(ntp ~ Tipo.de.control + block,
                   family = poisson(link = "log"),
                   data = datos_ntp)
 
-anova(modelo_ndn, test = "Chisq")
+anova(modelo_ntp, test = "Chisq")
 
-Anova(modelo_ndn, type = 3)
+Anova(modelo_ntp, type = 3)
 
 # Calcular dispersión: si >>1, hay sobredispersión
 
@@ -474,7 +474,7 @@ p2b <- mc %>%
            , ylimits = c(0, 8, 2)
            , 
            )+
-  guides(fill = guide_legend(label.theme = element_text(face = "italic")))
+  scale_x_discrete(labels = function(x) parse(text = paste0("italic('", gsub(" ", " ", x), "')")))
 
 p2b
 ```
@@ -513,15 +513,15 @@ fig <- plot_grid(p2, ncol = 1, align = 'v', rel_heights = c(0.05, 1))
 fig %>% 
   ggsave2(plot = ., "submission/Figure_3.jpg"
          , units = "cm"
-         , width = 24
-         , height = 12
+         , width = 25
+         , height = 22
          )
 
 fig %>% 
   ggsave2(plot = ., "submission/Figure_3.eps"
          , units = "cm"
-         , width = 20
-         , height = 10
+         , width = 25
+         , height = 22
          )
 
 knitr::include_graphics("submission/Figure_3.jpg")
@@ -560,10 +560,175 @@ p3 <- mc %>%
            , glab = "NULL"
            , ylimits = c(0, 1, 0.2)
            , 
-           ) 
+           ) +
+   theme(legend.position = "none") +
+  scale_x_discrete(labels = function(x) parse(text = paste0("italic('", gsub(" ", " ", x), "')")))
 
 p3
+
+p3 %>% 
+  ggsave2(plot = ., "submission/Figure_4.jpg"
+         , units = "cm"
+         , width = 20
+         , height = 12
+         )
+
+p3 %>% 
+  ggsave2(plot = ., "submission/Figure_4.eps"
+         , units = "cm"
+         , width = 20
+         , height = 12
+         )
+
+knitr::include_graphics("submission/Figure_3.jpg")
 ```
 
+### Número de tubérculos con zebra chip
 
+```{r}
+datos_ntz <- data %>% filter(!is.na(ntz))
 
+summary(datos_ntz$ntz)
+
+modelo_ntz <- glm(ntz ~ Tipo.de.control + block,
+                  family = poisson(link = "log"),
+                  data = datos_ntz)
+
+anova(modelo_ntz, test = "Chisq")
+
+Anova(modelo_ntz, type = 3)
+
+# Calcular dispersión: si >>1, hay sobredispersión
+
+deviance(modelo_ntz) / df.residual(modelo_ntz)
+
+modelo_ntz_quasi <- glm(ntz ~ Tipo.de.control + block,
+                        family = quasipoisson(link = "log"),
+                        data = datos_ntz)
+
+Anova(modelo_ntz_quasi, type = 3)
+
+anova(modelo_ntz_quasi, test = "Chisq")
+
+mc <- emmeans(modelo_ntz_quasi, ~ Tipo.de.control, type = "response") %>%
+  cld(Letters = letters, reversed = T) %>% 
+  mutate(across(".group", ~ trimws(.))) %>% 
+  rename(sig1 = ".group")
+
+mc %>% kable()
+
+p4a <- mc %>% 
+  plot_smr(x = "Tipo.de.control"
+           , y = "rate"
+           # , group = "Tipo.de.control"
+           , sig = "sig1"
+           # , error = "SE"
+           , color = T
+           , xlab = "NULL"
+           , ylab = "Tubers with zebra chip (u)"
+           , glab = "Control Type"
+           , ylimits = c(0, 5, 1)
+           , 
+           )+
+  guides(fill = guide_legend(label.theme = element_text(face = "italic")))
+
+p4a
+```
+
+### Número de tubérculos sanos
+
+```{r}
+datos_nts <- data %>% filter(!is.na(nts))
+
+modelo_nts <- glm(nts ~ Tipo.de.control + block,
+                  family = poisson(link = "log"),
+                  data = datos_nts)
+
+anova(modelo_ntz, test = "Chisq")
+
+Anova(modelo_ntz, type = 3)
+
+# Calcular dispersión: si >>1, hay sobredispersión
+
+deviance(modelo_nts) / df.residual(modelo_nts)
+
+modelo_nts_quasi <- glm(nts ~ Tipo.de.control + block,
+                        family = quasipoisson(link = "log"),
+                        data = datos_nts)
+
+Anova(modelo_nts_quasi, type = 3)
+
+anova(modelo_nts_quasi, test = "Chisq")
+
+mc <- emmeans(modelo_nts_quasi, ~ Tipo.de.control, type = "response") %>%
+  cld(Letters = letters, reversed = T) %>% 
+  mutate(across(".group", ~ trimws(.))) %>% 
+  rename(sig1 = ".group")
+
+mc %>% kable()
+
+p4b <- mc %>% 
+  plot_smr(x = "Tipo.de.control"
+           , y = "rate"
+           # , group = "Tipo.de.control"
+           , sig = "sig1"
+           # , error = "SE"
+           , color = T
+           , xlab = "NULL"
+           , ylab = "Healthy tubers(u)"
+           , glab = "Control Type"
+           , ylimits = c(0, 4, 1)
+           , 
+           )+
+  scale_x_discrete(labels = function(x) parse(text = paste0("italic('", gsub(" ", " ", x), "')")))
+
+p4b
+```
+
+### Figure 5
+
+Univariate analysis of the variables for determining the physiological maturity of the fruit at harvest time and for preventing handling damage during commercialization or industrial processes.
+
+```{r}
+legend <- cowplot::get_plot_component(p4a, 'guide-box-top', return_all = TRUE)
+
+p4 <- list(p4a + labs(x = NULL) + theme(legend.position="none"
+                                        , axis.title.x=element_blank()
+                                        , axis.text.x=element_blank()
+                                        , axis.ticks.x=element_blank())
+           # , p1b + labs(x = NULL) + theme(legend.position="none"
+           #                              , axis.title.x=element_blank()
+           #                              , axis.text.x=element_blank()
+           #                              , axis.ticks.x=element_blank())
+           # , p1c + labs(x = NULL) + theme(legend.position="none"
+           #                              , axis.title.x=element_blank()
+           #                              , axis.text.x=element_blank()
+           #                              , axis.ticks.x=element_blank())
+           # , p1b + labs(x = NULL) + theme(legend.position="none"
+           #                              , axis.title.x=element_blank()
+           #                              , axis.text.x=element_blank()
+           #                              , axis.ticks.x=element_blank())
+           , p4b + theme(legend.position="none")
+           ) %>% 
+  plot_grid(plotlist = ., ncol = 1
+            , labels = "auto"
+            ) 
+
+fig <- plot_grid(p4, ncol = 1, align = 'v', rel_heights = c(0.05, 1))
+  
+fig %>% 
+  ggsave2(plot = ., "submission/Figure_5.jpg"
+         , units = "cm"
+         , width = 20
+         , height = 12
+         )
+
+fig %>% 
+  ggsave2(plot = ., "submission/Figure_5.eps"
+         , units = "cm"
+         , width = 20
+         , height = 12
+         )
+
+knitr::include_graphics("submission/Figure_5.jpg")
+```
