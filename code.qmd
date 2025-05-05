@@ -387,20 +387,19 @@ trait <- "ppp"
 
 lmm <- paste({{trait}}, "~ 1 + (1|block) + Tipo.de.control") %>% as.formula()
 
-lmd <- paste({{trait}}, "~ block + Tipo.de.control") %>% as.formula()
-
 rmout <- datos_ppp %>% 
   remove_outliers(formula = lmm
                   , drop_na = T, plot_diag = T)
 
-rmout$diagplot
+plot_diagnostic(rmout$data$clean, formula = lmm) %>% 
+  plot_grid(plotlist = ., ncol = 2)
 
 rmout$outliers
 
 model <- rmout$data$clean %>% 
-  aov(formula = lmd, .)
+  lmer(formula = lmm, .)
 
-anova(model)
+Anova(model, type = 3, test.statistic = "F")
 
 mc <- emmeans(model, ~ Tipo.de.control) %>%
   cld(Letters = letters, reversed = T) %>% 
@@ -471,10 +470,11 @@ p2b <- mc %>%
            , xlab = "NULL"
            , ylab = " Tubers (u)"
            , glab = "Control Type"
-           , ylimits = c(0, 8, 2)
+           , ylimits = c(0, 9, 2)
            , 
            )+
-  scale_x_discrete(labels = function(x) parse(text = paste0("italic('", gsub(" ", " ", x), "')")))
+  scale_x_discrete(labels = function(x) parse(text = paste0("italic('", gsub(" ", " ", x), "')"))) +
+  scale_y_continuous(labels = scales::number_format(accuracy = 0.1))
 
 p2b
 ```
@@ -508,7 +508,7 @@ p2 <- list(p2a + labs(x = NULL) + theme(legend.position="none"
             , labels = "auto"
             ) 
 
-fig <- plot_grid(p2, ncol = 1, align = 'v', rel_heights = c(0.05, 1))
+fig <- plot_grid(p2, ncol = 1, align = 'hv', rel_heights = c(0.05, 1))
   
 fig %>% 
   ggsave2(plot = ., "submission/Figure_3.jpg"
@@ -548,7 +548,7 @@ mc <- emmeans(modelo_npm, ~ Tipo.de.control, type = "response") %>%
 
 mc %>% kable()
 
-p3 <- mc %>% 
+p3a <- mc %>% 
   plot_smr(x = "Tipo.de.control"
            , y = "prob"
            # , group = "Tipo.de.control"
@@ -564,125 +564,60 @@ p3 <- mc %>%
    theme(legend.position = "none") +
   scale_x_discrete(labels = function(x) parse(text = paste0("italic('", gsub(" ", " ", x), "')")))
 
-p3
-
-p3 %>% 
-  ggsave2(plot = ., "submission/Figure_4.jpg"
-         , units = "cm"
-         , width = 20
-         , height = 12
-         )
-
-p3 %>% 
-  ggsave2(plot = ., "submission/Figure_4.eps"
-         , units = "cm"
-         , width = 20
-         , height = 12
-         )
-
-knitr::include_graphics("submission/Figure_3.jpg")
+p3a
 ```
 
-### Número de tubérculos con zebra chip
+### Incidencia
 
 ```{r}
-datos_ntz <- data %>% filter(!is.na(ntz))
+datos_i <- data %>% 
+  group_by(Tipo.de.control, block) %>% 
+  summarise(ntp_sum = sum(ntp, na.rm = TRUE), ntz_sum = sum(ntz, na.rm = TRUE)) %>% 
+  mutate(ti = (ntz_sum/ntp_sum)*100)
 
-summary(datos_ntz$ntz)
+trait <- "ti"
 
-modelo_ntz <- glm(ntz ~ Tipo.de.control + block,
-                  family = poisson(link = "log"),
-                  data = datos_ntz)
+lmm <- paste({{trait}}, "~ 1 + (1|block) + Tipo.de.control") %>% as.formula()
 
-anova(modelo_ntz, test = "Chisq")
+rmout <- datos_i %>% 
+  remove_outliers(formula = lmm
+                  , drop_na = T, plot_diag = T)
 
-Anova(modelo_ntz, type = 3)
+plot_diagnostic(rmout$data$clean, formula = lmm) %>% 
+  plot_grid(plotlist = ., ncol = 2)
 
-# Calcular dispersión: si >>1, hay sobredispersión
+rmout$outliers
 
-deviance(modelo_ntz) / df.residual(modelo_ntz)
+model <- rmout$data$clean %>% 
+  lmer(formula = lmm, .)
 
-modelo_ntz_quasi <- glm(ntz ~ Tipo.de.control + block,
-                        family = quasipoisson(link = "log"),
-                        data = datos_ntz)
+Anova(model, type = 3, test.statistic = "F")
 
-Anova(modelo_ntz_quasi, type = 3)
-
-anova(modelo_ntz_quasi, test = "Chisq")
-
-mc <- emmeans(modelo_ntz_quasi, ~ Tipo.de.control, type = "response") %>%
+mc <- emmeans(model, ~ Tipo.de.control) %>%
   cld(Letters = letters, reversed = T) %>% 
   mutate(across(".group", ~ trimws(.))) %>% 
   rename(sig1 = ".group")
 
 mc %>% kable()
 
-p4a <- mc %>% 
+p3b <- mc %>% 
   plot_smr(x = "Tipo.de.control"
-           , y = "rate"
-           # , group = "Tipo.de.control"
+           , y = "emmean"
+           # , group = "edge"
            , sig = "sig1"
            # , error = "SE"
            , color = T
            , xlab = "NULL"
-           , ylab = "Tubers with zebra chip (u)"
+           , ylab = "Incidence rate ('%')"
            , glab = "Control Type"
-           , ylimits = c(0, 5, 1)
+           , ylimits = c(0, 80, 20)
            , 
-           )+
-  guides(fill = guide_legend(label.theme = element_text(face = "italic")))
+           ) +
+  guides(fill = guide_legend(label.theme = element_text(face = "italic"))) +
+  theme(axis.text.x = element_blank(),
+        axis.ticks.x = element_blank())
 
-p4a
-```
-
-### Número de tubérculos sanos
-
-```{r}
-datos_nts <- data %>% filter(!is.na(nts))
-
-modelo_nts <- glm(nts ~ Tipo.de.control + block,
-                  family = poisson(link = "log"),
-                  data = datos_nts)
-
-anova(modelo_ntz, test = "Chisq")
-
-Anova(modelo_ntz, type = 3)
-
-# Calcular dispersión: si >>1, hay sobredispersión
-
-deviance(modelo_nts) / df.residual(modelo_nts)
-
-modelo_nts_quasi <- glm(nts ~ Tipo.de.control + block,
-                        family = quasipoisson(link = "log"),
-                        data = datos_nts)
-
-Anova(modelo_nts_quasi, type = 3)
-
-anova(modelo_nts_quasi, test = "Chisq")
-
-mc <- emmeans(modelo_nts_quasi, ~ Tipo.de.control, type = "response") %>%
-  cld(Letters = letters, reversed = T) %>% 
-  mutate(across(".group", ~ trimws(.))) %>% 
-  rename(sig1 = ".group")
-
-mc %>% kable()
-
-p4b <- mc %>% 
-  plot_smr(x = "Tipo.de.control"
-           , y = "rate"
-           # , group = "Tipo.de.control"
-           , sig = "sig1"
-           # , error = "SE"
-           , color = T
-           , xlab = "NULL"
-           , ylab = "Healthy tubers(u)"
-           , glab = "Control Type"
-           , ylimits = c(0, 4, 1)
-           , 
-           )+
-  scale_x_discrete(labels = function(x) parse(text = paste0("italic('", gsub(" ", " ", x), "')")))
-
-p4b
+p3b
 ```
 
 ### Figure 5
@@ -690,9 +625,9 @@ p4b
 Univariate analysis of the variables for determining the physiological maturity of the fruit at harvest time and for preventing handling damage during commercialization or industrial processes.
 
 ```{r}
-legend <- cowplot::get_plot_component(p4a, 'guide-box-top', return_all = TRUE)
+legend <- cowplot::get_plot_component(p3a, 'guide-box-top', return_all = TRUE)
 
-p4 <- list(p4a + labs(x = NULL) + theme(legend.position="none"
+p3 <- list(p3a + labs(x = NULL) + theme(legend.position="none"
                                         , axis.title.x=element_blank()
                                         , axis.text.x=element_blank()
                                         , axis.ticks.x=element_blank())
@@ -708,27 +643,27 @@ p4 <- list(p4a + labs(x = NULL) + theme(legend.position="none"
            #                              , axis.title.x=element_blank()
            #                              , axis.text.x=element_blank()
            #                              , axis.ticks.x=element_blank())
-           , p4b + theme(legend.position="none")
+           , p3b + theme(legend.position="none")
            ) %>% 
   plot_grid(plotlist = ., ncol = 1
             , labels = "auto"
             ) 
 
-fig <- plot_grid(p4, ncol = 1, align = 'v', rel_heights = c(0.05, 1))
+fig <- plot_grid(p3, ncol = 1, align = 'v', rel_heights = c(0.05, 1))
   
 fig %>% 
-  ggsave2(plot = ., "submission/Figure_5.jpg"
+  ggsave2(plot = ., "submission/Figure_4.jpg"
          , units = "cm"
-         , width = 20
-         , height = 12
+         , width = 25
+         , height = 22
          )
 
 fig %>% 
-  ggsave2(plot = ., "submission/Figure_5.eps"
+  ggsave2(plot = ., "submission/Figure_4.eps"
          , units = "cm"
-         , width = 20
-         , height = 12
+         , width = 25
+         , height = 22
          )
 
-knitr::include_graphics("submission/Figure_5.jpg")
+knitr::include_graphics("submission/Figure_4.jpg")
 ```
