@@ -1,6 +1,5 @@
 ---
-title: "Impact of organic fertilizers on quality and post-harvest management of Mango ‘Kent’ (_Mangifera indica_ L.)"
-author: "Henry Morocho-Romero; Ricardo Peña-Castillo; Arturo Morales-Pizarro; Junior Domínguez-Chozo; Sandy Vilchez-Navarro; Sebastian Casas-Niño; Gabriela Cárdenas-Huamán; Nery Tirabante-Terrones; Esdwin-Oberti Nuñez-Ticliahunca; Ana-Gabriela Montañez-Artica; Leslie Velarde-Apaza; Max Ramirez-Rojas; Juancarlos Cruz; Flavio Lozano-Isla."
+title: "Use of biological and chemical control agents for potato psyllid (_Bactericera cockerelli_) under drought conditions"
 format:
   html:
     toc: true
@@ -21,12 +20,9 @@ execute:
 #| label:  setup
 
 library(emmeans)
-library(corrplot)
 library(multcomp)
 library(FSA)
 library(car)
-library(factoextra)
-library(corrplot)
 source('https://inkaverse.com/setup.r')
 
 cat("Project: ", getwd(), "\n")
@@ -35,7 +31,7 @@ session_info()
 
 # Import data
 
-Data was imported from the field book evaluated during the 2022-2023 growing season. The evaluations focused on mango fruits of the ‘Kent’ variety at two stages: physiological maturity and commercial maturity.
+Data were imported from the field book evaluated during the 2024 - 2025 crop year. The evaluations focused on the effect of _Bactericera cockerelli_ on potato (_Solanum tuberosum_ L.) yield and quality.
 
 ```{r}
 url <- "https://docs.google.com/spreadsheets/d/1UzF2W_rfOLLybl-wiD2sJSVPHlfzfKXXgShnqhfX5ps/edit?gid=912027622#gid=912027622"
@@ -81,11 +77,7 @@ str(data)
 ```
 
 ```{r}
-rendimiento %>% kable(caption = "Yield related traits")
-
-fisio %>% kable(caption = "Evaluation of fruits at fisiological maturity")
-
-consumo %>% kable(caption = "Evaluation of fruits at commercial maturity")
+data %>% kable(caption = "Yield related traits")
 ```
 
 # Data summary
@@ -93,22 +85,16 @@ consumo %>% kable(caption = "Evaluation of fruits at commercial maturity")
 Summary of the number of data points recorded for each treatment and evaluated variable.
 
 ```{r}
-sm <- fisio %>% 
-  group_by(treat) %>% 
-  summarise(across(pcfmf:rpp, ~ sum(!is.na(.))))
-
-sm
-
-sm <- consumo %>% 
-  group_by(treat) %>% 
-  summarise(across(pdfmc:imf, ~ sum(!is.na(.))))
+sm <- data %>% 
+  group_by(Tipo.de.control) %>% 
+  summarise(across(ndh:nts, ~ sum(!is.na(.))))
 
 sm
 ```
 
 # Meteorological data
 
-Climatic conditions of the study area located in the Tambogrande district, Piura region.
+Climatic conditions of the study area located in the Quispampa Bajo, Huancabamba district, Huancabamba province, Piura region.
 
 ```{r}
 met <- range_read(ss = gs, sheet = "clima") %>% 
@@ -147,13 +133,11 @@ knitr::include_graphics("submission/Figure_1.jpg")
 
 # Objetives
 
-The objective of this study is to demonstrate the effect of organic fertilizers, specifically compost and biol, applied at the soil and foliar levels on the quality of mango fruit at physiological and commercial maturity.
-
 ## Specific Objective 1
 
-Demonstrate the effect of organic fertilizers, specifically compost and biol, applied at the soil and foliar levels on the quality of mango fruit at physiological maturity.
+To evaluate the behavior of the psyllid Bactericera cockerelli Šulc. under water stress conditions during the phenological development of potato (Solanum tuberosum L.).
 
-### Numero de huevos
+### Number of eggs
 
 ```{r}
 datos_ndh <- data %>% filter(!is.na(ndh))
@@ -161,8 +145,6 @@ datos_ndh <- data %>% filter(!is.na(ndh))
 modelo_ndh <- glm(ndh ~ Tipo.de.control * id_variable + block,
                   family = poisson(link = "log"),
                   data = datos_ndh)
-
-anova(modelo_ndh, test = "Chisq")
 
 Anova(modelo_ndh, type = 3)
 
@@ -194,7 +176,7 @@ mc <- merge(mc2, mc1) %>%
 
 mc %>% kable()
 
-p1a <- mc %>% 
+p2a <- mc %>% 
   plot_smr(x = "id_variable"
            , y = "rate"
            , group = "Tipo.de.control"
@@ -209,10 +191,10 @@ p1a <- mc %>%
            ) +
   guides(fill = guide_legend(label.theme = element_text(face = "italic")))
 
-p1a
+p2a
 ```
 
-### Numero de ninfas
+### Number of nymphs
 
 ```{r}
 datos_ndn <- data %>% filter(!is.na(ndn))
@@ -220,8 +202,6 @@ datos_ndn <- data %>% filter(!is.na(ndn))
 modelo_ndn <- glm(ndn ~ Tipo.de.control * id_variable + block,
                   family = poisson(link = "log"),
                   data = datos_ndn)
-
-anova(modelo_ndn, test = "Chisq")
 
 Anova(modelo_ndn, type = 3)
 
@@ -253,7 +233,7 @@ mc <- merge(mc2, mc1) %>%
 
 mc %>% kable()
 
-p1b <- mc %>% 
+p2b <- mc %>% 
   plot_smr(x = "id_variable"
            , y = "rate"
            , group = "Tipo.de.control"
@@ -268,10 +248,10 @@ p1b <- mc %>%
            )+
   guides(fill = guide_legend(label.theme = element_text(face = "italic")))
 
-p1b
+p2b
 ```
 
-### Numero de adultos
+### Number of adults
 
 ```{r}
 datos_nda <- data %>% filter(!is.na(nda))
@@ -279,8 +259,6 @@ datos_nda <- data %>% filter(!is.na(nda))
 modelo_nda <- glm(nda ~ Tipo.de.control * id_variable + block,
                   family = poisson(link = "log"),
                   data = datos_ndn)
-
-anova(modelo_nda, test = "Chisq")
 
 Anova(modelo_nda, type = 3)
 
@@ -312,7 +290,7 @@ mc <- merge(mc2, mc1) %>%
 
 mc %>% kable()
 
-p1c <- mc %>% 
+p2c <- mc %>% 
   plot_smr(x = "id_variable"
            , y = "rate"
            , group = "Tipo.de.control"
@@ -327,39 +305,31 @@ p1c <- mc %>%
            )+
   guides(fill = guide_legend(label.theme = element_text(face = "italic")))
 
-p1c
+p2c
 ```
 
 ### Figure 2
 
-Univariate analysis of the variables for determining the physiological maturity of the fruit at harvest time and for preventing handling damage during commercialization or industrial processes.
+Univariate analysis of variables to determine the behavior of the psyllid _Bactericera cockerelli_ Šulc. under water stress conditions during the phenological development of potato (_Solanum tuberosum_ L.).
 
 ```{r}
-legend <- cowplot::get_plot_component(p1a, 'guide-box-top', return_all = TRUE)
+legend <- cowplot::get_plot_component(p2a, 'guide-box-top', return_all = TRUE)
 
-p1 <- list(p1a + labs(x = NULL) + theme(legend.position="none"
+p2 <- list(p2a + labs(x = NULL) + theme(legend.position="none"
                                         , axis.title.x=element_blank()
                                         , axis.text.x=element_blank()
                                         , axis.ticks.x=element_blank())
-           # , p1b + labs(x = NULL) + theme(legend.position="none"
-           #                              , axis.title.x=element_blank()
-           #                              , axis.text.x=element_blank()
-           #                              , axis.ticks.x=element_blank())
-           # , p1c + labs(x = NULL) + theme(legend.position="none"
-           #                              , axis.title.x=element_blank()
-           #                              , axis.text.x=element_blank()
-           #                              , axis.ticks.x=element_blank())
-           , p1b + labs(x = NULL) + theme(legend.position="none"
+           , p2b + labs(x = NULL) + theme(legend.position="none"
                                         , axis.title.x=element_blank()
                                         , axis.text.x=element_blank()
                                         , axis.ticks.x=element_blank())
-           , p1c + theme(legend.position="none")
+           , p2c + theme(legend.position="none")
            ) %>% 
   plot_grid(plotlist = ., ncol = 1
             , labels = "auto"
             ) 
 
-fig <- plot_grid(legend, p1, ncol = 1, align = 'v', rel_heights = c(0.05, 1))
+fig <- plot_grid(legend, p2, ncol = 1, align = 'v', rel_heights = c(0.05, 1))
   
 fig %>% 
   ggsave2(plot = ., "submission/Figure_2.jpg"
@@ -378,7 +348,11 @@ fig %>%
 knitr::include_graphics("submission/Figure_2.jpg")
 ```
 
-### Peso de planta
+## Specific Objective 2
+
+To evaluate the yield and commercial quality of potato tubers of potato (_Solanum tuberosum_ L.).
+
+### Plant weight
 
 ```{r}
 datos_ppp <- data %>% filter(!is.na(ppp))
@@ -408,7 +382,7 @@ mc <- emmeans(model, ~ Tipo.de.control) %>%
 
 mc %>% kable()
 
-p2a <- mc %>% 
+p3a <- mc %>% 
   plot_smr(x = "Tipo.de.control"
            , y = "emmean"
            # , group = "edge"
@@ -425,10 +399,10 @@ p2a <- mc %>%
   theme(axis.text.x = element_blank(),
         axis.ticks.x = element_blank())
 
-p2a
+p3a
 ```
 
-### Numero de tuberculos
+### Number of tubers
 
 ```{r}
 datos_ntp <- data %>% filter(!is.na(ntp))
@@ -437,21 +411,7 @@ modelo_ntp <- glm(ntp ~ Tipo.de.control + block,
                   family = poisson(link = "log"),
                   data = datos_ntp)
 
-anova(modelo_ntp, test = "Chisq")
-
 Anova(modelo_ntp, type = 3)
-
-# Calcular dispersión: si >>1, hay sobredispersión
-
-# deviance(modelo_ntp) / df.residual(modelo_ntp)
-# 
-# modelo_ntp_quasi <- glm(ntp ~ Tipo.de.control + block,
-#                         family = quasipoisson(link = "log"),
-#                         data = datos_ntp)
-# 
-# Anova(modelo_ntp_quasi, type = 3)
-# 
-# anova(modelo_ndn_quasi, test = "Chisq")
 
 mc <- emmeans(modelo_ntp, ~ Tipo.de.control, type = "response") %>%
   cld(Letters = letters, reversed = T) %>% 
@@ -460,7 +420,7 @@ mc <- emmeans(modelo_ntp, ~ Tipo.de.control, type = "response") %>%
 
 mc %>% kable()
 
-p2b <- mc %>% 
+p3b <- mc %>% 
   plot_smr(x = "Tipo.de.control"
            , y = "rate"
            # , group = "Tipo.de.control"
@@ -476,39 +436,27 @@ p2b <- mc %>%
   scale_x_discrete(labels = function(x) parse(text = paste0("italic('", gsub(" ", " ", x), "')"))) +
   scale_y_continuous(labels = scales::number_format(accuracy = 0.1))
 
-p2b
+p3b
 ```
 
 ### Figure 3
 
-Univariate analysis of the variables for determining the physiological maturity of the fruit at harvest time and for preventing handling damage during commercialization or industrial processes.
+Univariate analysis of variables to determine the yield and commercial quality of tubers of potato (_Solanum tuberosum_ L.).
 
 ```{r}
-legend <- cowplot::get_plot_component(p2a, 'guide-box-top', return_all = TRUE)
+legend <- cowplot::get_plot_component(p3a, 'guide-box-top', return_all = TRUE)
 
-p2 <- list(p2a + labs(x = NULL) + theme(legend.position="none"
+p3 <- list(p3a + labs(x = NULL) + theme(legend.position="none"
                                         , axis.title.x=element_blank()
                                         , axis.text.x=element_blank()
                                         , axis.ticks.x=element_blank())
-           # , p1b + labs(x = NULL) + theme(legend.position="none"
-           #                              , axis.title.x=element_blank()
-           #                              , axis.text.x=element_blank()
-           #                              , axis.ticks.x=element_blank())
-           # , p1c + labs(x = NULL) + theme(legend.position="none"
-           #                              , axis.title.x=element_blank()
-           #                              , axis.text.x=element_blank()
-           #                              , axis.ticks.x=element_blank())
-           # , p1b + labs(x = NULL) + theme(legend.position="none"
-           #                              , axis.title.x=element_blank()
-           #                              , axis.text.x=element_blank()
-           #                              , axis.ticks.x=element_blank())
-           , p2b + theme(legend.position="none")
+           , p3b + theme(legend.position="none")
            ) %>% 
   plot_grid(plotlist = ., ncol = 1
             , labels = "auto"
             ) 
 
-fig <- plot_grid(p2, ncol = 1, align = 'hv', rel_heights = c(0.05, 1))
+fig <- plot_grid(p3, ncol = 1, align = 'hv', rel_heights = c(0.05, 1))
   
 fig %>% 
   ggsave2(plot = ., "submission/Figure_3.jpg"
@@ -527,7 +475,11 @@ fig %>%
 knitr::include_graphics("submission/Figure_3.jpg")
 ```
 
-### Punta morada
+## Specific Objective 3
+
+To evaluate the incidence of the purple tip complex in the potato variety UNICA subjected to different biological and chemical treatments.
+
+### Purple tip
 
 ```{r}
 datos_npm <- data %>% filter(!is.na(npm))
@@ -548,7 +500,7 @@ mc <- emmeans(modelo_npm, ~ Tipo.de.control, type = "response") %>%
 
 mc %>% kable()
 
-p3a <- mc %>% 
+p4a <- mc %>% 
   plot_smr(x = "Tipo.de.control"
            , y = "prob"
            # , group = "Tipo.de.control"
@@ -564,10 +516,10 @@ p3a <- mc %>%
    theme(legend.position = "none") +
   scale_x_discrete(labels = function(x) parse(text = paste0("italic('", gsub(" ", " ", x), "')")))
 
-p3a
+p4a
 ```
 
-### Incidencia
+### Incidence of Zebra chip
 
 ```{r}
 datos_i <- data %>% 
@@ -600,7 +552,7 @@ mc <- emmeans(model, ~ Tipo.de.control) %>%
 
 mc %>% kable()
 
-p3b <- mc %>% 
+p4b <- mc %>% 
   plot_smr(x = "Tipo.de.control"
            , y = "emmean"
            # , group = "edge"
@@ -615,39 +567,27 @@ p3b <- mc %>%
            ) +
   scale_x_discrete(labels = function(x) parse(text = paste0("italic('", gsub(" ", " ", x), "')")))
 
-p3b
+p4b
 ```
 
-### Figure 5
+### Figure 4
 
-Univariate analysis of the variables for determining the physiological maturity of the fruit at harvest time and for preventing handling damage during commercialization or industrial processes.
+Univariate analysis of variables to determine the incidence of the purple tip complex in potato varieties subjected to different biological and chemical treatments.
 
 ```{r}
-legend <- cowplot::get_plot_component(p3a, 'guide-box-top', return_all = TRUE)
+legend <- cowplot::get_plot_component(p4a, 'guide-box-top', return_all = TRUE)
 
-p3 <- list(p3a + labs(x = NULL) + theme(legend.position="none"
+p4 <- list(p4a + labs(x = NULL) + theme(legend.position="none"
                                         , axis.title.x=element_blank()
                                         , axis.text.x=element_blank()
                                         , axis.ticks.x=element_blank())
-           # , p1b + labs(x = NULL) + theme(legend.position="none"
-           #                              , axis.title.x=element_blank()
-           #                              , axis.text.x=element_blank()
-           #                              , axis.ticks.x=element_blank())
-           # , p1c + labs(x = NULL) + theme(legend.position="none"
-           #                              , axis.title.x=element_blank()
-           #                              , axis.text.x=element_blank()
-           #                              , axis.ticks.x=element_blank())
-           # , p1b + labs(x = NULL) + theme(legend.position="none"
-           #                              , axis.title.x=element_blank()
-           #                              , axis.text.x=element_blank()
-           #                              , axis.ticks.x=element_blank())
-           , p3b + theme(legend.position="none")
+           , p4b + theme(legend.position="none")
            ) %>% 
   plot_grid(plotlist = ., ncol = 1
             , labels = "auto"
             ) 
 
-fig <- plot_grid(p3, ncol = 1, align = 'v', rel_heights = c(0.05, 1))
+fig <- plot_grid(p4, ncol = 1, align = 'v', rel_heights = c(0.05, 1))
   
 fig %>% 
   ggsave2(plot = ., "submission/Figure_4.jpg"
