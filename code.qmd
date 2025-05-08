@@ -171,8 +171,8 @@ mc2 <- emmeans(modelo_ndh_quasi, ~ id_variable | Tipo.de.control, type = "respon
   mutate(across(".group", ~ toupper(.))) %>% 
   rename(sig2 = ".group")
 
-mc <- merge(mc2, mc1) %>% 
-  unite(col = "group", c("sig2", "sig1"), sep = "")
+mc <- merge(mc1, mc2) %>% 
+  unite(col = "group", c("sig1", "sig2"), sep = "")
 
 mc %>% kable()
 
@@ -180,19 +180,77 @@ p2a <- mc %>%
   plot_smr(x = "id_variable"
            , y = "rate"
            , group = "Tipo.de.control"
-           , sig = "group"
+           # , sig = "group"
            # , error = "SE"
            , color = T
            , xlab = "Evaluation days"
-           , ylab = "Eggs (u)"
+           , ylab = "Number of eggs"
            , glab = "Control Type"
            , ylimits = c(0, 35, 5)
            , 
            ) +
-  guides(fill = guide_legend(label.theme = element_text(face = "italic")))
+    geom_text(
+    aes(label = group),  
+    position = position_dodge(width = 0.9),
+    angle = 90,          
+    vjust = 0.3,
+    hjust = -0.3,    
+    size = 3
+  ) +
+  guides(fill = guide_legend(label.theme = element_text(face = "italic"))) 
 
 p2a
 ```
+
+```{r}
+datos_ndh <- data %>% filter(!is.na(ndh))
+
+trait <- "ndh"
+
+lmm <- paste({{trait}}, "~ 1 + (1|block) + Tipo.de.control") %>% as.formula()
+
+rmout <- datos_ndh %>% 
+  remove_outliers(formula = lmm
+                  , drop_na = T, plot_diag = T)
+
+plot_diagnostic(rmout$data$clean, formula = lmm) %>% 
+  plot_grid(plotlist = ., ncol = 2)
+
+rmout$outliers
+
+model <- rmout$data$clean %>% 
+  lmer(formula = lmm, .)
+
+Anova(model, type = 3, test.statistic = "F")
+
+mc <- emmeans(model, ~ Tipo.de.control) %>%
+  cld(Letters = letters, reversed = T) %>% 
+  mutate(across(".group", ~ trimws(.))) %>% 
+  rename(sig1 = ".group")
+
+mc %>% kable()
+
+p3a <- mc %>% 
+  plot_smr(x = "Tipo.de.control"
+           , y = "emmean"
+           # , group = "edge"
+           , sig = "sig1"
+           # , error = "SE"
+           , color = T
+           , xlab = "NULL"
+           , ylab = "Tubers weight (g)"
+           , glab = "Control Type"
+           , ylimits = c(0, 220, 40)
+           , 
+           ) +
+  guides(fill = guide_legend(label.theme = element_text(face = "italic"))) +
+  theme(axis.text.x = element_blank(),
+        axis.ticks.x = element_blank())
+
+p3a
+```
+
+
 
 ### Number of nymphs
 
@@ -228,8 +286,8 @@ mc2 <- emmeans(modelo_ndn_quasi, ~ id_variable | Tipo.de.control, type = "respon
   mutate(across(".group", ~ toupper(.))) %>% 
   rename(sig2 = ".group")
 
-mc <- merge(mc2, mc1) %>% 
-  unite(col = "group", c("sig2", "sig1"), sep = "")
+mc <- merge(mc1, mc2) %>% 
+  unite(col = "group", c("sig1", "sig2"), sep = "")
 
 mc %>% kable()
 
@@ -237,16 +295,23 @@ p2b <- mc %>%
   plot_smr(x = "id_variable"
            , y = "rate"
            , group = "Tipo.de.control"
-           , sig = "group"
+           # , sig = "group"
            # , error = "SE"
            , color = T
            , xlab = "Evaluation days"
-           , ylab = " Nymphs (u)"
+           , ylab = "Number of nymphs"
            , glab = "Control Type"
            , ylimits = c(0, 35, 5)
            , 
            )+
-  guides(fill = guide_legend(label.theme = element_text(face = "italic")))
+    geom_text(
+    aes(label = group),  
+    position = position_dodge(width = 0.9),
+    angle = 90,          
+    vjust = 0.3,
+    hjust = -0.3,    
+    size = 3
+  )
 
 p2b
 ```
@@ -285,8 +350,8 @@ mc2 <- emmeans(modelo_nda, ~ id_variable | Tipo.de.control, type = "response") %
   mutate(across(".group", ~ toupper(.))) %>% 
   rename(sig2 = ".group")
 
-mc <- merge(mc2, mc1) %>% 
-  unite(col = "group", c("sig2", "sig1"), sep = "")
+mc <- merge(mc1, mc2) %>% 
+  unite(col = "group", c("sig1", "sig2"), sep = "")
 
 mc %>% kable()
 
@@ -294,16 +359,23 @@ p2c <- mc %>%
   plot_smr(x = "id_variable"
            , y = "rate"
            , group = "Tipo.de.control"
-           , sig = "group"
+           # , sig = "group"
            # , error = "SE"
            , color = T
            , xlab = "Evaluation days"
-           , ylab = "Adults (u)"
+           , ylab = "Number of adults"
            , glab = "Control Type"
            , ylimits = c(0, 0.8, 0.2)
            , 
            )+
-  guides(fill = guide_legend(label.theme = element_text(face = "italic")))
+     geom_text(
+    aes(label = group),  
+    position = position_dodge(width = 0.9),
+    angle = 90,          
+    vjust = 0.3,
+    hjust = -0.3,    
+    size = 3
+  )
 
 p2c
 ```
