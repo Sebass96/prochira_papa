@@ -202,56 +202,6 @@ p2a <- mc %>%
 p2a
 ```
 
-```{r}
-datos_ndh <- data %>% filter(!is.na(ndh))
-
-trait <- "ndh"
-
-lmm <- paste({{trait}}, "~ 1 + (1|block) + Tipo.de.control") %>% as.formula()
-
-rmout <- datos_ndh %>% 
-  remove_outliers(formula = lmm
-                  , drop_na = T, plot_diag = T)
-
-plot_diagnostic(rmout$data$clean, formula = lmm) %>% 
-  plot_grid(plotlist = ., ncol = 2)
-
-rmout$outliers
-
-model <- rmout$data$clean %>% 
-  lmer(formula = lmm, .)
-
-Anova(model, type = 3, test.statistic = "F")
-
-mc <- emmeans(model, ~ Tipo.de.control) %>%
-  cld(Letters = letters, reversed = T) %>% 
-  mutate(across(".group", ~ trimws(.))) %>% 
-  rename(sig1 = ".group")
-
-mc %>% kable()
-
-p3a <- mc %>% 
-  plot_smr(x = "Tipo.de.control"
-           , y = "emmean"
-           # , group = "edge"
-           , sig = "sig1"
-           # , error = "SE"
-           , color = T
-           , xlab = "NULL"
-           , ylab = "Tubers weight (g)"
-           , glab = "Control Type"
-           , ylimits = c(0, 220, 40)
-           , 
-           ) +
-  guides(fill = guide_legend(label.theme = element_text(face = "italic"))) +
-  theme(axis.text.x = element_blank(),
-        axis.ticks.x = element_blank())
-
-p3a
-```
-
-
-
 ### Number of nymphs
 
 ```{r}
@@ -500,7 +450,7 @@ p3b <- mc %>%
            # , error = "SE"
            , color = T
            , xlab = "NULL"
-           , ylab = " Tubers (u)"
+           , ylab = "Number of tubers"
            , glab = "Control Type"
            , ylimits = c(0, 9, 2)
            , 
