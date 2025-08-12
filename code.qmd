@@ -251,7 +251,7 @@ p2b <- mc %>%
            , xlab = "Evaluation days"
            , ylab = "Number of nymphs"
            , glab = "Control Type"
-           , ylimits = c(0, 35, 5)
+           , ylimits = c(0, 70, 10)
            , 
            )+
     geom_text(
