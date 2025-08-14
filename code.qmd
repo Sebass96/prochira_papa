@@ -205,32 +205,39 @@ p2a
 ### Number of nymphs
 
 ```{r}
-datos_ndn <- data %>% filter(!is.na(ndn))
+datos_ndn <- data %>% 
+  filter(!is.na(ndn))
 
-modelo_ndn <- glm(ndn ~ Tipo.de.control * id_variable + block,
-                  family = poisson(link = "log"),
-                  data = datos_ndn)
+table <- datos_ndn %>% 
+  group_by(id_variable, Tipo.de.control) %>% 
+  summarise(suma = sum(ndn), media = mean(ndn, na.rm = T))
 
-Anova(modelo_ndn, type = 3)
+model <- lm(ndh ~ id_variable*Tipo.de.control, data = datos_ndn)
 
-# Calcular dispersión: si >>1, hay sobredispersión
+anova(model)
+  
+# modelo_ndn <- glm(ndn ~ Tipo.de.control * id_variable,
+#                   family = poisson(link = "log"),
+#                   data = datos_ndn)
+# 
+# # Calcular dispersión: si >>1, hay sobredispersión
+# 
+# deviance(modelo_ndn) / df.residual(modelo_ndn)
+# 
+# modelo_ndn_quasi <- glm(ndn ~ Tipo.de.control * id_variable,
+#                         family = quasipoisson(link = "log"),
+#                         data = datos_ndn)
+# 
+# Anova(modelo_ndn_quasi, type = 3)
+# 
+# anova(modelo_ndn_quasi, test = "Chisq")
 
-deviance(modelo_ndn) / df.residual(modelo_ndn)
-
-modelo_ndn_quasi <- glm(ndn ~ Tipo.de.control * id_variable + block,
-                        family = quasipoisson(link = "log"),
-                        data = datos_ndn)
-
-Anova(modelo_ndn_quasi, type = 3)
-
-anova(modelo_ndn_quasi, test = "Chisq")
-
-mc1 <- emmeans(modelo_ndn_quasi, ~ Tipo.de.control | id_variable, type = "response") %>%
+mc1 <- emmeans(model, ~ Tipo.de.control | id_variable) %>%
   cld(Letters = letters, reversed = T) %>% 
   mutate(across(".group", ~ trimws(.))) %>% 
   rename(sig1 = ".group")
 
-mc2 <- emmeans(modelo_ndn_quasi, ~ id_variable | Tipo.de.control, type = "response") %>%
+mc2 <- emmeans(model, ~ id_variable | Tipo.de.control) %>%
   cld(Letters = letters, reversed = T) %>% 
   mutate(across(".group", ~ trimws(.))) %>% 
   mutate(across(".group", ~ toupper(.))) %>% 
@@ -243,7 +250,7 @@ mc %>% kable()
 
 p2b <- mc %>% 
   plot_smr(x = "id_variable"
-           , y = "rate"
+           , y = "emmean"
            , group = "Tipo.de.control"
            # , sig = "group"
            # , error = "SE"
@@ -251,7 +258,7 @@ p2b <- mc %>%
            , xlab = "Evaluation days"
            , ylab = "Number of nymphs"
            , glab = "Control Type"
-           , ylimits = c(0, 70, 10)
+           , ylimits = c(0, 40, 10)
            , 
            )+
     geom_text(
