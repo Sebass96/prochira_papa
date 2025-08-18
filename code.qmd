@@ -485,20 +485,20 @@ p3 <- list(p3a + labs(x = NULL) + theme(legend.position="none"
             , labels = "auto"
             ) 
 
-fig <- plot_grid(p3, ncol = 1, align = 'hv', rel_heights = c(0.05, 1))
+fig <- plot_grid(p3, ncol = 1, align = 'hv', rel_heights = c(1, 1))
   
 fig %>% 
   ggsave2(plot = ., "submission/Figure_3.jpg"
          , units = "cm"
-         , width = 25
-         , height = 22
+         , width = 20
+         , height = 18
          )
 
 fig %>% 
   ggsave2(plot = ., "submission/Figure_3.eps"
          , units = "cm"
-         , width = 25
-         , height = 22
+         , width = 20
+         , height = 18
          )
 
 knitr::include_graphics("submission/Figure_3.jpg")
@@ -621,15 +621,15 @@ fig <- plot_grid(p4, ncol = 1, align = 'v', rel_heights = c(0.05, 1))
 fig %>% 
   ggsave2(plot = ., "submission/Figure_4.jpg"
          , units = "cm"
-         , width = 25
-         , height = 22
+         , width = 20
+         , height = 18
          )
 
 fig %>% 
   ggsave2(plot = ., "submission/Figure_4.eps"
          , units = "cm"
-         , width = 25
-         , height = 22
+         , width = 20
+         , height = 18
          )
 
 knitr::include_graphics("submission/Figure_4.jpg")
