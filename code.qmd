@@ -540,7 +540,11 @@ fig %>%
     plot = ., "submission/Figure_3.eps",
     units = "cm",
     width = 13,
-    height = 16
+```
+
+
+```{r}
+height = 16
   )
 
 knitr::include_graphics("submission/Figure_3.jpg")
@@ -712,3 +716,171 @@ fig %>%
 
 knitr::include_graphics("submission/Figure_4.jpg")
 ```
+
+## Photos
+
+### Figura 3
+
+```{r}
+picfiles <- list.files(path = "C:/INIA/GIT/prochira_papa/Fotos/Figura3"
+                  , full.names = T
+                  , recursive = T
+                  , pattern = "jpg"
+                  )
+
+
+# Función para normalizar cada imagen
+normalize_image <- function(img, size = 800) {
+  img %>%
+    image_resize(paste0(size, "x", size, "^")) %>% # escala al menos al tamaño
+    image_crop(paste0(size, "x", size, "+0+0"))   # recorta centrado
+}
+
+image_plots <- picfiles %>%
+  map(~ image_read(.) %>% normalize_image(800))
+
+image_list <- list(image_plots[[1]] 
+                   
+                   , image_plots[[2]]
+                   
+                   , image_plots[[3]] 
+                     
+    
+                   , image_plots[[4]]  
+                     
+, image_plots[[5]] 
+, image_plots[[6]] 
+, image_plots[[7]] 
+, image_plots[[8]] 
+, image_plots[[9]] 
+, image_plots[[10]] 
+, image_plots[[11]]
+                    ) 
+
+images <- image_list %>% 
+  map( ~ image_ggplot(.)) %>% 
+  plot_grid(plotlist = ., ncol = 4, nrow = 3, labels = "auto") 
+
+plot <- images %>% 
+  ggsave( filename = "Fotos/Figure-2.jpg"
+          , plot = .
+          , units = "cm", width = 30, height = 30)
+
+include_graphics(plot)
+```
+
+### Figura 4
+
+```{r}
+picfiles <- list.files(path = "C:/INIA/GIT/prochira_papa/Fotos/Figura4"
+                  , full.names = T
+                  , recursive = T
+                  , pattern = "jpg"
+                  )
+
+image_plots <- picfiles %>%
+  map( ~ image_read(.))
+
+image_list <- list(image_plots[[1]] 
+                   
+                   , image_plots[[2]]
+                   
+                   , image_plots[[3]] 
+                     
+                   
+                   , image_plots[[4]]  
+                     
+
+                    ) 
+
+images <- image_list %>% 
+  map( ~ image_ggplot(.)) %>% 
+  plot_grid(plotlist = ., ncol = 4, labels = "auto") 
+
+plot <- images %>% 
+  ggsave( filename = "Fotos/Figure-1.jpg"
+          , plot = .
+          , units = "cm", width = 30, height = 11.5)
+
+include_graphics(plot)
+```
+
+```{r}
+picfiles <- list.files(
+  path = "C:/INIA/GIT/prochira_papa/Fotos/Figura3",
+  full.names = TRUE,
+  recursive = TRUE,
+  pattern = "jpe?g$"
+)
+
+# Función para normalizar cada imagen a cuadrado
+normalize_image <- function(img, size = 800) {
+  img %>%
+    image_resize(paste0(size, "x", size, "^")) %>% # escalar
+    image_crop(paste0(size, "x", size, "+0+0"))   # recortar cuadrado
+}
+
+# Leer y normalizar todas
+image_plots <- picfiles %>%
+  map(~ image_read(.) %>% normalize_image(800))
+
+# Pasar todas a ggplot
+images <- image_plots %>%
+  map(~ image_ggplot(.)) %>%
+  plot_grid(plotlist = ., ncol = 4, labels = "auto") 
+# 4 columnas → 3 filas: 4+4+3 = 11
+
+# Guardar en archivo
+ggsave(
+  filename = "Fotos/Figure-3.jpg",
+  plot = images,
+  units = "cm",
+  width = 35,
+  height = 30,   # más alto para que quepan 3 filas
+  dpi = 600
+)
+```
+
+
+```{r}
+library(magick)
+library(purrr)
+library(cowplot)
+
+# 1. Listar imágenes
+picfiles <- list.files(
+  path = "C:/INIA/GIT/prochira_papa/Fotos/Figura3",
+  full.names = TRUE,
+  recursive = TRUE,
+  pattern = "jpe?g$"
+)
+
+# 2. Función para normalizar a cuadrado idéntico
+normalize_square <- function(img, size = 2000) {
+  img %>%
+    image_resize(paste0(size, "x", size)) %>%   # ajusta el lado más grande al cuadrado
+    image_extent(paste0(size, "x", size),       # extiende al cuadrado exacto
+                 color = "white", gravity = "center") # rellena con blanco al centro
+}
+
+# 3. Aplicar a todas las imágenes
+image_plots <- map(picfiles, ~ image_read(.) %>% normalize_square(2000))
+
+# 4. Pasar a ggplot y combinarlas (11 imágenes → 3 filas de 4 columnas)
+images <- image_plots %>%
+  map(~ image_ggplot(.)) %>%
+  plot_grid(plotlist = ., ncol = 4, labels = "auto")
+
+# 5. Guardar en alta resolución
+ggsave(
+  filename = "Fotos/Figure-4.jpg",
+  plot = images,
+  units = "cm",
+  width = 35,
+  height = 30,
+  dpi = 600
+)
+
+```
+
+
