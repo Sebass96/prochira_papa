@@ -1,0 +1,416 @@
+**Efficacy of Biological and Chemical Control Agents Against the Potato Psyllid (*Bactericera cockerelli* Šulc) Under Field Conditions**
+
+Gabriela Cárdenas-Huamán^1^; Henry Morocho-Romero^1^; Sebastian Casas-Niño^1^; Sandy Vilchez-Navarro^1^; Leslie D. Velarde-Apaza^1^; Max Ramirez-Rojas^1^; Juancarlos Cruz^1^; Flavio Lozano-Isla^1,2\*^ 
+
+*^1^.Dirección de Servicios Estratégicos Agrarios, Estación Experimental Agraria El Chira, Instituto Nacional de Innovación Agraria (INIA), Carretera Sullana—Talara Km. 1027, Piura 20120, Perú*
+
+*^2^ Facultad de Ingeniería y Ciencias Agrarias, Universidad Nacional Toribio Rodríguez de Mendoza de Amazonas (UNTRM), Chachapoyas, Perú.*
+
+* ^\*^ *Corresponding author: *[flavio.lozano@untrm.edu.pe](mailto:flavio.lozano@untrm.edu.pe)*
+
+
+
+
+| **Author**                    | **ORCID**                     | **Email**                      |
+|-------------------------------|-------------------------------|--------------------------------|
+| Gabriela Cárdenas-Huamán      | 0000-0002-8379-5464           | 20200607@lamolina.edu.pe       |
+| Henry Morocho-Romero          | 0000-0002-1520-2372           | 0202018122@alumnos.unp.edu.pe  |
+| Sebastian Casas-Niño          | 0000-0002-6576-8761           | 20140231@lamolina.edu.pe       |
+| Sandy Vilchez-Navarro         | 0009-0002-1784-5563           | 0202018140@alumnos.unp.edu.p   |
+| Leslie Diana Velarde-Apaza    | 0000-0001-6031-6355           | leslie.velarde@upn.pe          |
+| Max Ramirez-Rojas             | 0000-0003-3322-0838           | proyectochira@inia.gob.pe      |
+| Juancarlos Cruz               | 0009-0005-8288-2768           | jcruz@inia.gob.pe              |
+| Flavio Lozano-Isla            | 0000-0002-0714-669X           | flavio.lozano@untrm.edu.pe     |
+
+
+
+
+
+
+
+
+**Highlights**
+
+* The psyllid *Bactericera cockerelli* significantly contributed to yield reduction in potato crops under field conditions.
+* Chemical control exhibited the highest efficacy in reducing *B. cockerelli* populations and plant symptom expression in the field.
+* Among the biological control agents evaluated under field conditions, *Paecilomyces lilacinus* and *Metarhizium anisopliae* demonstrated superior efficacy in suppressing *B. cockerelli* populations.
+* The incidence of zebra chip (ZC) disease was lower under chemical control (60.60%) and *M. anisopliae* (56.60%) treatments compared with the untreated control (68.61%).
+* The purple-top complex negatively affected both total yield and tuber size.
+
+
+
+**ABSTRACT**
+
+Potato (*Solanum tuberosum* L.) is the third most important food crop worldwide and a cornerstone of food security across the Andean region. However, its production is increasingly threatened by the potato psyllid *Bactericera cockerelli* (Šulc), the vector of *Candidatus Liberibacter solanacearum*, the causal agent of the purple-top complex associated with zebra chip disease, which severely reduces both tuber yield and quality. This study was conducted from September 2024 to February 2025 in the province of Huancabamba, Peru, to evaluate the efficacy of biological and chemical control agents against *B. cockerelli* under field conditions. A randomized complete block design was implemented with five treatments and four replicates, totaling 20 experimental units, each consisting of 20 potato plants (*S. tuberosum* L.), of which 10 plants were evaluated. Treatments included an untreated control (T0), a chemical control (thiamethoxam + lambda-cyhalothrin, abamectin, and imidacloprid) (T1), and three biological control agents: *Beauveria bassiana* CCB LE-265 (> 1.5 × 10¹⁰ conidia g⁻¹) (T2), *Paecilomyces lilacinus* strain 251 (1.0 × 10¹⁰ conidia g⁻¹) (T3), and *Metarhizium anisopliae* (1.0 × 10¹⁰ conidia g⁻¹) (T4). Foliar applications targeted eggs, nymphs, and adults of the psyllid. Results indicated that *B. cockerelli* mortality across developmental stages was lower under biological treatments compared with T1, which achieved the lowest probability of purple-top symptom expression (0.46) and a zebra chip incidence of 60.60%. Among the biological agents, *M. anisopliae* (T4) reduced incidence to 56.60%, while *P. lilacinus* (T3) demonstrated consistent suppression of nymphal populations. In terms of yield, T1 achieved the highest tuber weight (198.86 g plant⁻¹) and number of tubers (7.74 plant⁻¹), followed by T3 (5.08) and T4 (4.24). Nevertheless, all treatments exhibited low yields and small tuber sizes, likely due to unfavorable environmental conditions and the presence of the invasive pest. Overall, chemical control was more effective than biological agents; however, the latter showed considerable potential for integration into sustainable pest management programs. Importantly, vector suppression alone does not guarantee the absence of purple-top complex symptoms or zebra chip disease in potato tubers.
+
+**Keywords:** Andean agriculture; entomopathogenic fungi; integrated pest management; *Candidatus Liberibacter solanacearum*; field trials; tuber yield; zebra chip disease
+
+
+
+# INTRODUCTION
+
+Potato (*Solanum tuberosum L.; Solanales: Solanaceae)* is currently the third most important food crop worldwide [[1,2]](https://www.zotero.org/google-docs/?Mh7zGB). It originated in the Andes of South America, particularly between the regions of Peru and Bolivia, where it was domesticated approximately 7,000 to 10,000 years ago [[3–5]](https://www.zotero.org/google-docs/?5mF91J). This center of origin harbors an extraordinary diversity of native potato genotypes, underscoring their cultural and genetic significance to global agriculture [[6]](https://www.zotero.org/google-docs/?oPXwTH). Over time, potato cultivation has diversified into more than 4,000 edible varieties, largely as a result of clonal propagation through tubers. This reproductive strategy has contributed to a substantial expansion of its genome, particularly in resistance-related genes compared with sexually propagated Solanaceae crops [[7,8]](https://www.zotero.org/google-docs/?wTwoy2). 
+
+The potato psyllid, *Bactericera cockerell*i (Šulc) (Hemiptera: Triozidae), is an oligophagous insect widely distributed across cultivated and natural habitats, feeding mainly on solanaceous hosts [[9–11]](https://www.zotero.org/google-docs/?mowINC). Native to North America [[12]](https://www.zotero.org/google-docs/?qLmdUZ), the pest has progressively expanded its distribution to Central America and parts of Europe [[13]](https://www.zotero.org/google-docs/?iLeMan),  successfully adapting to semi-arid and temperate climates [[14,15]](https://www.zotero.org/google-docs/?gJOWqW).  In Peru, *B. cockerelli* has been established since 2021, with damage reports dating back to 2019 in the province of Huancabamba [[16]](https://www.zotero.org/google-docs/?hAKRFR). Both nymphs and adults are responsible for transmitting *Candidatus Liberibacter solanacearum* (CLso) [[17]](https://www.zotero.org/google-docs/?rGhsso), the causal agent of the economically important disease complex known as zebra chip (ZC) [[4,10,11]](https://www.zotero.org/google-docs/?euC7YX). CLso infection directly affects phloem tissues, reducing yields by 35–40% and compromising marketable quality through necrotic streaks, vascular discoloration, and abnormal sprouting, rendering tubers unfit for commercialization  [[11,18]](https://www.zotero.org/google-docs/?f33bNo).
+
+As *S. tuberosum* serves as a primary host for *B. cockerelli,* its genetic resources face a critical threat from the purple-top complex, which is caused by CLso and transmitted by this psyllid, also known as the tomato–potato psyllid [[19]](https://www.zotero.org/google-docs/?w63LoD). The disease is characterized by apical chlorosis, foliar reddening or purpling, stunted growth, and internal tuber deformities, often associated with zebra chip symptoms that reduce the commercial value of the crop [[20]](https://www.zotero.org/google-docs/?isOXfz).
+
+In addition to biotic stressors, abiotic factors such as drought also exacerbate potato susceptibility to pest infestation. Water stress significantly impairs plant defense capacity and disrupts nutrient balance [[17,21]](https://www.zotero.org/google-docs/?xWkdl2). In tomato plants subjected to moderate water stress, increased susceptibility to *B. cockerelli* colonization was observed, as evidenced by higher nymphal survival and adult emergence rates compared to well-watered controls [[22]](https://www.zotero.org/google-docs/?Rvku7L). Moreover, drought conditions often reduce the efficacy of chemical insecticides, promoting resistance within psyllid populations and increasing environmental contamination [[23,24]](https://www.zotero.org/google-docs/?Jl59VS). Vector management for ZC remains heavily reliant on insecticides, a strategy that is neither environmentally sustainable nor economically viable in the long term [[11,25]](https://www.zotero.org/google-docs/?8dc0O0). The indiscriminate use of agrochemicals also contributes to higher production costs and ecological degradation [[26]](https://www.zotero.org/google-docs/?43qrVM).
+
+Given these challenges, sustainable and environmentally compatible alternatives are increasingly necessary. Entomopathogenic fungi such as *Beauveria bassiana* and *Metarhizium anisopliae* have emerged as promising candidates for biological control in Peru, demonstrating up to 99% mortality under laboratory conditions and 88% efficacy in the field, comparable to synthetic insecticides [[27]](https://www.zotero.org/google-docs/?tl7gkV). In addition, the nematophagous fungus *Paecilomyces lilacinus* has been proposed as a biocontrol agent targeting the nymphal stages of *B. cockerelli,* which are particularly difficult to manage. Its field application is especially relevant under arid conditions, where plant susceptibility to psyllid feeding toxins increases, leading to apical yellowing and leaf curling [[28]](https://www.zotero.org/google-docs/?Rnw67O). 
+
+This study aimed to (i) evaluate the population dynamics of *B. cockerelli* under field conditions during the phenological development of potato (*S. tuberosum* L.); (ii) assess the symptom expression of the purple-top complex and zebra chip incidence in the potato cultivar UNICA subjected to biological and chemical treatments; and (iii) determine the agronomic response of the crop to psyllid infestation under field conditions. This integrative approach seeks to identify adaptive management strategies suitable for Andean agroecosystems, where climate variability and phytosanitary pressure increasingly threaten both food security and the genetic diversity of this staple crop.
+
+# MATERIALS AND METHODS
+
+## Study area and meteorological conditions
+
+The experiment was conducted in the rural community of Quispampa Bajo, district and province of Huancabamba, Peru, from September 2024 to February 2025, coinciding with the phenological development period of potato (*Solanum tuberosum* L.) (latitude 5°15′22.2048″ S, longitude 79°26′58.0848″ W, elevation 2044 m a.s.l.; [Figure 1](?tab=t.cw5hphuc1y6t#bookmark=kix.pgz9fqo92pr5)). The site was selected due to the confirmed presence of the potato psyllid *Bactericera cockerelli* (Šulc) in local potato fields [[16]](https://www.zotero.org/google-docs/?K369WZ) and the detection of the bacterium Candidatus Liberibacter solanacearum (CLso) in the same district, officially reported in 2024 by the National Agricultural Health Service [(SENASA)](https://www.zotero.org/google-docs/?Xf0Iwx) [[29]](https://www.zotero.org/google-docs/?aoYASQ). 
+
+
+
+
+
+
+
+![Map showing the location of the study area: (a) Geographic position of the northern Andes of Peru; (b) Location of Huancabamba Province, Piura; (c) Satellite image of the experimental site in Quispampa Bajo.](img_0.jpg){#fig:id.rhbe5tdhz3rf}
+
+The soils of Quispampa Bajo are heterogeneous, predominantly of alluvial and colluvial origin, with fertility variations related to topographic slope. Meteorological data – including maximum and minimum air temperature (°C), relative humidity (%), and daily precipitation (mm) – were obtained from the Huancabamba Conventional Meteorological Station (Code 105055) managed by the National Service of Meteorology and Hydrology of Peru (SENAMHI/DRD). During the study period, precipitation ranged from 6.9 mm in October to 150.2 mm in December. Average daily temperatures varied between 13.7 °C (minimum) and 25.7 °C (maximum), with a mean relative humidity of 67.5%. Days were generally warm, providing favorable conditions for the development of *B. cockerelli* populations under natural field exposure.
+
+
+
+
+
+![Meteorological data of temperature (°C), precipitation (mm), and relative humidity (%) recorded during the field experiment conducted in the community of Quispampa Bajo, Piura Region, Peru. Maximum and minimum temperature (°C), relative humidity (%), and daily precipitation (mm day⁻¹) data were obtained from the Huancabamba Conventional Meteorological Station (Code 105055) of the National Service of Meteorology and Hydrology of Peru (SENAMHI/DRD), Directorate of Observation Networks and Data.](img_1.jpg){#fig:id.8b8fa3adq14b}
+
+## Target insect
+
+The target insect was the potato psyllid *Bactericera cockerelli* (Šulc) (Hemiptera: Triozidae) [[30]](https://www.zotero.org/google-docs/?5WLFdF), which was first reported in the United States in the 1920s causing yellowing symptoms in potato (*Solanum tuberosum* L.) plants [[31]](https://www.zotero.org/google-docs/?ULEnEk). This psyllid exhibits seven developmental stages: egg, five immature nymphal instars, and the adult stage [[9,13,32]](https://www.zotero.org/google-docs/?4ZIrPv). In this study, the taxonomic identification of *B. cockerelli* was based on morphological traits observed in the egg, nymphal, and adult stages, which, according to previous reports, exhibit limited mobility [[33]](https://www.zotero.org/google-docs/?EUGt0M). 
+
+
+
+
+
+![Developmental stages of *Bactericera cockerelli* observed on potato plants of the cultivar UNICA: (a) egg stage; (b) first-instar nymph; (c) flattened fifth-instar nymph; (d) irregular emergence of the adult showing incomplete transition from the nymphal stage; (e) adult psyllid with stable coloration patterns distinguishing the abdomen and thorax – eyes narrower than the mesothorax; (f) adult with golden-yellow body; (g) adult with brown body showing a rhinarium on the fourth antennal segment; (h) copulating mature adults displaying a dark body with a whitish dorsal band on the first abdominal segment; (i) adult with fully expanded wings showing the venation of the anterior wings and white bands on the first and last abdominal segments; (j) whitish secretions on potato foliage; (k) symptoms of the purple-top complex on the UNICA variety; (l) tubers exhibiting zebra-chip symptoms. © G. Cárdenas-Huamán](img_2.jpg){#fig:id.tm8du45wqj5e}
+
+## Target crop
+
+The target crop was potato (*Solanum tuberosum* L.; Solanales: Solanaceae), which is commonly affected by the psyllid *Bactericera cockerelli*. The plant material consisted of 400 seed tubers of the variety UNICA (CIP 392797.22), developed by the International Potato Center (CIP, Peru) and released in 1998 [[34]](https://www.zotero.org/google-docs/?nn006u). The seed tubers corresponded to the Pre-Basic Seed Class, as defined in the Specific Potato Seed Regulation of Peru [[35]](https://www.zotero.org/google-docs/?hf9IDF). Planting was performed at a spacing of 0.3 × 1.0 m under field conditions simulating commercial production during the 2024–2025 agricultural season ([Figure 4](?tab=t.cw5hphuc1y6t#bookmark=id.swvf4f49j87k)). 
+
+The UNICA variety is characterized by slight apical dormancy, with a dormancy period of 40–50 days. It exhibits an early growth cycle, reaching maturity within 70–90 days after sowing (DAS), and may be considered semi-early (90–110 DAS) under low-tropical conditions such as coastal or inter-Andean valleys (0–1500 m a.s.l.). This variety also shows a high yield potential, estimated at 50 t/ha (Gutiérrez-Rosales et al., 2016). 
+
+
+
+![Seed tubers of the potato variety UNICA (CIP 392797.22): (a) pre-basic seed; (b) uniform sprouting; (c) development of sprouts and promising root initials; (d) field planting](img_3.jpg){#fig:id.p7nu5jxbw6w2}
+
+## Experimental design and treatments
+
+The experiment was established under a randomized complete block design (RCBD) consisting of five treatments with four replications each, totaling 20 experimental units. Each experimental unit comprised 20 potato plants, from which 10 plants located in the second row were selected for evaluation. Treatments were uniformly applied to all plants within each experimental unit.
+
+The evaluated treatments were as follows: untreated control (T0); chemical control – thiamethoxam + lambda-cyhalothrin, abamectin, and imidacloprid (T1); and three commercial biological control agents: *Beauveria bassiana* strain CCB LE-265 (> 1.5 × 10¹⁰ conidia g⁻¹) (T2), *Paecilomyces lilacinus* strain 251 (1.0 × 10¹⁰ conidia g⁻¹) (T3), and *Metarhizium anisopliae* (1.0 × 10¹⁰ conidia g⁻¹) (T4).
+
+Applications were targeted to the egg, nymph, and adult stages of *Bactericera cockerelli.* Spraying commenced once plants reached 98% emergence, approximately 45 days after sowing (DAS), and was performed directly on all aerial plant organs at seven-day intervals. Treatment protocols followed integrated pest and disease management guidelines for potato cultivation [[11,32,36]](https://www.zotero.org/google-docs/?V1S25f).
+
+## Application methodology of treatments
+
+The control treatment (T0) consisted solely of water. All other treatments included an agricultural adjuvant composed of 90% soybean oil and 10% emulsifiers at a dose of 5 mL/L, along with a pH regulator applied at 1 mL/L. In addition, a plant growth promoter formulated as a soluble concentrate (SL), containing indole-3-butyric acid (auxin, 2.84 g/L) and 6-benzylaminopurine (cytokinin, 0.02 g/L), was applied at a rate of 500 mL per 200 L of water during the first three spray applications of the crop cycle.
+
+For the chemical control (T1), in addition to the adjuvant and pH regulator, insecticides were applied in weekly rotations as follows: (a) thiamethoxam + lambda-cyhalothrin (200 mL per 200 L) combined with abamectin (300 mL per 200 L), and (b) thiamethoxam + lambda-cyhalothrin (200 mL per 200 L) combined with imidacloprid (500 mL per 200 L). In T0, two fungicides were applied preventively for foliar disease management: metiram (550 g/kg) + pyraclostrobin (50 g/kg) in WG formulation (2.5 kg/ha), and cymoxanil (80 g/kg) + mancozeb (640 g/kg) in WP formulation (0.5 kg per 200 L). These fungicides were applied every 15 days, totaling four applications during the vegetative stage and one additional application after flowering, following phytosanitary protection recommendations for potato [[37]](https://www.zotero.org/google-docs/?R1QxZw).
+
+The biological control suspensions were prepared according to the manufacturers’ technical specifications: *Beauveria bassiana* (T2; 200 g per 200 L), *Paecilomyces lilacinus* (T3; 400 g per 200 L), and *Metarhizium anisopliae* (T4; 200 g per 200 L). To enhance fungal effectiveness, a pH regulator (1 mL L⁻¹) and agricultural oil (5 mL L⁻¹) were added to each mixture. The solution was then stirred until fully homogenized and left to rest under shade for 30 min prior to use to preserve conidial viability [[38,39]](https://www.zotero.org/google-docs/?QonY3E). To prevent cross-contamination among the three biological agents, separate sprayer tanks were used for each treatment.
+
+All applications were performed *in situ* under shaded conditions during morning hours at weekly intervals. Manual backpack sprayers equipped with fine-cone nozzles were used to ensure uniform coverage of both adaxial and abaxial leaf surfaces, as well as terminal and lateral shoots and stems [[40]](https://www.zotero.org/google-docs/?gz52l1). * ***To isolate each treatment, plastic barriers were installed between plots. Each plant surface received three uniform spray passes per application. Afterward, all equipment was thoroughly washed and dried before reuse, following operational protocols to maintain both treatment efficacy and biological agent viability [[41]](https://www.zotero.org/google-docs/?4l5d7N).
+
+## Entomological variables and visual inspection methodology for field assessment of *Bactericera cockerelli* life stages
+
+The quantification of *Bactericera cockerelli* presence was conducted using a direct visual inspection method based on systematic field counts. The evaluation consisted of recording the number of eggs, nymphs, and adults on potato plants within each experimental unit through visual sampling of aerial organs. Both the adaxial and abaxial leaf surfaces, stems, petioles, lateral and terminal shoots, and flower calyces were inspected throughout the entire vegetative cycle of the crop, following the protocol established by the International Potato Center, 2022 [[42]](https://www.zotero.org/google-docs/?TCfmMO).
+
+Three entomological variables were assessed: (a) number of eggs, (b) number of nymphs, and (c) number of adults, all identified based on the morphological characteristics of the psyllid on plant foliage [[43]](https://www.zotero.org/google-docs/?dk3uPq). Evaluations were performed weekly between 09:00 and 15:00 h under natural light conditions, four days after treatment application, considering that oviposition typically begins between the fourth and fifth day after adult emergence [[43]](https://www.zotero.org/google-docs/?J9mEhq). 
+
+Egg counts of *B. cockerelli* (Šulc) were carried out systematically along leaf margins, followed by detailed examination of both leaf surfaces, leaflets, and secondary branch shoots – preferred oviposition sites for females. The primary morphological diagnostic feature of the egg stage is the pedicel, by which the egg is attached to the plant tissue [[36]](https://www.zotero.org/google-docs/?IgsFsf). This method has proven reliable for detecting and quantifying egg populations under field conditions, providing an accurate estimation of initial infestation density [[42]](https://www.zotero.org/google-docs/?9hN49F).
+
+Nymphal stages were evaluated using a portable entomological magnifier (200×) attached to an Android smartphone camera, enabling in situ identification of first through fifth instar nymphs. Diagnostic morphological features included body size, translucent yellow coloration, and the presence of marginal wax filaments [[36,44]](https://www.zotero.org/google-docs/?TwyBi5)
+
+Adult psyllids were quantified through careful plant inspection, focusing primarily on the upper foliage, where adults typically congregate, particularly during mating or oviposition on young leaves [[36,44]](https://www.zotero.org/google-docs/?D3PVvc). Adults were identified by their distinct morphological traits: an elongated body of dark brown to black color, transparent wings with clear venation, long segmented antennae, and two characteristic whitish abdominal bands [[42,45]](https://www.zotero.org/google-docs/?PgEVgp). 
+
+Adult assessments were complemented with an indirect sampling method – yellow sticky traps – following the procedure described by Butler & Trumble (2012) and Cameron et al. (2009) [[36,46]](https://www.zotero.org/google-docs/?axnnHS). The traps were installed around the plot perimeter to monitor population dynamics and weekly fluctuations of the vector in the environment [[25]](https://www.zotero.org/google-docs/?anbOUl). This trapping method is widely used for monitoring sap-sucking pests due to its high efficiency in tracking population trends of hemipteran vectors such as *B. cockerelli* [[33,36,40]](https://www.zotero.org/google-docs/?g1MRW0). 
+
+A total of twelve rectangular traps (40 × 25 cm per side) were used, each coated on both surfaces with a commercial entomological adhesive [[25]](https://www.zotero.org/google-docs/?KA0OwV). The traps were fixed to support structures at two heights: 15 cm above the ground level from planting to hilling, and 30 cm thereafter until harvest, following population dynamics criteria reported in previous studies [[44]](https://www.zotero.org/google-docs/?HMh1E6). Traps were replaced weekly after counting the captured adults. This approach enabled continuous recording of vector population fluctuations, complementing direct plant evaluations and providing a reliable indicator of psyllid pressure within the agroecosystem [[45]](https://www.zotero.org/google-docs/?DtlGt3). Data on adult captures from yellow traps are presented in Supplementary Table 1.
+
+## Agronomic variables
+
+The agronomic variables evaluated were yield (g/plant) and number of tubers per plant. Yield was quantified as the total fresh weight of tubers obtained per plant, expressed in grams, using a precision balance (T-Scale TB, capacity 3000 g, accuracy 0.1 g). The number of tubers per plant was determined through direct counting of each experimental plant sample.
+
+Both variables were assessed following the standard procedures for potato yield trials described by De Haan et al. (2014) at the International Potato Center (CIP) [[47]](https://www.zotero.org/google-docs/?MaC18N). This protocol involves the individual harvesting of experimental plants, followed by tuber counting and weighing with a precision balance. The method provides reliable estimations of yield parameters under field conditions.
+
+## Methodology for the diagnosis of the purple-top complex and zebra chip disease
+
+The presence of purple-top symptoms and the incidence of zebra chip disease were assessed in the laboratory, both conditions being associated with infection by *Candidatus Liberibacter solanacearum* transmitted by *Bactericera cockerelli* [[45]](https://www.zotero.org/google-docs/?CtCdZP).
+
+To diagnose the presence of purple-top symptoms in potato plants, a binary categorical scale was used, where 0 = absence and 1 = presence, following the qualitative nature of the variable. This approach has been previously applied to identify phytoplasma-associated symptoms in potato and other crops, allowing accurate recording of disease incidence. Morphological characterization of symptoms associated with the purple-top complex included apical yellowing, foliar reddening or purpling, chlorotic apical growth, leaf curling, stunting, leaf deformation, formation of aerial tubers, and vascular necrosis in tubers [[45,48]](https://www.zotero.org/google-docs/?pbuAW1).
+
+The incidence (%) of zebra chip disease in potato tubers was evaluated using the fresh tuber cross-section method described by Munyaneza (2012) [[45]](https://www.zotero.org/google-docs/?HWWLFY). Each harvested tuber from evaluated plants was transversely cut and visually inspected for characteristic symptoms, particularly dark brown to black necrotic streaks in the medullary tissue. The incidence percentage was subsequently calculated using the formula proposed by [[49]](https://www.zotero.org/google-docs/?WLNIuz), commonly employed in epidemiological studies to quantify disease incidence and severity. This method enables the morphological characterization of zebra chip symptomatology in potato tubers caused by *Candidatus Liberibacter solanacearum* [[45,48]](https://www.zotero.org/google-docs/?N98MgR).
+
+
+
+$$Incident_{zebra\ chip}\left(\%\right)\ =\left(\frac{Number\ of\ tubers\ with\ necrotic\ streaks\ in\ medulla}{Total\ number\ of\ tubers\ sampled}\right)\cdot100$$
+
+
+
+## Statistical analysis 
+
+All statistical analyses were performed using R software, version 4.5.1 [[50]](https://www.zotero.org/google-docs/?hhdlOG). For count-type response variables, generalized linear models (GLMs) with a Poisson distribution were fitted. In cases where overdispersion was detected, a quasi-Poisson distribution was applied to obtain more robust estimates [[51]](https://www.zotero.org/google-docs/?aG328R). Binary variables (presence/absence) were analyzed using GLMs with a binomial distribution. For continuous variables, linear mixed-effects models (LMMs) were applied using the lme4 package [[52]](https://www.zotero.org/google-docs/?JhkszG), which allows for the inclusion of both fixed and random effects, improving the capacity to model dependent data and address potential violations of normality and homoscedasticity assumptions [[53]](https://www.zotero.org/google-docs/?RuEaKS). Model significance was assessed using analysis of variance (ANOVA), and multiple mean comparisons were conducted with Tukey’s Honestly Significant Difference (HSD) test at a significance level of α = 0.05, implemented through the emmeans package  **[[54]](https://www.zotero.org/google-docs/?0X32pi).
+
+# RESULTS
+
+## Insect behavior
+
+To evaluate the effect of biological and chemical treatments on psyllid population dynamics, the presence of *Bactericera cockerelli* (Šulc) in its three developmental stages (egg, nymph, and adult) was monitored in the aerial organs of *Solanum tuberosum* L. var. UNICA through direct visual inspection and insect counts throughout the entire phenological cycle of the crop.
+
+Statistical analysis revealed that egg counts differed significantly among treatments at 77, 91, and 98 days post-installation (dpi) (p < 0.05; [Figure 5a](?tab=t.cw5hphuc1y6t#bookmark=kix.zdumtfbj5vat)). At 77 dpi, treatment T1 exhibited the most effective control with an average of 3.0 eggs, significantly lower than the control T0 (10.9 eggs), but statistically similar to T2 (9.94 eggs), T3 (3.65 eggs), and T4 (4.50 eggs). At 91 dpi, T1 and T4 achieved superior control with 2.0 and 3.0 eggs, respectively, significantly outperforming T0 (28.20 eggs) and T2 (13.75 eggs). Finally, at 98 dpi, T1 maintained the lowest number of eggs (2.17), significantly lower than T0 (11.99), T2 (32.40), and T4 (28.49), while showing no significant difference compared to T3 (8.94). Overall, T1 (chemical control) and T3 (*Paecilomyces lilacinus*) demonstrated the most stable suppression of egg density during the phenological cycle, with no significant differences across sampling dates (p > 0.05). Their highest mean values were observed at 49 dpi (3.50 eggs) and 98 dpi (8.94 eggs), respectively.
+
+Significant differences were also observed in nymphal populations at 70, 84, 91, 98, 105, 112, and 119 dpi (p < 0.05; [Figure 5b](?tab=t.cw5hphuc1y6t#bookmark=kix.zdumtfbj5vat)). At 70 dpi, T1 achieved the lowest mean nymph count (0.92), significantly outperforming T3 (9.10) and T4 (8.19). At 84 and 91 dpi, all treated plots exhibited lower nymph numbers than the control (T0). At 98, 105, and 112 dpi, both T1 and T3 sustained the highest suppression of nymphal populations, differing significantly from the remaining treatments. By 119 dpi, T1 maintained the lowest nymph count (1.31), significantly lower than T0 (26.14) and T2 (8.73). Treatments T1 and T3 displayed consistent control throughout the crop cycle, without significant fluctuations (p > 0.05), reaching their maximum means of 1.31 (T1) and 9.10 (T3) nymphs at 119 and 70 dpi, respectively.
+
+Regarding adult populations, significant differences were recorded at 84, 91, 98, and 105 dpi (p < 0.05; [Figure 5c](?tab=t.cw5hphuc1y6t#bookmark=kix.zdumtfbj5vat)). At 84 dpi, T1 and T4 exhibited the greatest control (0.13 adults), significantly lower than T2 (0.67). At 91 dpi, both T1 and T4 again outperformed the control (T0) with 0.09 adults. However, at 98 dpi, T0, T1, T2, and T3 exhibited the lowest adult counts (0.58, 0.54, 0.26, and 0.19 adults, respectively), significantly surpassing T4 (4.44 adults). Treatments T1 and T3 maintained stable adult suppression across the phenological period, showing no significant differences (p > 0.05), with their highest means recorded at 98 dpi (0.19 adults) and 105 dpi (0.46 adults), respectively.
+
+A total of 2,000 adult psyllids were captured across the 12 weekly yellow traps over 16 weeks, providing consistent evidence of adult vector activity in the experimental field. Detailed trap data are presented in the Electronic Supplementary Material (ESM).
+
+
+
+![Evaluation of the pest insect *Bactericera cockerelli* at its three developmental stages, monitored weekly on the foliar area of potato plants under field conditions in Quispampa Bajo, Huancabamba Province, Piura, Peru. (a) number of eggs, (b) number of nymphs, and (c) number of adults.](img_4.jpg){#fig:id.f1e96n41b7vh}
+
+
+
+
+
+## Symptomatology of purple-top complex in plants and zebra chip disease in potato tubers
+
+To assess the effect of biological and chemical treatments on the expression of purple-top symptoms in potato (*Solanum tuberosum* L.) var. UNICA under field conditions, the probability of incidence of the purple-top complex and the presence of zebra chip (ZC) were evaluated. The incidence of purple-top was determined based on morphological characteristics observed in the plants, whereas zebra chip incidence was assessed in tubers according to the presence of characteristic necrotic streaks [[45,48]](https://www.zotero.org/google-docs/?ulIfiO).
+
+The results showed that the application of treatments produced significant differences (p < 0.05) in the probability of purple-top complex occurrence ([Figure 6a](?tab=t.cw5hphuc1y6t#bookmark=kix.63zvwfop9yww)). The chemical control (T1) exhibited the lowest probability of symptom presence (0.46), significantly lower than T0 (0.91) and T2 (0.83). Likewise, *Metarhizium anisopliae* (T4) showed a lower probability of occurrence (0.49) compared to T0, T2, and T3, although it differed statistically only from the untreated control (T0).
+
+In contrast, no significant differences (p = 0.778) were observed among treatments for the incidence rate of zebra chip in tubers ([Figure 6b](?tab=t.cw5hphuc1y6t#bookmark=kix.63zvwfop9yww)). Despite the lack of statistical differences, treatment T4 exhibited the lowest incidence rate (56.60%), while the highest incidence was recorded in the untreated control (T0) with 68.61%.
+
+
+
+
+
+![Evaluation of purple-top symptomatology in potato plants during the flowering stage and incidence of zebra chip disease in tubers of the UNICA variety (CIP 392797.22). Symptoms were identified based on morphological characteristics, including brown splinter-like streaks observed after transverse cutting of harvested tubers. (a) Probability of purple-top occurrence in plants; (b) incidence rate of zebra chip disease (%).](img_5.jpg){#fig:id.30b6v2j7a5sf}
+
+## Agronomic response of potato crop under the presence of *Bactericera cockerelli*
+
+To evaluate the effect of biological and chemical treatments on the yield performance of potato (*Solanum tuberosum* L.) var. UNICA under field conditions, the number of tubers per plant and fresh tuber weight were determined. Measurements followed the methodology established by the International Potato Center (CIP), which enables the estimation of yield parameters under field conditions while distinguishing treatment effects from environmental influences on crop productivity [[47]](https://www.zotero.org/google-docs/?BNuvXj).  
+
+The results showed that the application of treatments produced significant differences (p < 0.05) in tuber fresh weight per plant ([Figure 7a](?tab=t.cw5hphuc1y6t#bookmark=id.pch1faft0ka9)). The chemical control (T1) exhibited the highest tuber weight, averaging 198.86 g plant⁻¹, significantly exceeding T0 (32.63 g) and T2 (86.93 g). Similarly, *Paecilomyces lilacinus* (T3) and *Metarhizium anisopliae* (T4) significantly outperformed the untreated control (T0), with mean tuber weights of 120.41 g and 122.84 g, respectively.
+
+For the variable number of tubers per plant, treatment effects were also statistically significant (p < 0.05; [Figure 7b](?tab=t.cw5hphuc1y6t#bookmark=id.pch1faft0ka9)). The T1 treatment produced the highest value, averaging 7.74 tubers per plant, statistically superior to the other treatments. T2, T3, and T4 also exceeded the control (T0 = 2.16 tubers per plant) with mean values of 4.28, 5.08, and 4.24 tubers per plant, respectively.
+
+
+
+![Agronomic variables evaluated in the potato variety UNICA exposed to infestation by the psyllid Bactericera cockerelli, the vector of *Candidatus Liberibacter solanacearum*, under field conditions: (a) tuber fresh weight per plant (g) and (b) number of tubers per plant.](img_6.jpg){#fig:id.5795mwjyj40u}
+
+
+
+# DISCUSSION
+
+This study evaluated the occurrence of the invasive pest *Bactericera cockerell*i (Šulc) in potato crops in the northern highlands of Peru, the probability of purple-top symptom expression, the incidence rate of zebra chip disease, and the agronomic performance of *Solanum tuberosum* L. var. UNICA under field conditions. The results demonstrated the differential effects of chemical control (T1) and biological agents (T2, T3, T4) on the pest–disease complex, providing insight into their efficacy, limitations, and potential for integration into sustainable management strategies for potato cultivation under field conditions.
+
+## Insect behavior
+
+The results obtained for the number of *Bactericera cockerelli* eggs indicate that the evaluated treatments exerted differential effects throughout the phenological cycle of Solanum tuberosum. The higher initial efficacy observed with the chemical control (T1) at 77 days after installation, compared with the untreated control (T0), can be attributed to the complementary modes of action of thiamethoxam (a systemic neonicotinoid), lambda-cyhalothrin (a contact pyrethroid), and abamectin (a translaminar avermectin). These compounds interfere with feeding behavior and neural signal transmission in hemipterans, thus reducing oviposition rates [[55]](https://www.zotero.org/google-docs/?jchZwv). Similar findings were reported by Yang et al. (2010) [[44]](https://www.zotero.org/google-docs/?tl5Zfr), who demonstrated that insecticidal treatments can suppress female feeding activity and consequently decrease egg deposition. This combined effect is consistent with studies in which sequential applications of systemic and contact insecticides resulted in rapid suppression of *B. cockerelli* populations at early developmental stages [[17]](https://www.zotero.org/google-docs/?Vpc2xF). At 91 days, the superior performance of *Metarhizium anisopliae* (T4) and chemical control (T1) compared with *Beauveria bassiana* (T2) and the control (T0) suggests greater adaptability of *M. anisopliae* to local environmental conditions. This entomopathogenic fungus demonstrates optimal germination and virulence in climates with temperatures ranging from 25 to 28 °C and relative humidity between 65–75%, conditions that match those recorded in Quispampa Bajo [[56]](https://www.zotero.org/google-docs/?7OqAep). In contrast, *B. bassiana* tends to exhibit reduced persistence under high solar radiation, which may decrease its medium-term efficacy [[56]](https://www.zotero.org/google-docs/?sJVKJw). At 98 days, *Paecilomyces lilacinus* (T3) showed efficacy comparable to the chemical control (T1), a noteworthy finding considering that *P. lilacinus* is primarily a nematophagous fungus, and its application in *B. cockerelli* management remains relatively novel.
+
+During the nymphal stage, although the chemical treatment (T1) exhibited an initial advantage, all treatments eventually outperformed the untreated control, suggesting that the interaction between field water stress and biological agents may have limited nymphal development [[21]](https://www.zotero.org/google-docs/?GDnhnI). This pattern aligns with the findings of Harrison et al. (2021) [[57]](https://www.zotero.org/google-docs/?I1PPHS), who reported that abiotic stress can reduce the developmental rate of *Bactericera cockerelli* by altering the composition of phloem sap. The efficacy of *Paecilomyces lilacinus* (T3) may be attributed to its ability to colonize plant tissues, which likely allowed it to affect immature nymphal stages internally, thereby explaining the sustained suppression of nymph populations observed in this study. Moreover, studies such as that of Athanassiou et al. (2017) [[58]](https://www.zotero.org/google-docs/?VHEdlN) have confirmed that *Metarhizium anisopliae* (T4) remains effective against sap-sucking insects even under conditions of low relative humidity, owing to its capacity to persist within the microclimate of the plant canopy.
+
+In the adult stage, *Metarhizium anisopliae* (T4) and the chemical control (T1) were the most effective during the initial evaluations, whereas *Paecilomyces lilacinus* (T3) and T1 maintained consistent suppression of adult populations throughout the crop cycle. Previous research by Pacheco Hernández et al. (2019) [[59]](https://www.zotero.org/google-docs/?GTHR2y)  has demonstrated that entomopathogenic fungi not only cause direct mortality but also reduce longevity and fecundity, contributing to long-term population suppression across successive generations. This effect has been further corroborated by Lacey et al. (2011) [[40]](https://www.zotero.org/google-docs/?vMHtVL), who emphasized the importance of entomopathogenic fungi as sustainable tools within integrated pest management (IPM) programs. The agroecological context of Quispampa Bajo, characterized by average maximum temperatures of 25.7 °C and relative humidity of 67.5%, is favorable for *B. cockerelli* development, as this pest thrives in temperate environments with moderate humidity [[17]](https://www.zotero.org/google-docs/?o1GtOC). These environmental conditions promote both rapid insect reproduction and the performance of specific biological control agents. Therefore, synchronizing treatment applications with population peaks is a critical factor for maximizing the efficacy of control strategies [[17,60]](https://www.zotero.org/google-docs/?CarLZc).
+
+Overall, the chemical control (T1) maintained superior efficacy at key points of the crop cycle, largely due to the rotational use of active ingredients, and significantly outperformed most biological treatments. However, the findings of this study also support the potential of *Paecilomyces lilacinus* (T3) as a viable alternative to chemical control, particularly under field conditions characterized by water stress. These results reinforce the importance of developing integrated pest management (IPM) strategies that combine insecticide rotation with the application of fungal-based biological agents, optimizing application timing according to climatic conditions and pest phenology. Similarly, Lacey et al. (2011) [[40]](https://www.zotero.org/google-docs/?xA8Z6I) demonstrated that the integration of biological and chemical control can enhance suppression of *B. cockerelli* populations without increasing resistance selection pressure. Such integration can reduce dependence on broad-spectrum insecticides, mitigate the risk of resistance development, and sustain long-term control efficacy in potato production systems affected by *B. cockerelli* [[17]](https://www.zotero.org/google-docs/?KwjsZt).
+
+## Symptomatology of purple-top complex in plants and zebra chip in potato tubers
+
+The analysis of the probability of purple-top complex occurrence revealed significant differences among treatments, with the chemical control (T1) exhibiting the lowest value (0.46). Since values closer to zero indicate the absence of symptom expression, this result reflects a reduced likelihood of symptom development compared with the untreated control (T0) and *Beauveria bassiana* (T2). This suggests that the mode of action of T1 – whether chemical or due to the synergistic combination of its active ingredients – was more effective in reducing the activity of the vector *Bactericera cockerelli* or in limiting the expression of purple-top complex symptoms. Previous studies have demonstrated that a reduction in infection probability can be associated with interference in the feeding behavior of *B. cockerelli* and a consequent decrease in the transmission rate of *Candidatus Liberibacter solanacearum* between the host plant and the vector [[11,61]](https://www.zotero.org/google-docs/?5Fhgs9).
+
+In turn, the application of the biological agent *Metarhizium anisopliae* (T4) resulted in a probability of symptom occurrence of 0.49, lower than T1, T2, and T3. Although the difference was statistically significant only when compared with the untreated control (T0), the reduction in purple-top symptomatology under this treatment was moderate, suggesting a trend toward a lower risk of symptom expression in plants. This effect could potentially be optimized through adjustments in application frequency or timing. The behavior observed in this study aligns with the findings of  Mora et al. (2022) [[61]](https://www.zotero.org/google-docs/?kATBQG), who reported that water deficit conditions can alter host plant physiology and vector–pathogen interactions, thereby affecting the effectiveness of control strategies. Drought stress can modify plant physiological processes, alter vector feeding behavior, and influence disease progression – factors that likely contributed to the moderate symptom reduction observed in this treatment.
+
+Regarding disease incidence, no significant differences were detected among treatments (p = 0.778). However, *Metarhizium anisopliae* (T4) exhibited the lowest incidence rate (56.60%) compared with the other treatments, which presented higher percentages and, consequently, a greater risk of zebra chip symptom expression in tubers. Although this difference was not statistically significant, it may hold agronomic relevance, as values approaching 100% indicate a high probability of visible damage and significant losses in commercial quality [[36]](https://www.zotero.org/google-docs/?ULl1Px). Additionally, Stoop et al. (2009) [[62]](https://www.zotero.org/google-docs/?2jVOxd) noted that, under field conditions, environmental variability can often mask statistical effects, even when the agronomic impacts are evident to growers.
+
+The joint interpretation of the probability of purple-top complex occurrence and the incidence rate of zebra chip (ZC) suggests that the chemical control (T1) is the most promising treatment for reducing the likelihood of purple-top symptom expression, whereas *Metarhizium anisopliae* (T4) may contribute to lowering the incidence of tuber symptoms. Similar results were reported by Greenway & Rondon (2018) [[37]](https://www.zotero.org/google-docs/?t0gEjD), who emphasized that even in the absence of statistical significance, consistent reductions observed under field conditions can be highly relevant for integrated pest management (IPM) programs.
+
+These findings are critical for field-level decision-making: low values of probability and incidence represent a reduced phytosanitary and economic risk, whereas high values indicate the need for immediate implementation of control measures. It is worth highlighting that *Bactericera cockerelli* (Šulc) is the primary vector responsible for transmitting *Candidatus Liberibacter solanacearum* (CLso), the etiological agent associated with zebra chip disease, as documented in studies conducted in other regions of North America and Europe [[14,32]](https://www.zotero.org/google-docs/?0qKtUF). 
+
+## Influence on yield and commercial quality of tubers
+
+The results showed that the chemical control (T1) achieved the highest yield, both in tuber weight and number per plant, significantly outperforming all other treatments. This behavior can be attributed to the greater efficacy of the product combining thiamethoxam and lambda-cyhalothrin, supported by the rotational use of insecticides containing abamectin and imidacloprid, as described in the methodology. These active ingredients exerted a direct effect on reducing *Bactericera cockerelli* pressure, thereby minimizing physiological damage and promoting tuber development. The products used are listed in Annex 2 of the Resolución Jefatural Nº D000141-2024-MIDAGRI-SENASA-JN, which recommends their strategic application for chemical control [[29]](https://www.zotero.org/google-docs/?QDW71Q). However, despite this relative advantage, the absolute values of tuber weight and number remained well below the expected yields for the UNICA variety under optimal conditions [[34]](https://www.zotero.org/google-docs/?iOTbeX). This suggests that the persistence of the pest still limited the productive potential of the crop. The low yields observed in this study may also be attributed to the limited water availability during critical stages such as tuber initiation, which directly affects both tuber size and number [[63]](https://www.zotero.org/google-docs/?c8KwXA). Under water deficit conditions, reductions in photosynthetic activity and alterations in the partitioning of photoassimilates toward storage organs result in fewer and smaller tubers [[64]](https://www.zotero.org/google-docs/?ZGMe9B), even when biotic stress – such as psyllid infestation – has been effectively controlled.
+
+In contrast, the treatments with entomopathogenic fungi – *Beauveria bassiana* (T2), *Paecilomyces lilacinus* (T3), and *Metarhizium anisopliae* (T4) – showed relatively low and statistically similar yields among them. Although their performance was lower than that of the chemical control (T1), they still produced higher yields compared with the untreated control (T0), indicating that these agents exerted a certain degree of pest suppression and partially mitigated yield losses. The reduced productive response observed in the fungal treatments may be related to their strong dependence on environmental factors for conidial germination and sporulation [[59]](https://www.zotero.org/google-docs/?A6DRN2), as well as the possible recolonization of the psyllid population during the crop’s phenological cycle [[40]](https://www.zotero.org/google-docs/?wFUnqw). The combined interaction of the vector and the bacterium constitutes a key factor contributing to yield reduction and deterioration of tuber quality, as evidenced by the visible brown streaking and necrotic patches observed in the harvested tubers.
+
+To date, no commercial potato varieties have been identified that exhibit complete resistance to the psyllid *Bactericera cockerelli* or to zebra chip disease caused by *Candidatus Liberibacter solanacearum* [[33,36,45]](https://www.zotero.org/google-docs/?IUdNkH). Although some genotypes have shown lower symptom incidence or reduced tuber damage, these responses are generally regarded as partial tolerance or avoidance rather than true resistance. Such mechanisms may be associated with specific plant traits, including trichome density, leaf architecture, the presence of secondary metabolites with deterrent or antibiotic properties, or phenological patterns that shorten the exposure period to the pest [[11]](https://www.zotero.org/google-docs/?D8ECor). It is important to note that effective vector control alone does not guarantee the complete absence of purple-top complex symptoms, nor does it prevent the occurrence of zebra chip in potato tubers.
+
+## Limitations and perspectives
+
+Regarding the productive impact, it is necessary to evaluate complementary strategies, such as adjusting the timing of the first application of biological control strains and assessing their performance across different cropping seasons. Since this study represents one of the first field-based investigations on the purple-top complex in Peru, certain limitations were encountered in advancing the epidemiological understanding of zebra chip (ZC). The transfer of infected plant material to external laboratories for diagnostic purposes is currently restricted under national phytosanitary regulations [[29]](https://www.zotero.org/google-docs/?oJ3KWV). Nevertheless, the weekly monitoring approach employed for the vector insect provided a reliable estimation of the population dynamics throughout the potato crop’s vegetative cycle. In addition, the morphological evaluation of purple-top complex symptoms and zebra chip presence in tubers proved to be a practical and applicable field strategy for estimating disease incidence. This approach, when complemented by molecular assays for the detection of *Candidatus Liberibacter solanacearum*, would yield a more accurate estimation of zebra chip incidence in potato-producing areas currently affected by *Bactericera cockerelli.*
+
+# 
+
+# CONCLUSIONS
+
+Based on the results obtained, the psyllid *Bactericera cockerelli* exhibited lower mortality under biological treatments compared with chemical control (T1), and water deficit conditions appeared to favor its persistence and damage potential. The symptom probability associated with the purple-top complex (0.46) and the incidence of zebra chip disease (60.60%) were lowest under T1, followed by *Metarhizium anisopliae* (T4) with 56.60% incidence. Tuber yield and number were statistically higher in T1, indicating that chemical control was the most effective treatment, followed by T4 and *Paecilomyces lilacinus* (T3). Nevertheless, all treatments exhibited low yields and small tubers, reflecting the combined influence of pest pressure and environmental stress. Chemical vector control contributed to reducing the manifestation of purple-top and zebra chip symptoms. However, the results also highlight the potential of biological control agents as integral components of sustainable and integrated pest management (IPM) programs for potato production under field conditions affected by *B. cockerelli.*
+
+# 
+
+# STATEMENTS
+
+**Author Contributions**
+
+
+
+Conceptualization, G.C.-H.; methodology, G.C.-H. and F.L.-I.; data collection, G.C.-H.; data analysis and interpretation, G.C.-H., S.V.-N., H.M.-R., and S.C.-N.; writing – original draft preparation, H.M.-R., F.L.-I., and S.C.-N.; writing – review and editing, L.V.-A., F.L.-I., and M.R.-R.; funding acquisition, J.C. All authors have read and agreed to the published version of the manuscript.
+
+
+
+**Funding**
+
+
+
+This research was funded by the Instituto Nacional de Innovación Agraria (INIA) under the investment project No. 2472190 "El Chira."
+
+**Data availability**
+
+All original data supporting the findings of this study are included in the article and its supplementary materials. Reproducible datasets and analytical scripts are available in Supplementary File 1 and accessible via the GitHub repository:  [https://github.com/Sebass96/prochira\_papa.git](https://github.com/Sebass96/prochira_papa.git)
+
+**Acknowledgments**
+
+The authors express their gratitude to the Instituto Nacional de Innovación Agraria (INIA) for financial support through the project “El Chira” (No. 2472190) and to the institutional research service for their assistance during this study.
+
+**Conflicts of interest**
+
+The authors declare no conflicts of interest. All contributions have been appropriately acknowledged and attributed.
+
+# REFERENCIAS
+
+[1. ](https://www.zotero.org/google-docs/?BvpbWI)	[González‐Orozco, C.E.; Reyes‐Herrera, P.H.; Sosa, C.C.; Torres, R.T.; Manrique‐Carpintero, N.C.; Lasso‐Paredes, Z.; Cerón‐Souza, I.; Yockteng, R. Wild Relatives of Potato ( *Solanum* L. Sec. *Petota* ) Poorly Sampled and Unprotected in Colombia. *Crop Science* **2024**, *64*, 225–243, doi:10.1002/csc2.21143. ](https://www.zotero.org/google-docs/?BvpbWI)
+
+[2. ](https://www.zotero.org/google-docs/?BvpbWI)	[Kumar, D.; Dutt, S.; Raigond, P.; Changan, S.S.; Lal, M.K.; Sharma, D.; Singh, B. Potato Probiotics for Human Health. In *Potato: Nutrition and Food Security*; Raigond, P., Singh, B., Dutt, S., Chakrabarti, S.K., Eds.; Springer: Singapore, 2020; pp. 271–287 ISBN 978-981-15-7662-1. ](https://www.zotero.org/google-docs/?BvpbWI)
+
+[3. ](https://www.zotero.org/google-docs/?BvpbWI)	[Nicolao, R.; Gaiero, P.; Castro, C.M.; Heiden, G. Solanum Malmeanum, a Promising Wild Relative for Potato Breeding. *Front. Plant Sci.* **2023**, *13*, 1046702, doi:10.3389/fpls.2022.1046702. ](https://www.zotero.org/google-docs/?BvpbWI)
+
+[4. ](https://www.zotero.org/google-docs/?BvpbWI)	[Rondon, S.I.; Carrillo, C.C.; Cuesta, H.X.; Navarro, P.D.; Acuña, I. Latin America Potato Production. In *Insect Pests of Potato*; Elsevier, 2022; pp. 317–330 ISBN 978-0-12-821237-0. ](https://www.zotero.org/google-docs/?BvpbWI)
+
+[5. ](https://www.zotero.org/google-docs/?BvpbWI)	[Spooner, D.M.; Ghislain, M.; Simon, R.; Jansky, S.H.; Gavrilenko, T. Systematics, Diversity, Genetics, and Evolution of Wild and Cultivated Potatoes. *Bot. Rev.* **2014**, *80*, 283–383, doi:10.1007/s12229-014-9146-y. ](https://www.zotero.org/google-docs/?BvpbWI)
+
+[6. ](https://www.zotero.org/google-docs/?BvpbWI)	[Tobin, D.; Bates, R.; Brennan, M.; Gill, T. Peru Potato Potential: Biodiversity Conservation and Value Chain Development. *Renewable Agriculture and Food Systems* **2018**, *33*, 19–32, doi:10.1017/S1742170516000284. ](https://www.zotero.org/google-docs/?BvpbWI)
+
+[7. ](https://www.zotero.org/google-docs/?BvpbWI)	[Maiti, R.K.; Singh, V. A Mini Review on Origin, History and Taxonomic Status of the Potato. *FarmManage* **2022**, *VOLUME 7*, doi:10.31830/2456-8724.2022.FM-104. ](https://www.zotero.org/google-docs/?BvpbWI)
+
+[8. ](https://www.zotero.org/google-docs/?BvpbWI)	[Tang, D.; Jia, Y.; Zhang, J.; Li, H.; Cheng, L.; Wang, P.; Bao, Z.; Liu, Z.; Feng, S.; Zhu, X.; et al. Genome Evolution and Diversity of Wild and Cultivated Potatoes. *Nature* **2022**, *606*, 535–541, doi:10.1038/s41586-022-04822-x. ](https://www.zotero.org/google-docs/?BvpbWI)
+
+[9. ](https://www.zotero.org/google-docs/?BvpbWI)	[Chen, C.; He, X.Z.; Zhou, P.; Wang, Q. Life History and Behavior of Tamarixia Triozae Parasitizing the Tomato-Potato Psyllid, Bactericera Cockerelli. *Biological Control* **2023**, *179*, 105152, doi:10.1016/j.biocontrol.2023.105152. ](https://www.zotero.org/google-docs/?BvpbWI)
+
+[10. ](https://www.zotero.org/google-docs/?BvpbWI)	[Gebiola, M.; Mauck, K.E. Symbiont Infection and Psyllid Haplotype Influence Phenotypic Plasticity during Host Switching Events. *Ecological Entomology* **2024**, *49*, 719–733, doi:10.1111/een.13342. ](https://www.zotero.org/google-docs/?BvpbWI)
+
+[11. ](https://www.zotero.org/google-docs/?BvpbWI)	[Wenninger, E.J.; Rashed, A. Biology, Ecology, and Management of the Potato Psyllid, *Bactericera Cockerelli* (Hemiptera: Triozidae), and Zebra Chip Disease in Potato. *Annu. Rev. Entomol.* **2024**, *69*, 139–157, doi:10.1146/annurev-ento-020123-014734. ](https://www.zotero.org/google-docs/?BvpbWI)
+
+[12. ](https://www.zotero.org/google-docs/?BvpbWI)	[Vereijssen, J.; Smith, G.R.; Weintraub, P.G. Bactericera Cockerelli (Hemiptera: Triozidae) and Candidatus Liberibacter Solanacearum in Potatoes in New Zealand: Biology, Transmission, and Implications for Management. *Journal of Integrated Pest Management* **2018**, *9*, doi:10.1093/jipm/pmy007. ](https://www.zotero.org/google-docs/?BvpbWI)
+
+[13. ](https://www.zotero.org/google-docs/?BvpbWI)	[Sumner-Kalkun, J.C.; Sjölund, M.J.; Arnsdorf, Y.M.; Carnegie, M.; Highet, F.; Ouvrard, D.; Greenslade, A.F.C.; Bell, J.R.; Sigvald, R.; Kenyon, D.M. A Diagnostic Real-Time PCR Assay for the Rapid Identification of the Tomato-Potato Psyllid, <i>Bactericera Cockerell/I>i (Šulc, 1909) and Development of a Psyllid Barcoding Database. *PLoS ONE* **2020**, *15*, e0230741, doi:10.1371/journal.pone.0230741. ](https://www.zotero.org/google-docs/?BvpbWI)
+
+[14. ](https://www.zotero.org/google-docs/?BvpbWI)	[Suwandharathne, N.I.; Holwell, G.I.; Avila, G.A. Current and Future Potential Geographical Distribution of *Bactericera Cockerelli* : An Invasive Pest of Increasing Global Importance. *Austral Entomology* **2023**, *62*, 488–502, doi:10.1111/aen.12664. ](https://www.zotero.org/google-docs/?BvpbWI)
+
+[15. ](https://www.zotero.org/google-docs/?BvpbWI)	[Vereijssen, J. Bactericera Cockerelli (Tomato/Potato Psyllid) 2022, 45643. ](https://www.zotero.org/google-docs/?BvpbWI)
+
+[16. ](https://www.zotero.org/google-docs/?BvpbWI)	[Gamarra, H.; Correa, Y.; Huaman, E.; Kreuze, J. *Reporte Sobre Colecta de Bactericera Cockerelli En Huancabamba-Piura, Perú.*; International Potato Center, 2022; p. 21 p.; ](https://www.zotero.org/google-docs/?BvpbWI)
+
+[17. ](https://www.zotero.org/google-docs/?BvpbWI)	[Sarkar, S.C.; Hatt, S.; Philips, A.; Akter, M.; Milroy, S.P.; Xu, W. Tomato Potato Psyllid Bactericera Cockerelli (Hemiptera: Triozidae) in Australia: Incursion, Potential Impact and Opportunities for Biological Control. *Insects* **2023**, *14*, 263, doi:10.3390/insects14030263. ](https://www.zotero.org/google-docs/?BvpbWI)
+
+[18. ](https://www.zotero.org/google-docs/?BvpbWI)	[Bastas, K.K. Bacterial Diseases of Potato and Their Control. In *Potato Production Worldwide*; Elsevier, 2023; pp. 179–197 ISBN 978-0-12-822925-5. ](https://www.zotero.org/google-docs/?BvpbWI)
+
+[19. ](https://www.zotero.org/google-docs/?BvpbWI)	[Wan, J.; Wang, R.; Ren, Y.; McKirdy, S. Potential Distribution and the Risks of Bactericera Cockerelli and Its Associated Plant Pathogen Candidatus Liberibacter Solanacearum for Global Potato Production. *Insects* **2020**, *11*, 298, doi:10.3390/insects11050298. ](https://www.zotero.org/google-docs/?BvpbWI)
+
+[20. ](https://www.zotero.org/google-docs/?BvpbWI)	[Munyaneza, J.E. Zebra Chip Disease, Candidatus Liberibacter, and Potato Psyllid: A Global Threat to the Potato Industry. *Am. J. Potato Res.* **2015**, *92*, 230–235, doi:10.1007/s12230-015-9448-6. ](https://www.zotero.org/google-docs/?BvpbWI)
+
+[21. ](https://www.zotero.org/google-docs/?BvpbWI)	[Cohen, A.; Basu, S.; Crowder, D.W. Drought Stress Affects Interactions between Potato Plants, Psyllid Vectors, and a Bacterial Pathogen. *FEMS Microbiology Ecology* **2023**, *99*, fiac142, doi:10.1093/femsec/fiac142. ](https://www.zotero.org/google-docs/?BvpbWI)
+
+[22. ](https://www.zotero.org/google-docs/?BvpbWI)	[Huot, O.B.; Tamborindeguy, C. Drought Stress Affects Olanum Lycopersicum Susceptibility to Actericera Cockerelli Colonization. *Entomologia Experimentalis et Applicata* **2017**, *165*, 70–82, doi:10.1111/eea.12627. ](https://www.zotero.org/google-docs/?BvpbWI)
+
+[23. ](https://www.zotero.org/google-docs/?BvpbWI)	[E, C.; Ochoa, Y.; Aguirre, L.; Flores, M.; Landeros, J. Determination of Insecticide Resistance in Four Populations of Potato Psillid Bactericera Cockerelli (Sulc.) (Hemiptera: Triozidae). *Phyton* **2013**, *82*, 63–68, doi:10.32604/phyton.2013.82.063. ](https://www.zotero.org/google-docs/?BvpbWI)
+
+[24. ](https://www.zotero.org/google-docs/?BvpbWI)	[Hu, W.; Wang, K.; Zhong, X.; Jiang, P.; Zhang, S.; Lu, Z.; Zhang, Z.; Yi, L.; Zhang, N. Enhanced Control Efficacy of Different Insecticides Mixed with Mineral Oil Against Asian Citrus Psyllid, Diaphorina Citri Kuwayama, Under Varying Climates. *Insects* **2025**, *16*, 28, doi:10.3390/insects16010028. ](https://www.zotero.org/google-docs/?BvpbWI)
+
+[25. ](https://www.zotero.org/google-docs/?BvpbWI)	[Lewis, O.M.; Michels, G.J.; Pierson, E.A.; Heinz, K.M. A Predictive Degree Day Model for the Development of *Bactericera Cockerelli* (Hemiptera: Triozidae) Infesting *Solanum Tuberosum*. *Environ Entomol* **2015**, *44*, 1201–1209, doi:10.1093/ee/nvv078. ](https://www.zotero.org/google-docs/?BvpbWI)
+
+[26. ](https://www.zotero.org/google-docs/?BvpbWI)	[Page-Weir, N.E.M.; Jamieson, L.E.; Chhagan, A.; Connolly, P.G.; Curtis, C. Efficacy of Insecticides against the Tomato/Potato Psyllid (*Bactericera Cockerelli*). *NZPP* **2011**, *64*, 276–281, doi:10.30843/nzpp.2011.64.6010. ](https://www.zotero.org/google-docs/?BvpbWI)
+
+[27. ](https://www.zotero.org/google-docs/?BvpbWI)	[Ocampo-Hernández, J.A.; Tamayo-Mejía, F.; Tamez-Guerra, P.; Gao, Y.; Guzmán-Franco, A.W. Different Host Plant Species Modifies the Susceptibility of Bactericera Cockerelli to the Entomopathogenic Fungus Beauveria Bassiana. *Journal of Applied Entomology* **2019**, *143*, 984–991, doi:10.1111/jen.12680. ](https://www.zotero.org/google-docs/?BvpbWI)
+
+[28. ](https://www.zotero.org/google-docs/?BvpbWI)	[Karaborklu, S. Biocontrol Potential of Beauveria Bassiana and Metarhizium Anisopliae Isolates from Turkey against Hyphantria Cunea (Drury) (Lepidoptera: Arctiidae) Larvae under Laboratory and Field Conditions. *Bioscience Journal* **2022**, *38*, e38015–e38015, doi:10.14393/BJ-v38n0a2022-60197. ](https://www.zotero.org/google-docs/?BvpbWI)
+
+[29. ](https://www.zotero.org/google-docs/?BvpbWI)	[Servicio Nacional de Sanidad Agraria (SENASA). Resolución Jefatural N° D000141-2024-MIDAGRI-SENASA-JN; Ministerio de Desarrollo Agrario y Riego: Lima, Perú 2024. ](https://www.zotero.org/google-docs/?BvpbWI)
+
+[30. ](https://www.zotero.org/google-docs/?BvpbWI)	[Burckhardt, D.; and Lauterer, P. A Taxonomic Reassessment of the Triozid Genus Bactericera (Hemiptera: Psylloidea). *Journal of Natural History* **1997**, *31*, 99–153, doi:10.1080/00222939700770081. ](https://www.zotero.org/google-docs/?BvpbWI)
+
+[31. ](https://www.zotero.org/google-docs/?BvpbWI)	[Eyer, J.R.; Crawford, R.F. Observations on the Feeding Habits of the Potato Psyllid (Paratrioza Cockerelli Sulc.) and the Pathological History of the “Psyllid Yellows” Which It Produces. *Journal of Economic Entomology* **1933**, *26*, 846–850, doi:10.1093/jee/26.4.846. ](https://www.zotero.org/google-docs/?BvpbWI)
+
+[32. ](https://www.zotero.org/google-docs/?BvpbWI)	[Vereijssen, J. Ecology and Management of Bactericera Cockerelli and Candidatus Liberibacter Solanacearum in New Zealand. *Journal of Integrative Agriculture* **2020**, *19*, 333–337, doi:10.1016/S2095-3119(19)62641-9. ](https://www.zotero.org/google-docs/?BvpbWI)
+
+[33. ](https://www.zotero.org/google-docs/?BvpbWI)	[Veronesi, E.R.; Thompson ,Christopher J.; and Goldson, S.L. Insect Biological Control of the Tomato-Potato Psyllid Bactericera Cockerelli, a Review. *New Zealand Journal of Crop and Horticultural Science* **2023**, *0*, 1–17, doi:10.1080/01140671.2023.2229770. ](https://www.zotero.org/google-docs/?BvpbWI)
+
+[34. ](https://www.zotero.org/google-docs/?BvpbWI)	[Gutiérrez-Rosales, R.O.; Espinoza-Trelles, J.A.; Bonierbale, M. UNICA: Variedad Peruana Para Mercado Fresco y Papa Frita Con Tolerancia y Resistencia Para Condiciones Climáticas Adversas. *RALAP* **2016**, *14*, 41–50, doi:10.37066/ralap.v14i1.143. ](https://www.zotero.org/google-docs/?BvpbWI)
+
+[35. ](https://www.zotero.org/google-docs/?BvpbWI)	[Ministerio de Agricultura y Riego (MINAGRI) Decreto Supremo N.° 010-2018-MINAGRI, Que Aprueba El Reglamento Específico de Semillas de Papa. 2018. ](https://www.zotero.org/google-docs/?BvpbWI)
+
+[36. ](https://www.zotero.org/google-docs/?BvpbWI)	[Butler, C.D.; Trumble, J.T. The Potato Psyllid, Bactericera Cockerelli (Sulc) (Hemiptera: Triozidae): Life History, Relationship to Plant Diseases, and Management Strategies. *Terr Arthropod Rev* **2012**, *5*, 87–111, doi:10.1163/187498312X634266. ](https://www.zotero.org/google-docs/?BvpbWI)
+
+[37. ](https://www.zotero.org/google-docs/?BvpbWI)	[Greenway, G.A.; Rondon, S. Economic Impacts of Zebra Chip in Idaho, Oregon, and Washington. *Am. J. Potato Res.* **2018**, *95*, 362–367, doi:10.1007/s12230-018-9636-2. ](https://www.zotero.org/google-docs/?BvpbWI)
+
+[38. ](https://www.zotero.org/google-docs/?BvpbWI)	[Jackson, M.A.; Dunlap, C.A.; Jaronski, S.T. Ecological Considerations in Producing and Formulating Fungal Entomopathogens for Use in Insect Biocontrol. *BioControl* **2010**, *55*, 129–145, doi:10.1007/s10526-009-9240-y. ](https://www.zotero.org/google-docs/?BvpbWI)
+
+[39. ](https://www.zotero.org/google-docs/?BvpbWI)	[Mascarin, G.M.; Jaronski, S.T. The Production and Uses of Beauveria Bassiana as a Microbial Insecticide. *World J Microbiol Biotechnol* **2016**, *32*, 177, doi:10.1007/s11274-016-2131-3. ](https://www.zotero.org/google-docs/?BvpbWI)
+
+[40. ](https://www.zotero.org/google-docs/?BvpbWI)	[Lacey, L.A.; Liu, T.-X.; Buchman, J.L.; Munyaneza, J.E.; Goolsby, J.A.; Horton, D.R. Entomopathogenic Fungi (Hypocreales) for Control of Potato Psyllid, *Bactericera Cockerelli* (Šulc) (Hemiptera: Triozidae) in an Area Endemic for Zebra Chip Disease of Potato. *Biological Control* **2011**, *56*, 271–278, doi:10.1016/j.biocontrol.2010.11.012. ](https://www.zotero.org/google-docs/?BvpbWI)
+
+[41. ](https://www.zotero.org/google-docs/?BvpbWI)	[Inglis, G.D.; Goettel, M.S.; Butt, T.M.; Strasser, H. Use of Hyphomycetous Fungi for Managing Insect Pests. In *Fungi as biocontrol agents: progress, problems and potential*; Butt, T.M., Jackson, C., Magan, N., Eds.; CABI Publishing: UK, 2001; pp. 23–69 ISBN 978-0-85199-356-0. ](https://www.zotero.org/google-docs/?BvpbWI)
+
+[42. ](https://www.zotero.org/google-docs/?BvpbWI)	[International Potato Center *Informe de Visita a Huancabamba, Piura de Comitiva SENASA Nivel Central Intervención de Especialistas SENASA-CIP*; ISBN: 978-92-9060-652-9; International Potato Center, 2022; p. 13 p.; ](https://www.zotero.org/google-docs/?BvpbWI)
+
+[43. ](https://www.zotero.org/google-docs/?BvpbWI)	[Roque Enriquez, A.; Beltrán Beache, M.; Ochoa Fuentes, Y.M.; Delgado Ortiz, J.C. Parámetros Poblacionales de Bactericera Cockerelli En Plantas de Tomate Tratadas Con Menadiona. *Remexca* **2024**, *15*, e3349, doi:10.29312/remexca.v15i4.3349. ](https://www.zotero.org/google-docs/?BvpbWI)
+
+[44. ](https://www.zotero.org/google-docs/?BvpbWI)	[Yang, X.-B.; Zhang, Y.-M.; Hua, L.; Peng, L.-N.; Munyaneza, J.E.; Trumble, J.T.; Liu, T.-X. Repellency of Selected Biorational Insecticides to Potato Psyllid, Bactericera Cockerelli (Hemiptera: Psyllidae). *Crop Protection* **2010**, *29*, 1320–1324, doi:10.1016/j.cropro.2010.06.013. ](https://www.zotero.org/google-docs/?BvpbWI)
+
+[45. ](https://www.zotero.org/google-docs/?BvpbWI)	[Munyaneza, J.E. Zebra Chip Disease of Potato: Biology, Epidemiology, and Management. *Am. J. Pot Res* **2012**, *89*, 329–350, doi:10.1007/s12230-012-9262-3. ](https://www.zotero.org/google-docs/?BvpbWI)
+
+[46. ](https://www.zotero.org/google-docs/?BvpbWI)	[Cameron, P.J.; Surrey, M.R.; Wigley, P.J.; Anderson, J.A.D.; Hartnett, D.E.; Wallace, A.R. Seasonality of *Bactericera Cockerelli* in Potatoes ( *Solanum Tuberosum* ) in South Auckland, New Zealand. *New Zealand Journal of Crop and Horticultural Science* **2009**, *37*, 295–301, doi:10.1080/01140671.2009.9687584. ](https://www.zotero.org/google-docs/?BvpbWI)
+
+[47. ](https://www.zotero.org/google-docs/?BvpbWI)	[De Haan, S.; Forbes, A.; Amoros, W.; Gastelo, M.; Salas, E.; Hualla, V.; De Mendiburu, F.; Bonierbale, M. *Metodologías de Evaluación Estándar y Manejo de Datos de Clones Avanzados de Papa.*; Modulo 2: Evaluación del rendimiento de tubérculos sanos de clones avanzados de papa. Guía para Colaboradores Internacionales.; Centro Internacional de la Papa: Lima (Perú), 2014; p. 44 p.; ](https://www.zotero.org/google-docs/?BvpbWI)
+
+[48. ](https://www.zotero.org/google-docs/?BvpbWI)	[Liefting, L.W.; Sutherland, P.W.; Ward, L.I.; Paice, K.L.; Weir, B.S.; Clover, G.R.G. A New ‘ *Candidatus* Liberibacter’ Species Associated with Diseases of Solanaceous Crops. *Plant Disease* **2009**, *93*, 208–214, doi:10.1094/PDIS-93-3-0208. ](https://www.zotero.org/google-docs/?BvpbWI)
+
+[49. ](https://www.zotero.org/google-docs/?BvpbWI)	[Vanderplank, J. Plant Diseases: Epidemics and Control. *Academic Press* **1963**. ](https://www.zotero.org/google-docs/?BvpbWI)
+
+[50. ](https://www.zotero.org/google-docs/?BvpbWI)	[R Core Team Available online: https://www.r-project.org/ (accessed on 13 August 2025). ](https://www.zotero.org/google-docs/?BvpbWI)
+
+[51. ](https://www.zotero.org/google-docs/?BvpbWI)	[Edmondson, M.J.; Luo, C.; Nazmul Islam, Md.; Sheils, N.E.; Buresh, J.; Chen, Z.; Bian, J.; Chen, Y. Distributed Quasi-Poisson Regression Algorithm for Modeling Multi-Site Count Outcomes in Distributed Data Networks. *Journal of Biomedical Informatics* **2022**, *131*, 104097, doi:10.1016/j.jbi.2022.104097. ](https://www.zotero.org/google-docs/?BvpbWI)
+
+[52. ](https://www.zotero.org/google-docs/?BvpbWI)	[Bates, D.; Maechler, M.; Bolker  [aut, B.; cre; Walker, S.; Christensen, R.H.B.; Singmann, H.; Dai, B.; Scheipl, F.; Grothendieck, G.; et al. Lme4: Linear Mixed-Effects Models Using “Eigen” and S4 2025. ](https://www.zotero.org/google-docs/?BvpbWI)
+
+[53. ](https://www.zotero.org/google-docs/?BvpbWI)	[Schielzeth, H.; Dingemanse, N.J.; Nakagawa, S.; Westneat, D.F.; Allegue, H.; Teplitsky, C.; Réale, D.; Dochtermann, N.A.; Garamszegi, L.Z.; Araya-Ajoy, Y.G. Robustness of Linear Mixed-Effects Models to Violations of Distributional Assumptions. *Methods in Ecology and Evolution* **2020**, *11*, 1141–1152, doi:10.1111/2041-210X.13434. ](https://www.zotero.org/google-docs/?BvpbWI)
+
+[54. ](https://www.zotero.org/google-docs/?BvpbWI)	[Lenth, R.V.; Bolker, B.; Buerkner, P.; Giné-Vázquez, I.; Herve, M.; Jung, M.; Love, J.; Miguez, F.; Piaskowski, J.; Riebl, H.; et al. Emmeans: Estimated Marginal Means, Aka Least-Squares Means 2024. ](https://www.zotero.org/google-docs/?BvpbWI)
+
+[55. ](https://www.zotero.org/google-docs/?BvpbWI)	[Cerna, E.; Ail, C.; Landeros, J.; Sánchez, S.; Badii, M.; Aguirre, L.; Ochoa, Y. Comparación de la toxicidad y selectividad de insecticidas para la plaga Bactericera cockerelli y su depredador Chrysoperla carnea. *Agrociencia* **2012**, *46*, 783–793. ](https://www.zotero.org/google-docs/?BvpbWI)
+
+[56. ](https://www.zotero.org/google-docs/?BvpbWI)	[Chandra Teja, K.N.P.; Rahman, S.J. Characterisation and Evaluation of Metarhizium Anisopliae (Metsch.) Sorokin Strains for Their Temperature Tolerance. *Mycology* **2016**, *7*, 171–179, doi:10.1080/21501203.2016.1247116. ](https://www.zotero.org/google-docs/?BvpbWI)
+
+[57. ](https://www.zotero.org/google-docs/?BvpbWI)	[Harrison, K.; Mendoza-Herrera, A.; Levy, J.G.; Tamborindeguy, C. Lasting Consequences of Psyllid (Bactericera Cockerelli L.) Infestation on Tomato Defense, Gene Expression, and Growth. *BMC Plant Biol* **2021**, *21*, 114, doi:10.1186/s12870-021-02876-z. ](https://www.zotero.org/google-docs/?BvpbWI)
+
+[58. ](https://www.zotero.org/google-docs/?BvpbWI)	[Athanassiou, C.G.; Kavallieratos, N.G.; Rumbos, C.I.; Kontodimas, D.C. Influence of Temperature and Relative Humidity on the Insecticidal Efficacy of Metarhizium Anisopliae against Larvae of Ephestia Kuehniella (Lepidoptera: Pyralidae) on Wheat. *J Insect Sci* **2017**, *17*, 22, doi:10.1093/jisesa/iew107. ](https://www.zotero.org/google-docs/?BvpbWI)
+
+[59. ](https://www.zotero.org/google-docs/?BvpbWI)	[Pacheco Hernández, M. de L.; Reséndiz Martínez, J.F.; Arriola Padilla, V.J.; Pacheco Hernández, M. de L.; Reséndiz Martínez, J.F.; Arriola Padilla, V.J. Organismos entomopatógenos como control biológico en los sectores agropecuario y forestal de México: una revisión. *Revista mexicana de ciencias forestales* **2019**, *10*, 4–32, doi:10.29298/rmcf.v10i56.496. ](https://www.zotero.org/google-docs/?BvpbWI)
+
+[60. ](https://www.zotero.org/google-docs/?BvpbWI)	[Djaman, K.; Higgins, C.; O’Neill, M.; Begay, S.; Koudahe, K.; Allen, S. Population Dynamics of Six Major Insect Pests During Multiple Crop Growing Seasons in Northwestern New Mexico. *Insects* **2019**, *10*, 369, doi:10.3390/insects10110369. ](https://www.zotero.org/google-docs/?BvpbWI)
+
+[61. ](https://www.zotero.org/google-docs/?BvpbWI)	[Mora, V.; Ramasamy, M.; Damaj, M.B.; Irigoyen, S.; Ancona, V.; Avila, C.A.; Vales, M.I.; Ibanez, F.; Mandadi, K.K. Identification and Characterization of Potato Zebra Chip Resistance Among Wild Solanum Species. *Front Microbiol* **2022**, *13*, 857493, doi:10.3389/fmicb.2022.857493. ](https://www.zotero.org/google-docs/?BvpbWI)
+
+[62. ](https://www.zotero.org/google-docs/?BvpbWI)	[Stoop, W.A.; Adam, A.; Kassam, A. Comparing Rice Production Systems: A Challenge for Agronomic Research and for the Dissemination of Knowledge-Intensive Farming Practices. *Agricultural Water Management* **2009**, *96*, 1491–1501, doi:10.1016/j.agwat.2009.06.022. ](https://www.zotero.org/google-docs/?BvpbWI)
+
+[63. ](https://www.zotero.org/google-docs/?BvpbWI)	[Jacques, M.M.; Gumiere, S.J.; Gallichand, J.; Celicourt, P.; Gumiere, T. Impacts of Water Stress Severity and Duration on Potato Photosynthetic Activity and Yields. *Front. Agron.* **2020**, *2*, doi:10.3389/fagro.2020.590312. ](https://www.zotero.org/google-docs/?BvpbWI)
+
+[64. ](https://www.zotero.org/google-docs/?BvpbWI)	[Li, F.; Deng, H.; Wang, Y.; Li, X.; Chen, X.; Liu, L.; Zhang, H. Potato Growth, Photosynthesis, Yield, and Quality Response to Regulated Deficit Drip Irrigation under Film Mulching in a Cold and Arid Environment. *Sci Rep* **2021**, *11*, 15888, doi:10.1038/s41598-021-95340-9. ](https://www.zotero.org/google-docs/?BvpbWI)
