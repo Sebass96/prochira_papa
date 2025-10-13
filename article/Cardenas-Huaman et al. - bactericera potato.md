@@ -2,13 +2,15 @@
 
 Gabriela Cárdenas-Huamán^1^; Henry Morocho-Romero^1^; Sebastian Casas-Niño^1^; Sandy Vilchez-Navarro^1^; Leslie D. Velarde-Apaza^1^; Max Ramirez-Rojas^1^; Juancarlos Cruz^1^; Flavio Lozano-Isla^1,2\*^ 
 
-*^1^.Dirección de Servicios Estratégicos Agrarios, Estación Experimental Agraria El Chira, Instituto Nacional de Innovación Agraria (INIA), Carretera Sullana—Talara Km. 1027, Piura 20120, Perú*
+*^1^ Dirección de Servicios Estratégicos Agrarios, Estación Experimental Agraria El Chira, Instituto Nacional de Innovación Agraria (INIA), Carretera Sullana—Talara Km. 1027, Piura 20120, Perú*
 
 *^2^ Facultad de Ingeniería y Ciencias Agrarias, Universidad Nacional Toribio Rodríguez de Mendoza de Amazonas (UNTRM), Chachapoyas, Perú.*
 
 * ^\*^ *Corresponding author: *[flavio.lozano@untrm.edu.pe](mailto:flavio.lozano@untrm.edu.pe)*
 
 
+
+**ORCIDs**
 
 
 | **Author**                    | **ORCID**                     | **Email**                      |
@@ -26,16 +28,6 @@ Gabriela Cárdenas-Huamán^1^; Henry Morocho-Romero^1^; Sebastian Casas-Niño^1^
 
 
 
-
-
-
-**Highlights**
-
-* The psyllid *Bactericera cockerelli* significantly contributed to yield reduction in potato crops under field conditions.
-* Chemical control exhibited the highest efficacy in reducing *B. cockerelli* populations and plant symptom expression in the field.
-* Among the biological control agents evaluated under field conditions, *Paecilomyces lilacinus* and *Metarhizium anisopliae* demonstrated superior efficacy in suppressing *B. cockerelli* populations.
-* The incidence of zebra chip (ZC) disease was lower under chemical control (60.60%) and *M. anisopliae* (56.60%) treatments compared with the untreated control (68.61%).
-* The purple-top complex negatively affected both total yield and tuber size.
 
 
 
@@ -61,15 +53,13 @@ Given these challenges, sustainable and environmentally compatible alternatives 
 
 This study aimed to (i) evaluate the population dynamics of *B. cockerelli* under field conditions during the phenological development of potato (*S. tuberosum* L.); (ii) assess the symptom expression of the purple-top complex and zebra chip incidence in the potato cultivar UNICA subjected to biological and chemical treatments; and (iii) determine the agronomic response of the crop to psyllid infestation under field conditions. This integrative approach seeks to identify adaptive management strategies suitable for Andean agroecosystems, where climate variability and phytosanitary pressure increasingly threaten both food security and the genetic diversity of this staple crop.
 
+# 
+
 # MATERIALS AND METHODS
 
 ## Study area and meteorological conditions
 
 The experiment was conducted in the rural community of Quispampa Bajo, district and province of Huancabamba, Peru, from September 2024 to February 2025, coinciding with the phenological development period of potato (*Solanum tuberosum* L.) (latitude 5°15′22.2048″ S, longitude 79°26′58.0848″ W, elevation 2044 m a.s.l.; [Figure 1](?tab=t.cw5hphuc1y6t#bookmark=kix.pgz9fqo92pr5)). The site was selected due to the confirmed presence of the potato psyllid *Bactericera cockerelli* (Šulc) in local potato fields [[16]](https://www.zotero.org/google-docs/?K369WZ) and the detection of the bacterium Candidatus Liberibacter solanacearum (CLso) in the same district, officially reported in 2024 by the National Agricultural Health Service [(SENASA)](https://www.zotero.org/google-docs/?Xf0Iwx) [[29]](https://www.zotero.org/google-docs/?aoYASQ). 
-
-
-
-
 
 
 
@@ -110,6 +100,8 @@ The experiment was established under a randomized complete block design (RCBD) c
 The evaluated treatments were as follows: untreated control (T0); chemical control – thiamethoxam + lambda-cyhalothrin, abamectin, and imidacloprid (T1); and three commercial biological control agents: *Beauveria bassiana* strain CCB LE-265 (> 1.5 × 10¹⁰ conidia g⁻¹) (T2), *Paecilomyces lilacinus* strain 251 (1.0 × 10¹⁰ conidia g⁻¹) (T3), and *Metarhizium anisopliae* (1.0 × 10¹⁰ conidia g⁻¹) (T4).
 
 Applications were targeted to the egg, nymph, and adult stages of *Bactericera cockerelli.* Spraying commenced once plants reached 98% emergence, approximately 45 days after sowing (DAS), and was performed directly on all aerial plant organs at seven-day intervals. Treatment protocols followed integrated pest and disease management guidelines for potato cultivation [[11,32,36]](https://www.zotero.org/google-docs/?V1S25f).
+
+## 
 
 ## Application methodology of treatments
 
@@ -161,6 +153,8 @@ $$Incident_{zebra\ chip}\left(\%\right)\ =\left(\frac{Number\ of\ tubers\ with\ 
 
 All statistical analyses were performed using R software, version 4.5.1 [[50]](https://www.zotero.org/google-docs/?hhdlOG). For count-type response variables, generalized linear models (GLMs) with a Poisson distribution were fitted. In cases where overdispersion was detected, a quasi-Poisson distribution was applied to obtain more robust estimates [[51]](https://www.zotero.org/google-docs/?aG328R). Binary variables (presence/absence) were analyzed using GLMs with a binomial distribution. For continuous variables, linear mixed-effects models (LMMs) were applied using the lme4 package [[52]](https://www.zotero.org/google-docs/?JhkszG), which allows for the inclusion of both fixed and random effects, improving the capacity to model dependent data and address potential violations of normality and homoscedasticity assumptions [[53]](https://www.zotero.org/google-docs/?RuEaKS). Model significance was assessed using analysis of variance (ANOVA), and multiple mean comparisons were conducted with Tukey’s Honestly Significant Difference (HSD) test at a significance level of α = 0.05, implemented through the emmeans package  **[[54]](https://www.zotero.org/google-docs/?0X32pi).
 
+# 
+
 # RESULTS
 
 ## Insect behavior
@@ -179,10 +173,6 @@ A total of 2,000 adult psyllids were captured across the 12 weekly yellow traps 
 
 ![Evaluation of the pest insect *Bactericera cockerelli* at its three developmental stages, monitored weekly on the foliar area of potato plants under field conditions in Quispampa Bajo, Huancabamba Province, Piura, Peru. (a) number of eggs, (b) number of nymphs, and (c) number of adults.](img_4.jpg){#fig:id.f1e96n41b7vh}
 
-
-
-
-
 ## Symptomatology of purple-top complex in plants and zebra chip disease in potato tubers
 
 To assess the effect of biological and chemical treatments on the expression of purple-top symptoms in potato (*Solanum tuberosum* L.) var. UNICA under field conditions, the probability of incidence of the purple-top complex and the presence of zebra chip (ZC) were evaluated. The incidence of purple-top was determined based on morphological characteristics observed in the plants, whereas zebra chip incidence was assessed in tubers according to the presence of characteristic necrotic streaks [[45,48]](https://www.zotero.org/google-docs/?ulIfiO).
@@ -190,8 +180,6 @@ To assess the effect of biological and chemical treatments on the expression of 
 The results showed that the application of treatments produced significant differences (p < 0.05) in the probability of purple-top complex occurrence ([Figure 6a](?tab=t.cw5hphuc1y6t#bookmark=kix.63zvwfop9yww)). The chemical control (T1) exhibited the lowest probability of symptom presence (0.46), significantly lower than T0 (0.91) and T2 (0.83). Likewise, *Metarhizium anisopliae* (T4) showed a lower probability of occurrence (0.49) compared to T0, T2, and T3, although it differed statistically only from the untreated control (T0).
 
 In contrast, no significant differences (p = 0.778) were observed among treatments for the incidence rate of zebra chip in tubers ([Figure 6b](?tab=t.cw5hphuc1y6t#bookmark=kix.63zvwfop9yww)). Despite the lack of statistical differences, treatment T4 exhibited the lowest incidence rate (56.60%), while the highest incidence was recorded in the untreated control (T0) with 68.61%.
-
-
 
 
 
