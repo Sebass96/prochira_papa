@@ -9,7 +9,7 @@ format:
     toc: false
     toc-title: Indice
     section-numbers: true
-    reference-doc: "files/crops-template.dot"
+    reference-doc: "files/ijpb-template.dot"
     output-file: "manuscript"
 editor_options: 
   chunk_output_type: console
