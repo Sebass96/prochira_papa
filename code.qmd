@@ -223,9 +223,11 @@ datos_ndn <- data %>%
 modelo <- lmer(ndn ~ 0 + (1 | block) + (1 | repeticion) + Tipo.de.control * id_variable
                , data = datos_ndn)
 
+AIC(modelo, modelo2)
+
 Anova(modelo, type = 3, test.statistic = "F")
 
-mc1 <- emmeans(modelo, ~ Tipo.de.control | id_variable) %>%
+mc1 <- emmeans(modelo2, ~ Tipo.de.control | id_variable) %>%
   cld(Letters = letters, reversed = T) %>%
   mutate(across(".group", ~ trimws(.))) %>%
   rename(sig1 = ".group")
@@ -377,14 +379,14 @@ fig %>%
     dpi = 600
   )
 
-fig %>%
-  ggsave2(
-    plot = ., "article/img_4.eps",
-    units = "cm",
-    width = 35,
-    height = 30,
-    dpi = 600
-  )
+# fig %>%
+#   ggsave2(
+#     plot = ., "article/img_4.eps",
+#     units = "cm",
+#     width = 35,
+#     height = 30,
+#     dpi = 600
+#   )
 
 knitr::include_graphics("article/img_4.jpg")
 ```
@@ -396,11 +398,12 @@ To evaluate the yield and commercial quality of potato tubers of potato (_Solanu
 ### Plant weight
 
 ```{r}
-datos_ppp <- data %>% filter(!is.na(ppp))
+datos_ppp <- data %>% 
+  filter(!is.na(ppp))
 
 trait <- "ppp"
 
-lmm <- paste({{ trait }}, "~ 1 + (1|block) + Tipo.de.control") %>% as.formula()
+lmm <- paste({{ trait }}, "~ 0 + (1|block) + Tipo.de.control") %>% as.formula()
 
 rmout <- datos_ppp %>%
   remove_outliers(
@@ -452,14 +455,27 @@ p3a
 ```{r}
 datos_ntp <- data %>% filter(!is.na(ntp))
 
-modelo_ntp <- glm(ntp ~ Tipo.de.control + block,
-  family = poisson(link = "log"),
-  data = datos_ntp
-)
+trait <- "ntp"
 
-Anova(modelo_ntp, type = 3)
+lmm <- paste({{ trait }}, "~ 0 + (1|block) + Tipo.de.control") %>% as.formula()
 
-mc <- emmeans(modelo_ntp, ~Tipo.de.control, type = "response") %>%
+rmout <- datos_ntp %>%
+  remove_outliers(
+    formula = lmm,
+    drop_na = T, plot_diag = T
+  )
+
+plot_diagnostic(rmout$data$clean, formula = lmm) %>%
+  plot_grid(plotlist = ., ncol = 2)
+
+rmout$outliers
+
+model <- rmout$data$clean %>%
+  lmer(formula = lmm, .)
+
+Anova(model, type = 3, test.statistic = "F")
+
+mc <- emmeans(model, ~Tipo.de.control) %>%
   cld(Letters = letters, reversed = T) %>%
   mutate(across(".group", ~ trimws(.))) %>%
   rename(sig1 = ".group")
@@ -469,7 +485,7 @@ mc %>% kable()
 p3b <- mc %>%
   plot_smr(
     x = "Tipo.de.control",
-    y = "rate"
+    y = "emmean"
     # , group = "Tipo.de.control"
     , sig = "sig1"
     # , error = "SE"
@@ -556,10 +572,17 @@ modelo_npm <- glm(npm ~ Tipo.de.control + block,
   data = datos_npm
 )
 
+library(DHARMa)
+
+sim_res <- simulateResiduals(modelo_npm)
+
+plot(sim_res)
+
+testDispersion(sim_res)
+
 summary(modelo_npm)
 
 anova(modelo_npm, test = "Chisq")
-
 
 mc <- emmeans(modelo_npm, ~Tipo.de.control, type = "response") %>%
   cld(Letters = letters, reversed = T) %>%
@@ -611,7 +634,7 @@ datos_i <- data %>%
 
 trait <- "ti"
 
-lmm <- paste({{ trait }}, "~ 1 + (1|block) + Tipo.de.control") %>% as.formula()
+lmm <- paste({{ trait }}, "~ 0 + (1|block) + Tipo.de.control") %>% as.formula()
 
 rmout <- datos_i %>%
   remove_outliers(
@@ -645,7 +668,7 @@ p4b <- mc %>%
     # , error = "SE"
     , color = T,
     xlab = "NULL",
-    ylab = "Incidence rate per plant ('%')",
+    ylab = "Incidence rate of Zebra Chip ('%')",
     glab = "Control Type",
     ylimits = c(0, 100, 20),
   ) +
