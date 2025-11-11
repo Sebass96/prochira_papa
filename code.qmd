@@ -21,6 +21,7 @@ execute:
 
 library(emmeans)
 library(multcomp)
+library(glmmTMB)
 library(FSA)
 library(car)
 source("https://inkaverse.com/setup.r")
@@ -90,6 +91,19 @@ sm <- data %>%
   summarise(across(ndh:nts, ~ sum(!is.na(.))))
 
 sm
+
+summary <- data %>%
+  group_by(Tipo.de.control) %>%
+  summarise(
+    ndh_sum = sum(ndh[ndh > 0], na.rm = TRUE),
+    ndn_sum = sum(ndn[ndn > 0], na.rm = TRUE),
+    nda_sum = sum(nda[nda > 0], na.rm = TRUE)
+  )
+
+summary %>% kable(align = 'c')
+
+summary %>%
+  write_sheet(ss = gs, sheet = "tb1")
 ```
 
 # Meteorological data
@@ -146,34 +160,22 @@ To evaluate the behavior of the psyllid Bactericera cockerelli Šulc. under wate
 ### Number of eggs
 
 ```{r}
-datos_ndh <- data %>% filter(!is.na(ndh))
+datos_ndh <- data %>%
+  filter(!is.na(ndh)) %>% 
+  filter(!id_variable %in% c(143, 150)) %>%
+  droplevels()
 
-modelo_ndh <- glm(ndh ~ Tipo.de.control * id_variable + block,
-  family = poisson(link = "log"),
-  data = datos_ndh
-)
+modelo <- lmer(ndh ~ 0 + (1 | block) + (1 | repeticion) + Tipo.de.control * id_variable
+               , data = datos_ndh)
 
-Anova(modelo_ndh, type = 3)
+Anova(modelo, type = 3, test.statistic = "F")
 
-# Calcular dispersión: si >>1, hay sobredispersión
-
-deviance(modelo_ndh) / df.residual(modelo_ndh)
-
-modelo_ndh_quasi <- glm(ndh ~ Tipo.de.control * id_variable + block,
-  family = quasipoisson(link = "log"),
-  data = datos_ndh
-)
-
-Anova(modelo_ndh_quasi, type = 3)
-
-anova(modelo_ndh_quasi, test = "Chisq")
-
-mc1 <- emmeans(modelo_ndh_quasi, ~ Tipo.de.control | id_variable, type = "response") %>%
+mc1 <- emmeans(modelo, ~ Tipo.de.control | id_variable) %>%
   cld(Letters = letters, reversed = T) %>%
   mutate(across(".group", ~ trimws(.))) %>%
   rename(sig1 = ".group")
 
-mc2 <- emmeans(modelo_ndh_quasi, ~ id_variable | Tipo.de.control, type = "response") %>%
+mc2 <- emmeans(modelo, ~ id_variable | Tipo.de.control) %>%
   cld(Letters = letters, reversed = T) %>%
   mutate(across(".group", ~ trimws(.))) %>%
   mutate(across(".group", ~ toupper(.))) %>%
@@ -187,15 +189,15 @@ mc %>% kable()
 p2a <- mc %>%
   plot_smr(
     x = "id_variable",
-    y = "rate",
+    y = "emmean",
     group = "Tipo.de.control"
     # , sig = "group"
     # , error = "SE"
     , color = T,
-    xlab = "Evaluation days",
-    ylab = "Number of eggs",
+    xlab = "Days after sowing (DAS)",
+    ylab = "Eggs plant^{-1}",
     glab = "Control Type",
-    ylimits = c(0, 35, 5),
+    ylimits = c(0, 50, 10),
   ) +
   geom_text(
     aes(label = group),
@@ -214,38 +216,21 @@ p2a
 
 ```{r}
 datos_ndn <- data %>%
-  filter(!is.na(ndn))
+  filter(!is.na(ndn)) %>% 
+  filter(!id_variable %in% c(143, 150)) %>%
+  droplevels()
 
-table <- datos_ndn %>%
-  group_by(id_variable, Tipo.de.control) %>%
-  summarise(suma = sum(ndn), media = mean(ndn, na.rm = T))
+modelo <- lmer(ndn ~ 0 + (1 | block) + (1 | repeticion) + Tipo.de.control * id_variable
+               , data = datos_ndn)
 
-model <- lm(ndh ~ id_variable * Tipo.de.control, data = datos_ndn)
+Anova(modelo, type = 3, test.statistic = "F")
 
-anova(model)
-
-# modelo_ndn <- glm(ndn ~ Tipo.de.control * id_variable,
-#                   family = poisson(link = "log"),
-#                   data = datos_ndn)
-#
-# # Calcular dispersión: si >>1, hay sobredispersión
-#
-# deviance(modelo_ndn) / df.residual(modelo_ndn)
-#
-# modelo_ndn_quasi <- glm(ndn ~ Tipo.de.control * id_variable,
-#                         family = quasipoisson(link = "log"),
-#                         data = datos_ndn)
-#
-# Anova(modelo_ndn_quasi, type = 3)
-#
-# anova(modelo_ndn_quasi, test = "Chisq")
-
-mc1 <- emmeans(model, ~ Tipo.de.control | id_variable) %>%
+mc1 <- emmeans(modelo, ~ Tipo.de.control | id_variable) %>%
   cld(Letters = letters, reversed = T) %>%
   mutate(across(".group", ~ trimws(.))) %>%
   rename(sig1 = ".group")
 
-mc2 <- emmeans(model, ~ id_variable | Tipo.de.control) %>%
+mc2 <- emmeans(modelo, ~ id_variable | Tipo.de.control) %>%
   cld(Letters = letters, reversed = T) %>%
   mutate(across(".group", ~ trimws(.))) %>%
   mutate(across(".group", ~ toupper(.))) %>%
@@ -264,10 +249,10 @@ p2b <- mc %>%
     # , sig = "group"
     # , error = "SE"
     , color = T,
-    xlab = "Evaluation days",
-    ylab = "Number of nymphs",
+    xlab = "Days after sowing (DAS)",
+    ylab = "Nymphs plant^{-1}",
     glab = "Control Type",
-    ylimits = c(0, 40, 10),
+    ylimits = c(0, 80, 20),
   ) +
   geom_text(
     aes(label = group),
@@ -284,33 +269,22 @@ p2b
 ### Number of adults
 
 ```{r}
-datos_nda <- data %>% filter(!is.na(nda))
+datos_nda <- data %>%
+  filter(!is.na(nda)) %>% 
+  filter(!id_variable %in% c(143, 150)) %>%
+  droplevels()
 
-modelo_nda <- glm(nda ~ Tipo.de.control * id_variable + block,
-  family = poisson(link = "log"),
-  data = datos_ndn
-)
+modelo <- lmer(nda ~ 0 + (1 | block) + (1 | repeticion) + Tipo.de.control * id_variable
+               , data = datos_nda)
 
-Anova(modelo_nda, type = 3)
+Anova(modelo, type = 3, test.statistic = "F")
 
-# Calcular dispersión: si >>1, hay sobredispersión
-
-deviance(modelo_nda) / df.residual(modelo_nda)
-
-# modelo_nda_quasi <- glm(nda ~ Tipo.de.control * id_variable + block,
-#                         family = quasipoisson(link = "log"),
-#                         data = datos_nda)
-#
-# Anova(modelo_nda_quasi, type = 3)
-#
-# anova(modelo_nda_quasi, test = "Chisq")
-
-mc1 <- emmeans(modelo_nda, ~ Tipo.de.control | id_variable, type = "response") %>%
+mc1 <- emmeans(modelo, ~ Tipo.de.control | id_variable) %>%
   cld(Letters = letters, reversed = T) %>%
   mutate(across(".group", ~ trimws(.))) %>%
   rename(sig1 = ".group")
 
-mc2 <- emmeans(modelo_nda, ~ id_variable | Tipo.de.control, type = "response") %>%
+mc2 <- emmeans(modelo, ~ id_variable | Tipo.de.control) %>%
   cld(Letters = letters, reversed = T) %>%
   mutate(across(".group", ~ trimws(.))) %>%
   mutate(across(".group", ~ toupper(.))) %>%
@@ -319,20 +293,39 @@ mc2 <- emmeans(modelo_nda, ~ id_variable | Tipo.de.control, type = "response") %
 mc <- merge(mc1, mc2) %>%
   unite(col = "group", c("sig1", "sig2"), sep = "")
 
-mc %>% kable()
+mc %>% kable()   
+
+# modelo_nda <- glm(nda ~ Tipo.de.control * id_variable + block,
+#   family = poisson(link = "log"),
+#   data = datos_ndn
+# )
+# 
+# Anova(modelo_nda, type = 3)
+# 
+# # Calcular dispersión: si >>1, hay sobredispersión
+# 
+# deviance(modelo_nda) / df.residual(modelo_nda)
+# 
+# # modelo_nda_quasi <- glm(nda ~ Tipo.de.control * id_variable + block,
+# #                         family = quasipoisson(link = "log"),
+# #                         data = datos_nda)
+# #
+# # Anova(modelo_nda_quasi, type = 3)
+# #
+# # anova(modelo_nda_quasi, test = "Chisq")
 
 p2c <- mc %>%
   plot_smr(
     x = "id_variable",
-    y = "rate",
+    y = "emmean",
     group = "Tipo.de.control"
     # , sig = "group"
     # , error = "SE"
     , color = T,
-    xlab = "Evaluation days",
-    ylab = "Number of adults",
+    xlab = "Days after sowing (DAS)",
+    ylab = "Adults plant^{-1}",
     glab = "Control Type",
-    ylimits = c(0, 0.8, 0.2),
+    ylimits = c(0, 1, 0.2),
   ) +
   geom_text(
     aes(label = group),
@@ -377,21 +370,23 @@ fig <- plot_grid(legend, p2, ncol = 1, align = "v", rel_heights = c(0.05, 1))
 
 fig %>%
   ggsave2(
-    plot = ., "submission/Figure_2.jpg",
+    plot = ., "article/img_4.jpg",
     units = "cm",
     width = 35,
-    height = 30
+    height = 30,
+    dpi = 600
   )
 
 fig %>%
   ggsave2(
-    plot = ., "submission/Figure_2.eps",
+    plot = ., "article/img_4.eps",
     units = "cm",
     width = 35,
-    height = 30
+    height = 30,
+    dpi = 600
   )
 
-knitr::include_graphics("submission/Figure_2.jpg")
+knitr::include_graphics("article/img_4.jpg")
 ```
 
 ## Specific Objective 2
@@ -439,9 +434,9 @@ p3a <- mc %>%
     # , error = "SE"
     , color = T,
     xlab = "NULL",
-    ylab = "Tubers weight (g)",
+    ylab = "Tubers weight (g.plant^{-1})",
     glab = "Control Type",
-    ylimits = c(0, 220, 40),
+    ylimits = c(0, 280, 70),
   ) +
   guides(fill = guide_legend(label.theme = element_text(face = "italic"))) +
   theme(
@@ -480,9 +475,9 @@ p3b <- mc %>%
     # , error = "SE"
     , color = T,
     xlab = "NULL",
-    ylab = "Number of tubers",
+    ylab = "Tubers plant^{-1}",
     glab = "Control Type",
-    ylimits = c(0, 9, 2),
+    ylimits = c(0, 15, 3),
   ) +
   scale_x_discrete(
     labels = c(
@@ -497,8 +492,7 @@ p3b <- mc %>%
     axis.text.x = element_text(
       face = "italic"
     )
-  ) +
-  scale_y_continuous(labels = scales::number_format(accuracy = 0.1))
+  )
 
 p3b
 ```
@@ -528,7 +522,7 @@ fig <- plot_grid(p3, ncol = 1, align = "hv", rel_heights = c(1, 1))
 
 fig %>%
   ggsave2(
-    plot = ., "submission/Figure_3.jpg",
+    plot = ., "article/img_6.jpg",
     units = "cm",
     width = 13,
     height = 16,
@@ -537,18 +531,16 @@ fig %>%
 
 fig %>%
   ggsave2(
-    plot = ., "submission/Figure_3.eps",
+    plot = ., "article/img_6.eps",
     units = "cm",
     width = 13,
-```
-
-
-```{r}
-height = 16
+    height = 16,
+    dpi = 600
   )
 
-knitr::include_graphics("submission/Figure_3.jpg")
+knitr::include_graphics("article/img_6.jpg")
 ```
+
 
 ## Specific Objective 3
 
@@ -572,6 +564,7 @@ anova(modelo_npm, test = "Chisq")
 mc <- emmeans(modelo_npm, ~Tipo.de.control, type = "response") %>%
   cld(Letters = letters, reversed = T) %>%
   mutate(across(".group", ~ trimws(.))) %>%
+  mutate(prob = round(prob * 100, 2)) %>% 
   rename(sig1 = ".group")
 
 mc %>% kable()
@@ -585,9 +578,9 @@ p4a <- mc %>%
     # , error = "SE"
     , color = T,
     xlab = "Control Type",
-    ylab = " Probability of presence of purple tip",
+    ylab = " Probability of purple tip presence per plant ('%')",
     glab = "NULL",
-    ylimits = c(0, 1, 0.2),
+    ylimits = c(0, 100, 20),
   ) +
   theme(legend.position = "none") +
   scale_x_discrete(
@@ -652,9 +645,9 @@ p4b <- mc %>%
     # , error = "SE"
     , color = T,
     xlab = "NULL",
-    ylab = "Incidence rate ('%')",
+    ylab = "Incidence rate per plant ('%')",
     glab = "Control Type",
-    ylimits = c(0, 80, 20),
+    ylimits = c(0, 100, 20),
   ) +
   scale_x_discrete(
     labels = c(
@@ -699,22 +692,23 @@ fig <- plot_grid(p4, ncol = 1, align = "v", rel_heights = c(1, 1))
 
 fig %>%
   ggsave2(
-    plot = ., "submission/Figure_4.jpg",
+    plot = ., "article/img_5.jpg",
     units = "cm",
     width = 13,
-    height = 16,
+    height = 19,
     dpi = 600
   )
 
 fig %>%
   ggsave2(
-    plot = ., "submission/Figure_4.eps",
+    plot = ., "article/img_5.eps",
     units = "cm",
     width = 13,
-    height = 16
+    height = 19,
+    dpi = 600
   )
 
-knitr::include_graphics("submission/Figure_4.jpg")
+knitr::include_graphics("article/img_5.jpg")
 ```
 
 ## Photos
