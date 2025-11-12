@@ -22,8 +22,10 @@ execute:
 library(emmeans)
 library(multcomp)
 library(glmmTMB)
+library(DHARMa)
 library(FSA)
 library(car)
+library(inti)
 source("https://inkaverse.com/setup.r")
 
 cat("Project: ", getwd(), "\n")
@@ -138,17 +140,11 @@ plot <- met %>%
 
 plot %>%
   ggsave2(
-    plot = ., "submission/Figure_1.jpg", units = "cm",
+    plot = ., "article/clima.jpg", units = "cm",
     width = 25, height = 15
   )
 
-plot %>%
-  ggsave2(
-    plot = ., "submission/Figure_1.eps", units = "cm",
-    width = 25, height = 15
-  )
-
-knitr::include_graphics("submission/Figure_1.jpg")
+knitr::include_graphics("article/clima.jpg")
 ```
 
 # Objetives
@@ -223,11 +219,9 @@ datos_ndn <- data %>%
 modelo <- lmer(ndn ~ 0 + (1 | block) + (1 | repeticion) + Tipo.de.control * id_variable
                , data = datos_ndn)
 
-AIC(modelo, modelo2)
-
 Anova(modelo, type = 3, test.statistic = "F")
 
-mc1 <- emmeans(modelo2, ~ Tipo.de.control | id_variable) %>%
+mc1 <- emmeans(modelo, ~ Tipo.de.control | id_variable) %>%
   cld(Letters = letters, reversed = T) %>%
   mutate(across(".group", ~ trimws(.))) %>%
   rename(sig1 = ".group")
@@ -571,8 +565,6 @@ modelo_npm <- glm(npm ~ Tipo.de.control + block,
   family = binomial(link = "logit"),
   data = datos_npm
 )
-
-library(DHARMa)
 
 sim_res <- simulateResiduals(modelo_npm)
 
