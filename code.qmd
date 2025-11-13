@@ -118,6 +118,16 @@ met <- range_read(ss = gs, sheet = "clima") %>%
 
 scale <- 3
 
+fechas_evento <- as.Date(c("2024-10-28", "2024-11-04", "2024-11-11",
+                           "2024-11-18", "2024-11-25", "2024-12-02",
+                           "2024-12-09", "2024-12-16", "2024-12-23",
+                           "2024-12-30", "2025-01-06", "2025-01-13"))
+
+eventos_df <- data.frame(
+  date = fechas_evento,
+  label = seq_along(fechas_evento)
+)
+
 plot <- met %>%
   ggplot(aes(x = date)) +
   geom_line(aes(y = TMax, color = "Tmax (°C)"), size = 0.8, linetype = "longdash") +
@@ -126,7 +136,16 @@ plot <- met %>%
     stat = "identity", size = .1, fill = "blue", color = "black", alpha = .4
   ) +
   geom_line(aes(y = HR / scale, color = "HR (%)"), size = 0.8, linetype = "twodash") +
-  scale_color_manual("", values = c("skyblue", "red", "blue")) +
+   geom_vline(xintercept = as.numeric(fechas_evento),
+             color = "#572364", linetype = "solid", size = 0.7) +
+  geom_line(aes(y = NA, color = "Treatment application")) +
+  geom_text(data = eventos_df,
+            aes(x = date, y = 48, label = label),
+            color = "#572364", angle = 90, vjust = -0.5, size = 3.5, fontface = "bold") +
+  scale_color_manual("", values = c("HR (%)" = "skyblue",
+      "Tmax (°C)" = "red",
+      "Tmin (°C)" = "blue",
+      "Treatment application" = "#572364")) +
   scale_y_continuous(
     limits = c(0, 50),
     expand = c(0, 0),
