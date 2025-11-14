@@ -26,6 +26,7 @@ library(DHARMa)
 library(FSA)
 library(car)
 library(inti)
+library(glmmTMB)
 source("https://inkaverse.com/setup.r")
 
 cat("Project: ", getwd(), "\n")
@@ -750,7 +751,7 @@ knitr::include_graphics("article/img_5.jpg")
 ### Figura 3
 
 ```{r}
-picfiles <- list.files(path = "C:/INIA/GIT/prochira_papa/Fotos/Figura3"
+picfiles <- list.files(path = "Fotos/Figura3"
                   , full.names = T
                   , recursive = T
                   , pattern = "jpg"
@@ -800,7 +801,7 @@ include_graphics(plot)
 ### Figura 4
 
 ```{r}
-picfiles <- list.files(path = "C:/INIA/GIT/prochira_papa/Fotos/Figura4"
+picfiles <- list.files(path = "Fotos/Figura4"
                   , full.names = T
                   , recursive = T
                   , pattern = "jpg"
@@ -835,7 +836,7 @@ include_graphics(plot)
 
 ```{r}
 picfiles <- list.files(
-  path = "C:/INIA/GIT/prochira_papa/Fotos/Figura3",
+  path = "Fotos/Figura3",
   full.names = TRUE,
   recursive = TRUE,
   pattern = "jpe?g$"
@@ -877,7 +878,7 @@ library(cowplot)
 
 # 1. Listar imágenes
 picfiles <- list.files(
-  path = "C:/INIA/GIT/prochira_papa/Fotos/Figura3",
+  path = "Fotos/Figura3",
   full.names = TRUE,
   recursive = TRUE,
   pattern = "jpe?g$"
