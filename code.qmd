@@ -873,43 +873,41 @@ ggsave(
 
 ```{r}
 library(magick)
-library(purrr)
 library(cowplot)
+library(tidyverse)
 
-# 1. Listar imágenes
 picfiles <- list.files(
   path = "Fotos/Figura3",
   full.names = TRUE,
   recursive = TRUE,
   pattern = "jpe?g$"
-)
+) %>% map( ~ image_read(.))
 
-# 2. Función para normalizar a cuadrado idéntico
-normalize_square <- function(img, size = 2000) {
-  img %>%
-    image_resize(paste0(size, "x", size)) %>%   # ajusta el lado más grande al cuadrado
-    image_extent(paste0(size, "x", size),       # extiende al cuadrado exacto
-                 color = "white", gravity = "center") # rellena con blanco al centro
-}
+images <- list(
+  picfiles[[1]] %>% image_crop("1792x1792+0+350")
+  , picfiles[[2]] %>% image_crop("1792x1792+0+500")
+  , picfiles[[3]] %>% image_crop("1792x1792+0+550")
+  , picfiles[[4]] %>% image_crop("1792x1792+0+1350")
+  , picfiles[[5]] %>% image_crop("3000x3000+0+20")
+  , picfiles[[6]] %>% image_crop("3000x3000+0+25")
+  , picfiles[[7]] %>% image_crop("1792x1792+750+000")
+  , picfiles[[8]] %>% image_crop("1792x1792+0+1500")
+  , picfiles[[9]] %>% image_crop("3000x3000+0+800")
+  , picfiles[[10]] %>% image_crop("1792x1792+600+0")
+  , picfiles[[11]] %>% image_crop("1944x1944+0+100")
+  , picfiles[[12]] %>% image_crop("3000x3000+0+700")
+  ) %>%
+  map(~ image_ggplot(.)) %>% 
+  plot_grid(plotlist = ., ncol = 3, labels = "auto")
 
-# 3. Aplicar a todas las imágenes
-image_plots <- map(picfiles, ~ image_read(.) %>% normalize_square(2000))
-
-# 4. Pasar a ggplot y combinarlas (11 imágenes → 3 filas de 4 columnas)
-images <- image_plots %>%
-  map(~ image_ggplot(.)) %>%
-  plot_grid(plotlist = ., ncol = 4, labels = "auto")
-
-# 5. Guardar en alta resolución
-ggsave(
-  filename = "Fotos/Figure-4.jpg",
-  plot = images,
+plot <- images %>% 
+  ggsave(
+  filename = "manuscript/Figure-03.jpg",
+  plot = .,
   units = "cm",
-  width = 35,
-  height = 30,
-  dpi = 600
+  width = 21.5,
+  height = 25
 )
-
 ```
 
 

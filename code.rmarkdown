@@ -1,0 +1,914 @@
+---
+title: "Use of biological and chemical control agents for potato psyllid (_Bactericera cockerelli_) under drought conditions"
+format:
+  html:
+    toc: true
+    toc-location: left
+    number-sections: true
+    self-contained: true
+    output-file: "ESM_2"
+editor_options: 
+  chunk_output_type: console
+execute: 
+  warning: false
+  echo: true
+---
+
+# Project Setup
+
+```{r}
+#| label:  setup
+
+library(emmeans)
+library(multcomp)
+library(glmmTMB)
+library(DHARMa)
+library(FSA)
+library(car)
+library(inti)
+library(glmmTMB)
+source("https://inkaverse.com/setup.r")
+
+cat("Project: ", getwd(), "\n")
+session_info()
+```
+
+# Import data
+
+Data were imported from the field book evaluated during the 2024 - 2025 crop year. The evaluations focused on the effect of _Bactericera cockerelli_ on potato (_Solanum tuberosum_ L.) yield and quality.
+
+```{r}
+url <- "https://docs.google.com/spreadsheets/d/1UzF2W_rfOLLybl-wiD2sJSVPHlfzfKXXgShnqhfX5ps/edit?gid=912027622#gid=912027622"
+
+gs <- url %>%
+  as_sheets_id()
+
+data <- gs %>%
+  range_read("fb") %>%
+  select(-c(barcode:plots)) %>%
+  select(-c(sort, rows, cols)) %>%
+  pivot_longer(
+    cols = -c(ntreat, Tipo.de.control, block),
+    names_to = c("grupo", "id_variable", "repeticion"),
+    names_sep = "_",
+    values_to = "valor"
+  ) %>%
+  mutate(
+    grupo = factor(grupo),
+    id_variable = as.numeric(id_variable),
+    repeticion = as.integer(repeticion),
+    ntreat = as.factor(ntreat),
+    block = as.factor(block),
+    Tipo.de.control = as.factor(Tipo.de.control),
+    id_variable = as.factor(id_variable),
+    repeticion = as.factor(repeticion)
+  ) %>%
+  pivot_wider(
+    names_from = grupo,
+    values_from = valor
+  ) %>%
+  mutate(Tipo.de.control = recode(Tipo.de.control,
+    "Testigo" = "Control",
+    "Control.químico" = "Chemical control",
+    "Beauveria.bassiana" = "Beauveria bassiana",
+    "Metarhizium.anisopliae" = "Metarhizium anisopliae",
+    "Paecilomyces.lilacinus" = "Paecilomyces lilacinus"
+  ))
+
+names(data)
+
+str(data)
+```
+
+```{r}
+data %>% kable(caption = "Yield related traits")
+```
+
+# Data summary
+
+Summary of the number of data points recorded for each treatment and evaluated variable.
+
+```{r}
+sm <- data %>%
+  group_by(Tipo.de.control) %>%
+  summarise(across(ndh:nts, ~ sum(!is.na(.))))
+
+sm
+
+summary <- data %>%
+  group_by(Tipo.de.control) %>%
+  summarise(
+    ndh_sum = sum(ndh[ndh > 0], na.rm = TRUE),
+    ndn_sum = sum(ndn[ndn > 0], na.rm = TRUE),
+    nda_sum = sum(nda[nda > 0], na.rm = TRUE)
+  )
+
+summary %>% kable(align = 'c')
+
+summary %>%
+  write_sheet(ss = gs, sheet = "tb1")
+```
+
+# Meteorological data
+
+Climatic conditions of the study area located in the Quispampa Bajo, Huancabamba district, Huancabamba province, Piura region.
+
+```{r}
+met <- range_read(ss = gs, sheet = "clima") %>%
+  mutate(date = as_date(Fecha))
+
+scale <- 3
+
+fechas_evento <- as.Date(c("2024-10-28", "2024-11-04", "2024-11-11",
+                           "2024-11-18", "2024-11-25", "2024-12-02",
+                           "2024-12-09", "2024-12-16", "2024-12-23",
+                           "2024-12-30", "2025-01-06", "2025-01-13"))
+
+eventos_df <- data.frame(
+  date = fechas_evento,
+  label = seq_along(fechas_evento)
+)
+
+plot <- met %>%
+  ggplot(aes(x = date)) +
+  geom_line(aes(y = TMax, color = "Tmax (°C)"), size = 0.8, linetype = "longdash") +
+  geom_line(aes(y = TMin, color = "Tmin (°C)"), size = 0.8, linetype = "dotted") +
+  geom_bar(aes(y = PP / scale),
+    stat = "identity", size = .1, fill = "blue", color = "black", alpha = .4
+  ) +
+  geom_line(aes(y = HR / scale, color = "HR (%)"), size = 0.8, linetype = "twodash") +
+   geom_vline(xintercept = as.numeric(fechas_evento),
+             color = "#572364", linetype = "solid", size = 0.7) +
+  geom_line(aes(y = NA, color = "Treatment application")) +
+  geom_text(data = eventos_df,
+            aes(x = date, y = 48, label = label),
+            color = "#572364", angle = 90, vjust = -0.5, size = 3.5, fontface = "bold") +
+  scale_color_manual("", values = c("HR (%)" = "skyblue",
+      "Tmax (°C)" = "red",
+      "Tmin (°C)" = "blue",
+      "Treatment application" = "#572364")) +
+  scale_y_continuous(
+    limits = c(0, 50),
+    expand = c(0, 0),
+    name = "Temperature (°C)",
+    sec.axis = sec_axis(~ . * scale, name = "Precipitation (mm)")
+  ) +
+  scale_x_date(date_breaks = "7 day", date_labels = "%d-%b", name = NULL) +
+  theme_minimal_grid() +
+  theme(legend.position = "top") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+plot %>%
+  ggsave2(
+    plot = ., "article/clima.jpg", units = "cm",
+    width = 25, height = 15
+  )
+
+knitr::include_graphics("article/clima.jpg")
+```
+
+# Objetives
+
+## Specific Objective 1
+
+To evaluate the behavior of the psyllid Bactericera cockerelli Šulc. under water stress conditions during the phenological development of potato (Solanum tuberosum L.).
+
+### Number of eggs
+
+```{r}
+datos_ndh <- data %>%
+  filter(!is.na(ndh)) %>% 
+  filter(!id_variable %in% c(143, 150)) %>%
+  droplevels()
+
+modelo <- lmer(ndh ~ 0 + (1 | block) + (1 | repeticion) + Tipo.de.control * id_variable
+               , data = datos_ndh)
+
+Anova(modelo, type = 3, test.statistic = "F")
+
+mc1 <- emmeans(modelo, ~ Tipo.de.control | id_variable) %>%
+  cld(Letters = letters, reversed = T) %>%
+  mutate(across(".group", ~ trimws(.))) %>%
+  rename(sig1 = ".group")
+
+mc2 <- emmeans(modelo, ~ id_variable | Tipo.de.control) %>%
+  cld(Letters = letters, reversed = T) %>%
+  mutate(across(".group", ~ trimws(.))) %>%
+  mutate(across(".group", ~ toupper(.))) %>%
+  rename(sig2 = ".group")
+
+mc <- merge(mc1, mc2) %>%
+  unite(col = "group", c("sig1", "sig2"), sep = "")
+
+mc %>% kable()
+
+p2a <- mc %>%
+  plot_smr(
+    x = "id_variable",
+    y = "emmean",
+    group = "Tipo.de.control"
+    # , sig = "group"
+    # , error = "SE"
+    , color = T,
+    xlab = "Days after sowing (DAS)",
+    ylab = "Eggs plant^{-1}",
+    glab = "Control Type",
+    ylimits = c(0, 50, 10),
+  ) +
+  geom_text(
+    aes(label = group),
+    position = position_dodge(width = 0.9),
+    angle = 90,
+    vjust = 0.3,
+    hjust = -0.3,
+    size = 3
+  ) +
+  guides(fill = guide_legend(label.theme = element_text(face = "italic")))
+
+p2a
+```
+
+### Number of nymphs
+
+```{r}
+datos_ndn <- data %>%
+  filter(!is.na(ndn)) %>% 
+  filter(!id_variable %in% c(143, 150)) %>%
+  droplevels()
+
+modelo <- lmer(ndn ~ 0 + (1 | block) + (1 | repeticion) + Tipo.de.control * id_variable
+               , data = datos_ndn)
+
+Anova(modelo, type = 3, test.statistic = "F")
+
+mc1 <- emmeans(modelo, ~ Tipo.de.control | id_variable) %>%
+  cld(Letters = letters, reversed = T) %>%
+  mutate(across(".group", ~ trimws(.))) %>%
+  rename(sig1 = ".group")
+
+mc2 <- emmeans(modelo, ~ id_variable | Tipo.de.control) %>%
+  cld(Letters = letters, reversed = T) %>%
+  mutate(across(".group", ~ trimws(.))) %>%
+  mutate(across(".group", ~ toupper(.))) %>%
+  rename(sig2 = ".group")
+
+mc <- merge(mc1, mc2) %>%
+  unite(col = "group", c("sig1", "sig2"), sep = "")
+
+mc %>% kable()
+
+p2b <- mc %>%
+  plot_smr(
+    x = "id_variable",
+    y = "emmean",
+    group = "Tipo.de.control"
+    # , sig = "group"
+    # , error = "SE"
+    , color = T,
+    xlab = "Days after sowing (DAS)",
+    ylab = "Nymphs plant^{-1}",
+    glab = "Control Type",
+    ylimits = c(0, 80, 20),
+  ) +
+  geom_text(
+    aes(label = group),
+    position = position_dodge(width = 0.9),
+    angle = 90,
+    vjust = 0.3,
+    hjust = -0.3,
+    size = 3
+  )
+
+p2b
+```
+
+### Number of adults
+
+```{r}
+datos_nda <- data %>%
+  filter(!is.na(nda)) %>% 
+  filter(!id_variable %in% c(143, 150)) %>%
+  droplevels()
+
+modelo <- lmer(nda ~ 0 + (1 | block) + (1 | repeticion) + Tipo.de.control * id_variable
+               , data = datos_nda)
+
+Anova(modelo, type = 3, test.statistic = "F")
+
+mc1 <- emmeans(modelo, ~ Tipo.de.control | id_variable) %>%
+  cld(Letters = letters, reversed = T) %>%
+  mutate(across(".group", ~ trimws(.))) %>%
+  rename(sig1 = ".group")
+
+mc2 <- emmeans(modelo, ~ id_variable | Tipo.de.control) %>%
+  cld(Letters = letters, reversed = T) %>%
+  mutate(across(".group", ~ trimws(.))) %>%
+  mutate(across(".group", ~ toupper(.))) %>%
+  rename(sig2 = ".group")
+
+mc <- merge(mc1, mc2) %>%
+  unite(col = "group", c("sig1", "sig2"), sep = "")
+
+mc %>% kable()   
+
+# modelo_nda <- glm(nda ~ Tipo.de.control * id_variable + block,
+#   family = poisson(link = "log"),
+#   data = datos_ndn
+# )
+# 
+# Anova(modelo_nda, type = 3)
+# 
+# # Calcular dispersión: si >>1, hay sobredispersión
+# 
+# deviance(modelo_nda) / df.residual(modelo_nda)
+# 
+# # modelo_nda_quasi <- glm(nda ~ Tipo.de.control * id_variable + block,
+# #                         family = quasipoisson(link = "log"),
+# #                         data = datos_nda)
+# #
+# # Anova(modelo_nda_quasi, type = 3)
+# #
+# # anova(modelo_nda_quasi, test = "Chisq")
+
+p2c <- mc %>%
+  plot_smr(
+    x = "id_variable",
+    y = "emmean",
+    group = "Tipo.de.control"
+    # , sig = "group"
+    # , error = "SE"
+    , color = T,
+    xlab = "Days after sowing (DAS)",
+    ylab = "Adults plant^{-1}",
+    glab = "Control Type",
+    ylimits = c(0, 1, 0.2),
+  ) +
+  geom_text(
+    aes(label = group),
+    position = position_dodge(width = 0.9),
+    angle = 90,
+    vjust = 0.3,
+    hjust = -0.3,
+    size = 3
+  )
+
+p2c
+```
+
+### Figure 2
+
+Univariate analysis of variables to determine the behavior of the psyllid _Bactericera cockerelli_ Šulc. under water stress conditions during the phenological development of potato (_Solanum tuberosum_ L.).
+
+```{r}
+legend <- cowplot::get_plot_component(p2a, "guide-box-top", return_all = TRUE)
+
+p2 <- list(
+  p2a + labs(x = NULL) + theme(
+    legend.position = "none",
+    axis.title.x = element_blank(),
+    axis.text.x = element_blank(),
+    axis.ticks.x = element_blank()
+  ),
+  p2b + labs(x = NULL) + theme(
+    legend.position = "none",
+    axis.title.x = element_blank(),
+    axis.text.x = element_blank(),
+    axis.ticks.x = element_blank()
+  ),
+  p2c + theme(legend.position = "none")
+) %>%
+  plot_grid(
+    plotlist = ., ncol = 1,
+    labels = "auto"
+  )
+
+fig <- plot_grid(legend, p2, ncol = 1, align = "v", rel_heights = c(0.05, 1))
+
+fig %>%
+  ggsave2(
+    plot = ., "article/img_4.jpg",
+    units = "cm",
+    width = 35,
+    height = 30,
+    dpi = 600
+  )
+
+# fig %>%
+#   ggsave2(
+#     plot = ., "article/img_4.eps",
+#     units = "cm",
+#     width = 35,
+#     height = 30,
+#     dpi = 600
+#   )
+
+knitr::include_graphics("article/img_4.jpg")
+```
+
+## Specific Objective 2
+
+To evaluate the yield and commercial quality of potato tubers of potato (_Solanum tuberosum_ L.).
+
+### Plant weight
+
+```{r}
+datos_ppp <- data %>% 
+  filter(!is.na(ppp))
+
+trait <- "ppp"
+
+lmm <- paste({{ trait }}, "~ 0 + (1|block) + Tipo.de.control") %>% as.formula()
+
+rmout <- datos_ppp %>%
+  remove_outliers(
+    formula = lmm,
+    drop_na = T, plot_diag = T
+  )
+
+plot_diagnostic(rmout$data$clean, formula = lmm) %>%
+  plot_grid(plotlist = ., ncol = 2)
+
+rmout$outliers
+
+model <- rmout$data$clean %>%
+  lmer(formula = lmm, .)
+
+Anova(model, type = 3, test.statistic = "F")
+
+mc <- emmeans(model, ~Tipo.de.control) %>%
+  cld(Letters = letters, reversed = T) %>%
+  mutate(across(".group", ~ trimws(.))) %>%
+  rename(sig1 = ".group")
+
+mc %>% kable()
+
+p3a <- mc %>%
+  plot_smr(
+    x = "Tipo.de.control",
+    y = "emmean"
+    # , group = "edge"
+    , sig = "sig1"
+    # , error = "SE"
+    , color = T,
+    xlab = "NULL",
+    ylab = "Tubers weight (g.plant^{-1})",
+    glab = "Control Type",
+    ylimits = c(0, 280, 70),
+  ) +
+  guides(fill = guide_legend(label.theme = element_text(face = "italic"))) +
+  theme(
+    axis.text.x = element_blank(),
+    axis.ticks.x = element_blank()
+  )
+
+p3a
+```
+
+### Number of tubers
+
+```{r}
+datos_ntp <- data %>% filter(!is.na(ntp))
+
+trait <- "ntp"
+
+lmm <- paste({{ trait }}, "~ 0 + (1|block) + Tipo.de.control") %>% as.formula()
+
+rmout <- datos_ntp %>%
+  remove_outliers(
+    formula = lmm,
+    drop_na = T, plot_diag = T
+  )
+
+plot_diagnostic(rmout$data$clean, formula = lmm) %>%
+  plot_grid(plotlist = ., ncol = 2)
+
+rmout$outliers
+
+model <- rmout$data$clean %>%
+  lmer(formula = lmm, .)
+
+Anova(model, type = 3, test.statistic = "F")
+
+mc <- emmeans(model, ~Tipo.de.control) %>%
+  cld(Letters = letters, reversed = T) %>%
+  mutate(across(".group", ~ trimws(.))) %>%
+  rename(sig1 = ".group")
+
+mc %>% kable()
+
+p3b <- mc %>%
+  plot_smr(
+    x = "Tipo.de.control",
+    y = "emmean"
+    # , group = "Tipo.de.control"
+    , sig = "sig1"
+    # , error = "SE"
+    , color = T,
+    xlab = "NULL",
+    ylab = "Tubers plant^{-1}",
+    glab = "Control Type",
+    ylimits = c(0, 15, 3),
+  ) +
+  scale_x_discrete(
+    labels = c(
+      "Beauveria\nbassiana",
+      "Chemical\ncontrol",
+      "Metarhizium\nanisopliae",
+      "Paecilomyces\nlilacinus",
+      "Control"
+    )
+  ) +
+  theme(
+    axis.text.x = element_text(
+      face = "italic"
+    )
+  )
+
+p3b
+```
+
+### Figure 3
+
+Univariate analysis of variables to determine the yield and commercial quality of tubers of potato (_Solanum tuberosum_ L.).
+
+```{r}
+legend <- cowplot::get_plot_component(p3a, "guide-box-top", return_all = TRUE)
+
+p3 <- list(
+  p3a + labs(x = NULL) + theme(
+    legend.position = "none",
+    axis.title.x = element_blank(),
+    axis.text.x = element_blank(),
+    axis.ticks.x = element_blank()
+  ),
+  p3b + theme(legend.position = "none")
+) %>%
+  plot_grid(
+    plotlist = ., ncol = 1,
+    labels = "auto"
+  )
+
+fig <- plot_grid(p3, ncol = 1, align = "hv", rel_heights = c(1, 1))
+
+fig %>%
+  ggsave2(
+    plot = ., "article/img_6.jpg",
+    units = "cm",
+    width = 13,
+    height = 16,
+    dpi = 600
+  )
+
+fig %>%
+  ggsave2(
+    plot = ., "article/img_6.eps",
+    units = "cm",
+    width = 13,
+    height = 16,
+    dpi = 600
+  )
+
+knitr::include_graphics("article/img_6.jpg")
+```
+
+
+## Specific Objective 3
+
+To evaluate the incidence of the purple tip complex in the potato variety UNICA subjected to different biological and chemical treatments.
+
+### Purple tip
+
+```{r}
+datos_npm <- data %>% filter(!is.na(npm))
+
+modelo_npm <- glm(npm ~ Tipo.de.control + block,
+  family = binomial(link = "logit"),
+  data = datos_npm
+)
+
+sim_res <- simulateResiduals(modelo_npm)
+
+plot(sim_res)
+
+testDispersion(sim_res)
+
+summary(modelo_npm)
+
+anova(modelo_npm, test = "Chisq")
+
+mc <- emmeans(modelo_npm, ~Tipo.de.control, type = "response") %>%
+  cld(Letters = letters, reversed = T) %>%
+  mutate(across(".group", ~ trimws(.))) %>%
+  mutate(prob = round(prob * 100, 2)) %>% 
+  rename(sig1 = ".group")
+
+mc %>% kable()
+
+p4a <- mc %>%
+  plot_smr(
+    x = "Tipo.de.control",
+    y = "prob"
+    # , group = "Tipo.de.control"
+    , sig = "sig1"
+    # , error = "SE"
+    , color = T,
+    xlab = "Control Type",
+    ylab = " Probability of purple tip presence per plant ('%')",
+    glab = "NULL",
+    ylimits = c(0, 100, 20),
+  ) +
+  theme(legend.position = "none") +
+  scale_x_discrete(
+    labels = c(
+      "Beauveria\nbassiana",
+      "Chemical\ncontrol",
+      "Metarhizium\nanisopliae",
+      "Paecilomyces\nlilacinus",
+      "Control"
+    )
+  ) +
+  theme(
+    axis.text.x = element_text(
+      face = "italic"
+    )
+  )
+
+p4a
+```
+
+### Incidence of Zebra chip
+
+```{r}
+datos_i <- data %>%
+  group_by(Tipo.de.control, block) %>%
+  summarise(ntp_sum = sum(ntp, na.rm = TRUE), ntz_sum = sum(ntz, na.rm = TRUE)) %>%
+  mutate(ti = (ntz_sum / ntp_sum) * 100)
+
+trait <- "ti"
+
+lmm <- paste({{ trait }}, "~ 0 + (1|block) + Tipo.de.control") %>% as.formula()
+
+rmout <- datos_i %>%
+  remove_outliers(
+    formula = lmm,
+    drop_na = T, plot_diag = T
+  )
+
+plot_diagnostic(rmout$data$clean, formula = lmm) %>%
+  plot_grid(plotlist = ., ncol = 2)
+
+rmout$outliers
+
+model <- rmout$data$clean %>%
+  lmer(formula = lmm, .)
+
+Anova(model, type = 3, test.statistic = "F")
+
+mc <- emmeans(model, ~Tipo.de.control) %>%
+  cld(Letters = letters, reversed = T) %>%
+  mutate(across(".group", ~ trimws(.))) %>%
+  rename(sig1 = ".group")
+
+mc %>% kable()
+
+p4b <- mc %>%
+  plot_smr(
+    x = "Tipo.de.control",
+    y = "emmean"
+    # , group = "edge"
+    , sig = "sig1"
+    # , error = "SE"
+    , color = T,
+    xlab = "NULL",
+    ylab = "Incidence rate of Zebra Chip ('%')",
+    glab = "Control Type",
+    ylimits = c(0, 100, 20),
+  ) +
+  scale_x_discrete(
+    labels = c(
+      "Beauveria\nbassiana",
+      "Chemical\ncontrol",
+      "Metarhizium\nanisopliae",
+      "Paecilomyces\nlilacinus",
+      "Control"
+    )
+  ) +
+  theme(
+    axis.text.x = element_text(
+      face = "italic"
+    )
+  )
+
+p4b
+```
+
+### Figure 4
+
+Univariate analysis of variables to determine the incidence of the purple tip complex in potato varieties subjected to different biological and chemical treatments.
+
+```{r}
+legend <- cowplot::get_plot_component(p4a, "guide-box-top", return_all = TRUE)
+
+p4 <- list(
+  p4a + labs(x = NULL) + theme(
+    legend.position = "none",
+    axis.title.x = element_blank(),
+    axis.text.x = element_blank(),
+    axis.ticks.x = element_blank()
+  ),
+  p4b + theme(legend.position = "none")
+) %>%
+  plot_grid(
+    plotlist = ., ncol = 1,
+    labels = "auto"
+  )
+
+fig <- plot_grid(p4, ncol = 1, align = "v", rel_heights = c(1, 1))
+
+fig %>%
+  ggsave2(
+    plot = ., "article/img_5.jpg",
+    units = "cm",
+    width = 13,
+    height = 19,
+    dpi = 600
+  )
+
+fig %>%
+  ggsave2(
+    plot = ., "article/img_5.eps",
+    units = "cm",
+    width = 13,
+    height = 19,
+    dpi = 600
+  )
+
+knitr::include_graphics("article/img_5.jpg")
+```
+
+## Photos
+
+### Figura 3
+
+```{r}
+picfiles <- list.files(path = "Fotos/Figura3"
+                  , full.names = T
+                  , recursive = T
+                  , pattern = "jpg"
+                  )
+
+
+# Función para normalizar cada imagen
+normalize_image <- function(img, size = 800) {
+  img %>%
+    image_resize(paste0(size, "x", size, "^")) %>% # escala al menos al tamaño
+    image_crop(paste0(size, "x", size, "+0+0"))   # recorta centrado
+}
+
+image_plots <- picfiles %>%
+  map(~ image_read(.) %>% normalize_image(800))
+
+image_list <- list(image_plots[[1]] 
+                   
+                   , image_plots[[2]]
+                   
+                   , image_plots[[3]] 
+                     
+    
+                   , image_plots[[4]]  
+                     
+, image_plots[[5]] 
+, image_plots[[6]] 
+, image_plots[[7]] 
+, image_plots[[8]] 
+, image_plots[[9]] 
+, image_plots[[10]] 
+, image_plots[[11]]
+                    ) 
+
+images <- image_list %>% 
+  map( ~ image_ggplot(.)) %>% 
+  plot_grid(plotlist = ., ncol = 4, nrow = 3, labels = "auto") 
+
+plot <- images %>% 
+  ggsave( filename = "Fotos/Figure-2.jpg"
+          , plot = .
+          , units = "cm", width = 30, height = 30)
+
+include_graphics(plot)
+```
+
+### Figura 4
+
+```{r}
+picfiles <- list.files(path = "Fotos/Figura4"
+                  , full.names = T
+                  , recursive = T
+                  , pattern = "jpg"
+                  )
+
+image_plots <- picfiles %>%
+  map( ~ image_read(.))
+
+image_list <- list(image_plots[[1]] 
+                   
+                   , image_plots[[2]]
+                   
+                   , image_plots[[3]] 
+                     
+                   
+                   , image_plots[[4]]  
+                     
+
+                    ) 
+
+images <- image_list %>% 
+  map( ~ image_ggplot(.)) %>% 
+  plot_grid(plotlist = ., ncol = 4, labels = "auto") 
+
+plot <- images %>% 
+  ggsave( filename = "Fotos/Figure-1.jpg"
+          , plot = .
+          , units = "cm", width = 30, height = 11.5)
+
+include_graphics(plot)
+```
+
+```{r}
+picfiles <- list.files(
+  path = "Fotos/Figura3",
+  full.names = TRUE,
+  recursive = TRUE,
+  pattern = "jpe?g$"
+)
+
+# Función para normalizar cada imagen a cuadrado
+normalize_image <- function(img, size = 800) {
+  img %>%
+    image_resize(paste0(size, "x", size, "^")) %>% # escalar
+    image_crop(paste0(size, "x", size, "+0+0"))   # recortar cuadrado
+}
+
+# Leer y normalizar todas
+image_plots <- picfiles %>%
+  map(~ image_read(.) %>% normalize_image(800))
+
+# Pasar todas a ggplot
+images <- image_plots %>%
+  map(~ image_ggplot(.)) %>%
+  plot_grid(plotlist = ., ncol = 4, labels = "auto") 
+# 4 columnas → 3 filas: 4+4+3 = 11
+
+# Guardar en archivo
+ggsave(
+  filename = "Fotos/Figure-3.jpg",
+  plot = images,
+  units = "cm",
+  width = 35,
+  height = 30,   # más alto para que quepan 3 filas
+  dpi = 600
+)
+```
+
+
+```{r}
+library(magick)
+library(cowplot)
+library(tidyverse)
+
+picfiles <- list.files(
+  path = "Fotos/Figura3",
+  full.names = TRUE,
+  recursive = TRUE,
+  pattern = "jpe?g$"
+) %>% map( ~ image_read(.))
+
+images <- list(
+  picfiles[[1]] %>% image_crop("1792x1792+0+350")
+  , picfiles[[2]] %>% image_crop("1792x1792+0+500")
+  , picfiles[[3]] %>% image_crop("1792x1792+0+550")
+  , picfiles[[4]] %>% image_crop("1792x1792+0+1350")
+  , picfiles[[5]] %>% image_crop("3000x3000+0+20")
+  , picfiles[[6]] %>% image_crop("3000x3000+0+25")
+  , picfiles[[7]] %>% image_crop("1792x1792+750+000")
+  , picfiles[[8]] %>% image_crop("1792x1792+0+1500")
+  , picfiles[[9]] %>% image_crop("3000x3000+0+800")
+  , picfiles[[10]] %>% image_crop("1792x1792+600+0")
+  , picfiles[[11]] %>% image_crop("1944x1944+0+100")
+  , picfiles[[12]] %>% image_crop("3000x3000+0+700")
+  ) %>%
+  map(~ image_ggplot(.)) %>% 
+  plot_grid(plotlist = ., ncol = 3, labels = "auto")
+
+plot <- images %>% 
+  ggsave(
+  filename = "manuscript/Figure-03.jpg",
+  plot = .,
+  units = "cm",
+  width = 21.5,
+  height = 25
+)
+```
+
+
+
